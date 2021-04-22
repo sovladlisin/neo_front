@@ -1,1 +1,1 @@
-export const SERVER_URL = 'http://127.0.0.1:8000/api/'
+export const SERVER_URL = window.location.host.includes('local') ? 'http://127.0.0.1:8000/api/' : 'https://neoback.herokuapp.com/api/'
