@@ -20,7 +20,7 @@ const OntologyWS: React.FunctionComponent<IOntologyWSProps> = (props) => {
     }, [])
 
     const [selectedClass, setSelectedClass] = React.useState<TClass>(null)
-    const [selectedObject, setSelectedObject] = React.useState<TClass>(null)
+    const [selectedObject, setSelectedObject] = React.useState<number>(-1)
 
     return <>
         <div className='ontology'>
@@ -33,7 +33,7 @@ const OntologyWS: React.FunctionComponent<IOntologyWSProps> = (props) => {
                 {selectedClass && <ClassInfo onObjectSelect={co => setSelectedObject(co)} class={selectedClass} />}
             </div>
         </div>
-        {selectedObject && <ObjectInfo object={selectedObject} onClose={() => setSelectedObject(null)} />}
+        {selectedObject != -1 && <ObjectInfo object_id={selectedObject} onClose={() => setSelectedObject(-1)} />}
     </>;
 };
 

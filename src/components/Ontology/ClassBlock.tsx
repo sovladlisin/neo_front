@@ -19,7 +19,12 @@ const ClassBlock: React.FunctionComponent<IClassBlockProps> = (props) => {
     React.useEffect(() => {
         const data = classState.selectedSubClasses
         data.id === currentClass.id && setSubClasses(data.classes)
-    }, [classState.selectedSubClasses])
+    }, [, classState.selectedSubClasses])
+    React.useEffect(() => {
+        if (subClasses.find(co => co.id === classState.updatedClass.id)) {
+            setSubClasses(subClasses.map(sc => sc.id === classState.updatedClass.id ? classState.updatedClass : sc))
+        }
+    }, [classState.updatedClass])
 
     const [currentClass, setCurrentClass] = React.useState(props.class)
     React.useEffect(() => setCurrentClass(props.class), [props.class])
