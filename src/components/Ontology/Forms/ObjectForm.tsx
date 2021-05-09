@@ -130,7 +130,7 @@ const ObjectForm: React.FunctionComponent<IObjectFormProps> = (props) => {
 
     return <>
         <div className='og-form' ref={ref}>
-            <p className='og-form-title'>{classes.length > 0 && getName(classes.find(c => c.id === selectedClass))}</p>
+            <p className='og-form-title'>{classes.length > 0 && classes.find(c => c.id === selectedClass) ? getName(classes.find(c => c.id === selectedClass)) : 'Сигнатура отсутствует'}</p>
             {!props.class_id && <div className='og-form-settings-buttons'>
                 <button onClick={_ => setFormSelector(!formSelector)}>Выбрать класс</button>
             </div>}
