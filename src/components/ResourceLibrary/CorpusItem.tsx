@@ -18,7 +18,7 @@ const CorpusItem: React.FunctionComponent<ICorpusItemProps> = (props) => {
 
     //on SubCorpus info update
     const [subCorpuses, setSubCorpuses] = React.useState<TClass[]>([])
-    React.useEffect(() => { corpusState.subCorpuses.corpus_id === currentCorpus.id && setSubCorpuses(corpusState.subCorpuses.corpuses) }, [corpusState.subCorpuses])
+    React.useEffect(() => { corpusState.subCorpuses && corpusState.subCorpuses.corpus_id === currentCorpus.id && setSubCorpuses(corpusState.subCorpuses.corpuses) }, [corpusState.subCorpuses])
 
     const [isOpened, setIsOpened] = React.useState(false)
 
