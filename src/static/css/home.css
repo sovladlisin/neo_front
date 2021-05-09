@@ -1,0 +1,27 @@
+.h-menu {
+    margin: 30px auto;
+    width: 900px;
+  }
+  .h-menu a {
+    background: white;
+    display: block;
+    width: max-content;
+    padding: 20px;
+    float: left;
+    margin: 10px;
+  }
+  
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: black;
+    opacity: 0.5;
+  }
+  #add {
+    line-height: inherit;
+    font-size: 9pt;
+    margin: 0 10px;
+  }

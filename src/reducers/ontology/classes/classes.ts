@@ -1,4 +1,4 @@
-import { GET_CLASSES, GET_CLASS_OBJECT, GET_CLASS_OBJECTS, GET_SUBCLASSES, TClass, TClassDispatchTypes, UPDATE_CLASS } from "../../../actions/ontology/classes/types"
+import { CREATE_ENTITY, GET_CLASS, GET_CLASSES, GET_CLASSES_WITH_SIGNATURE, GET_CLASS_OBJECT, GET_CLASS_OBJECTS, GET_OBJECTS_BY_URI, GET_SUBCLASSES, TAttributeType, TClass, TClassDispatchTypes, TClassExtended, TObjectExtended, UPDATE_CLASS } from "../../../actions/ontology/classes/types"
 
 
 interface IDefaultState {
@@ -6,7 +6,13 @@ interface IDefaultState {
     updatedClass: TClass,
     selectedSubClasses: { id: number, classes: TClass[] }
     selectedClassObjects: { id: number, objects: TClass[] }
-    selectedObject: TClass
+    selectedObject: TObjectExtended,
+    selectedClass: TClassExtended,
+    classesWithSignature: TClass[],
+    selectedObjectsByUri: { uri: string, objects: TClass[] },
+
+    createdEntity: TClass
+
 }
 
 const defaultState: IDefaultState = {
@@ -14,7 +20,12 @@ const defaultState: IDefaultState = {
     updatedClass: null,
     selectedSubClasses: { id: -1, classes: [] },
     selectedClassObjects: { id: -1, objects: [] },
-    selectedObject: null
+    selectedObject: null,
+    selectedClass: null,
+    classesWithSignature: [],
+    selectedObjectsByUri: null,
+
+    createdEntity: null
 }
 
 const classReducer = (state: IDefaultState = defaultState, action: TClassDispatchTypes) => {
@@ -45,6 +56,29 @@ const classReducer = (state: IDefaultState = defaultState, action: TClassDispatc
             return {
                 ...state,
                 selectedObject: action.payload
+            }
+
+        case GET_CLASS:
+            return {
+                ...state,
+                selectedClass: action.payload
+            }
+
+        case GET_CLASSES_WITH_SIGNATURE:
+            return {
+                ...state,
+                classesWithSignature: action.payload
+            }
+        case GET_OBJECTS_BY_URI:
+            return {
+                ...state,
+                selectedObjectsByUri: action.payload
+            }
+
+        case CREATE_ENTITY:
+            return {
+                ...state,
+                createdEntity: action.payload
             }
 
         default:

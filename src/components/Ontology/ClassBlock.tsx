@@ -4,6 +4,7 @@ import { getClassObjects, getSubClasses } from '../../actions/ontology/classes/c
 import { TClass } from '../../actions/ontology/classes/types';
 
 import { RootStore } from '../../store';
+import { getName } from '../../utils';
 
 interface IClassBlockProps {
     class: TClass,
@@ -38,7 +39,7 @@ const ClassBlock: React.FunctionComponent<IClassBlockProps> = (props) => {
     }
     return <div className='og-class-block' >
         <div onClick={onClick} className='og-class-title' style={isOpened && subClasses.length != 0 ? { background: 'grey' } : {}}>
-            <p>{currentClass["uri"]}</p>
+            <p>{getName(currentClass)}</p>
         </div>
         {isOpened && <div className='og-class-subblock'>
             {subClasses.map(sc => {

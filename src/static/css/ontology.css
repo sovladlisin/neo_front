@@ -25,6 +25,9 @@
 }
 .og-class-title {
   padding: 10px 0;
+  height: 30px;
+  line-height: 30px;
+  font-size: 10pt;
 }
 
 .og-class-name {
@@ -49,7 +52,7 @@
 
 .og-class-info-params {
   display: grid;
-  grid-template-columns: 2fr 5fr;
+  grid-template-columns: 20px 20px 2fr 5fr;
   gap: 5px;
 }
 .og-class-info-params label {
@@ -125,4 +128,42 @@ gap: 10px;
 .og-class-add-field button {
 color: white;
 background: black;
+}
+.rl-control-pannel {
+  position: sticky;
+  top: 0;
+  height: 30px;
+  line-height: 30px;
+  background: white;
+  margin-bottom: 10px;
+}
+.rl-control-pannel button {
+  float: left;
+  height: 30px;
+  padding: 0 10px;
+}
+.og-object-container-separator {
+  height: 30px;
+  line-height: 30px;
+  background: gainsboro;
+  text-align: center;
+}
+#open {
+  float: left;
+  display: block;
+  font-size: 9pt;
+  margin: 0 10px;
+  height: 30px;
+}
+.og-class-title p {
+  float: left;
+}
+.og-object-container-params p {
+  font-size: 9pt;
+  line-height: 30px;
+}
+.og-object-container-params p:hover {
+  cursor: pointer;
+  background: black;
+  color: white;
 }

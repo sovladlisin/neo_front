@@ -1,0 +1,114 @@
+
+.og-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: white;
+    width: 700px;
+    max-height: 400px;
+    padding: 30px;
+    z-index: 5;
+    overflow-y: auto;
+  }
+  .og-form-selector {
+    position: absolute;
+    right: -20px;
+    width: auto;
+    transform: translate(100%,0);
+    z-index: 5;
+    background: white;
+    padding: 30px;
+    display: grid;
+    gap: 5px;
+    top: 0;
+  }
+  
+.og-form-body {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5px;
+  }
+  .og-form-body label {
+    text-align: right;
+    font-size: 10pt;
+  }
+  .og-form-body input {
+    background: gainsboro;
+    padding: 0 5px;
+    font-size: 9pt;
+  }
+  .object-selector-background {
+    z-index: 98;
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    background: #00000061;
+    top: 0;
+    left: 0;
+  }
+  
+.object-selector-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background: white;
+    height: 300px;
+    width: 400px;
+    overflow-y: auto;
+    transform: translate(-50%,-50%);
+    z-index: 99;
+  }
+  .object-selector-window input {
+    width: 100%;
+    padding: 5px;
+    font-size: 9pt;
+    height: 30px;
+    background: gainsboro;
+  }
+  .object-selector-window button {
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+  }
+  .object-selector-window button:hover {
+    background: black;
+    color: white;
+  }
+  .object-selector {
+    font-size: 10pt;
+    position: relative;
+    border: 1px solid black;
+    height: 25px;
+  }
+  .object-selector-name-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    cursor: pointer;
+  }
+  .og-form-settings-buttons {
+    font-size: 9pt;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+  
+.og-form-title {
+    width: 100%;
+    text-align: center;
+    background: grey;
+    color: white;
+    height: 30px;
+    line-height: 30px;
+    margin: 10px 0;
+  }
+  .og-form>button {
+    width: 100%;
+    font-size: 9pt;
+    height: 30px;
+    line-height: 30px;
+    background: gainsboro;
+    margin: 10px 0;
+  }
