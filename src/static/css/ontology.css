@@ -167,3 +167,49 @@ background: black;
   background: black;
   color: white;
 }
+
+.ro-file-input {
+  width: 900px;
+  height: 50px;
+  background: white;
+  box-shadow: 0 5px 0 gainsboro;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 auto;
+  gap: 20px;
+  font-size: 13px;
+  padding: 10px;
+}
+.ro-file-input >* {
+  line-height: 30px;
+  height: 30px;
+  margin: 10px;
+}
+.ro-file-input input {
+  background: gainsboro;
+  padding: 0 10px;
+}
+
+.ro-file-input button {
+  background: gainsboro;
+}
+.ro-file-card {
+  width: 900px;
+  height: 50px;
+  background: white;
+  margin: 20px auto;
+  box-shadow: 0 3px 0 gainsboro;
+  padding: 10px;
+  font-size: 12px;
+  position: relative;
+}
+.ro-file-card>* {
+  float: left;
+  margin: 10px;
+  height: 30px;
+  line-height: 30px;
+}
+.ro-file-card label {
+  background: gainsboro;
+  padding: 0 10px;
+}

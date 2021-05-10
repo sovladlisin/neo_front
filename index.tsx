@@ -8,6 +8,8 @@ import './src/static/css/fixer.css'
 import './src/static/css/ontology.css'
 import './src/static/css/home.css'
 import './src/static/css/forms.css'
+import './src/static/css/header.css'
+import './src/static/css/account.css'
 
 
 import { persistStore } from 'redux-persist'

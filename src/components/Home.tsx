@@ -7,11 +7,7 @@ interface IHomeProps {
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
     return <>
-        <div className='h-menu'>
-            <Link to='/resource-library'>Библиотека ресурсов</Link>
-            <Link to='/resource-ontology'>Онтология ресурсов</Link>
-            <Link to='/domain-ontology'>Онтологии ПрО</Link>
-        </div>
+        Домашняя страница
     </>
 };
 

@@ -4,6 +4,7 @@ import { CorpusTree } from './CorpusTree';
 import Places from './Places';
 import ObjectList from './ObjectList';
 import { PERSON_URI, PLACE_URI } from '../../utils';
+import Files from './Files';
 
 interface IResourceLibraryProps {
 }
@@ -14,6 +15,7 @@ const ResourceLibrary: React.FunctionComponent<IResourceLibraryProps> = (props) 
         { name: 'Корпусы', id: 1 },
         { name: 'Авторы', id: 2 },
         { name: 'Места', id: 3 },
+        { name: 'Файловое хранилище', id: 4 },
     ]
 
 
@@ -32,6 +34,7 @@ const ResourceLibrary: React.FunctionComponent<IResourceLibraryProps> = (props) 
             {selectedMode === 1 && <CorpusTree />}
             {selectedMode === 2 && <ObjectList class_uri={PERSON_URI} />}
             {selectedMode === 3 && <ObjectList class_uri={PLACE_URI} />}
+            {selectedMode === 4 && <Files />}
         </div>
     </>;
 };
