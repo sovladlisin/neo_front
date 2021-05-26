@@ -58,7 +58,7 @@ const OntologyWS: React.FunctionComponent<IOntologyWSProps> = (props) => {
                     })}
                 </div>
                 <div className='og-right'>
-                    {selectedClass && <ClassInfo domain={props.domain} onObjectAdd={(class_uri: string) => { setObjectAddWindow(true); setSelectedClassForObjectAdd(class_uri) }} onObjectSelect={co => setSelectedObject(co)} class_id={selectedClass} />}
+                    {selectedClass != -1 && <ClassInfo domain={props.domain} onObjectAdd={(class_uri: string) => { setObjectAddWindow(true); setSelectedClassForObjectAdd(class_uri) }} onObjectSelect={co => setSelectedObject(co)} class_id={selectedClass} />}
                 </div>
             </div>
         </div>
