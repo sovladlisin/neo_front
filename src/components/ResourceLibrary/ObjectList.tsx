@@ -28,7 +28,7 @@ const ObjectList: React.FunctionComponent<IObjectListProps> = (props) => {
   }, [, props.class_uri, classState.createdEntity])
   React.useEffect(() => {
     const data = classState.selectedObjectsByUri
-    if (data && data.uri != props.class_uri) return;
+    if (!data || (data && data.uri != props.class_uri)) return;
     setItems(data.objects)
   }, [, classState.selectedObjectsByUri])
 

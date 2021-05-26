@@ -32,7 +32,7 @@ const OntologyWS: React.FunctionComponent<IOntologyWSProps> = (props) => {
         dispatch(getClasses(props.domain))
     }, [])
 
-    const [selectedClass, setSelectedClass] = React.useState<TClass>(null)
+    const [selectedClass, setSelectedClass] = React.useState<number>(-1)
     const [selectedObject, setSelectedObject] = React.useState<number>(-1)
     const [selectedClassForObjectAdd, setSelectedClassForObjectAdd] = React.useState('')
 
@@ -54,11 +54,11 @@ const OntologyWS: React.FunctionComponent<IOntologyWSProps> = (props) => {
             <div className='ontology'>
                 <div className='og-left'>
                     {classState.parentClasses && classState.parentClasses.map(c => {
-                        return <ClassBlock selectedClass={selectedClass ? selectedClass.id : -1} onAddChild={cl => { setSelectedParent(cl); setClassAddWindow(true) }} onSelect={sc => setSelectedClass(sc)} class={c} />
+                        return <ClassBlock selectedClass={selectedClass ? selectedClass : -1} onAddChild={cl => { setSelectedParent(cl); setClassAddWindow(true) }} onSelect={sc => setSelectedClass(sc)} class={c} />
                     })}
                 </div>
                 <div className='og-right'>
-                    {selectedClass && <ClassInfo domain={props.domain} onObjectAdd={(class_uri: string) => { setObjectAddWindow(true); setSelectedClassForObjectAdd(class_uri) }} onObjectSelect={co => setSelectedObject(co)} class_id={selectedClass.id} />}
+                    {selectedClass && <ClassInfo domain={props.domain} onObjectAdd={(class_uri: string) => { setObjectAddWindow(true); setSelectedClassForObjectAdd(class_uri) }} onObjectSelect={co => setSelectedObject(co)} class_id={selectedClass} />}
                 </div>
             </div>
         </div>

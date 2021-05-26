@@ -9,7 +9,7 @@ import { getName } from '../../utils';
 interface IClassBlockProps {
     class: TClass,
     selectedClass: number,
-    onSelect: (sc: TClass) => void,
+    onSelect: (sc: number) => void,
     onAddChild: (cl: TClass) => void
 }
 
@@ -42,7 +42,7 @@ const ClassBlock: React.FunctionComponent<IClassBlockProps> = (props) => {
         setIsOpened(!isOpened)
     }
     const onExpand = () => {
-        props.onSelect(currentClass)
+        props.onSelect(currentClass.id)
     }
     const onAdd = () => {
         props.onAddChild(currentClass)
