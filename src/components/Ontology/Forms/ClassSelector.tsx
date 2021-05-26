@@ -1,44 +1,41 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getObjectsByClassUri } from '../../../actions/ontology/classes/classes';
-import { TClass, TRelation } from '../../../actions/ontology/classes/types';
+import { getAllClasses, getObjectsByClassUri } from '../../../actions/ontology/classes/classes';
+import { TClass } from '../../../actions/ontology/classes/types';
 import { RootStore } from '../../../store';
-import { getName, nodeFilter, useKeyPress } from '../../../utils';
+import { getName, nodeFilter } from '../../../utils';
 import { useOnClickOutside } from '../../HandleClickOutside';
 
-interface IObjectSelectorWindowProps {
-    uri: string,
+interface IClassSelectorWindowProps {
+    domain: string,
     onSelect: (object: TClass) => void,
     onClose: () => void,
-    default?: TClass,
-
+    default?: TClass
 }
 
-const ObjectSelectorWindow: React.FunctionComponent<IObjectSelectorWindowProps> = (props) => {
+const ClassSelectorWindow: React.FunctionComponent<IClassSelectorWindowProps> = (props) => {
 
     const dispatch = useDispatch()
     const classState = useSelector((state: RootStore) => state.classes)
 
-    const [objectWindowSearch, setObjectWindowSearch] = React.useState('')
+    const [classWindowSearch, setClassWindowSearch] = React.useState('')
 
     const onSelect = (object: TClass) => {
-
         props.onSelect(object)
         props.onClose()
     }
 
     const [objects, setObjects] = React.useState<TClass[]>([])
     React.useEffect(() => {
-        dispatch(getObjectsByClassUri(props.uri))
-    }, [, props.uri])
+        dispatch(getAllClasses(props.domain))
+    }, [, props.domain])
 
     React.useEffect(() => {
-        const data = classState.selectedObjectsByUri
-
-        if (data.uri != props.uri) return;
-        setObjects(data.objects)
-
-    }, [classState.selectedObjectsByUri])
+        const data = classState.domainClasses
+        if (data === null) return;
+        if (data.domain != props.domain) return;
+        data.classes && setObjects(data.classes)
+    }, [, classState.domainClasses])
 
     const ref = React.useRef()
     useOnClickOutside(ref, () => {
@@ -64,9 +61,9 @@ const ObjectSelectorWindow: React.FunctionComponent<IObjectSelectorWindowProps> 
 
     return <>
         <div className='object-selector-window' ref={ref}>
-            <input placeholder='Поиск' value={objectWindowSearch} onChange={e => setObjectWindowSearch(e.target.value)}></input>
+            <input placeholder='Поиск' value={classWindowSearch} onChange={e => setClassWindowSearch(e.target.value)}></input>
             <button style={props.default === null ? { background: '#252854', color: 'white' } : {}} onClick={_ => onSelect(null)}>Не указано</button>
-            {objects.filter(node => nodeFilter(objectWindowSearch, node)).map(object => {
+            {objects.filter(node => nodeFilter(classWindowSearch, node)).map(object => {
                 return <button style={props.default && object.id === props.default.id ? { background: '#252854', color: 'white' } : {}} onClick={_ => onSelect(object)}>{getName(object)}</button>
             })}
         </div>
@@ -74,41 +71,29 @@ const ObjectSelectorWindow: React.FunctionComponent<IObjectSelectorWindowProps> 
     </>
 }
 
-interface IObjectSelectorProps {
-    uri: string,
-    onSelect: (object: TClass, relation?: TRelation) => void,
-    default?: TClass,
-    onClick?: () => void,
-    relation?: TRelation
+interface IClassSelectorProps {
+    domain: string,
+    onSelect: (object: TClass) => void,
+    default?: TClass
 }
 
-const ObjectSelector: React.FunctionComponent<IObjectSelectorProps> = (props) => {
-    const dispatch = useDispatch()
-    const classState = useSelector((state: RootStore) => state.classes)
-
-    const ctrlPress = useKeyPress('Control')
-
-    const [objectWindow, setObjectWindow] = React.useState(false)
+const ClassSelector: React.FunctionComponent<IClassSelectorProps> = (props) => {
+    const [classWindow, setClassWindow] = React.useState(false)
 
     const onSelect = (object: TClass) => {
-        if (props.relation) props.onSelect(object, props.relation)
-        else props.onSelect(object)
+        props.onSelect(object)
     }
 
     return <>
         <div className='object-selector'>
-            <div className='object-selector-name-placeholder' onClick={_ => {
-                if (ctrlPress && props.onClick) props.onClick()
-                else
-                    setObjectWindow(true)
-            }}>
+            <div className='object-selector-name-placeholder' onClick={_ => setClassWindow(true)}>
                 {props.default ? <p>{getName(props.default)}</p> : <p>Не указано</p>}
             </div>
         </div>
-        {objectWindow && <>
-            <ObjectSelectorWindow uri={props.uri} default={props.default} onClose={() => setObjectWindow(false)} onSelect={obj => onSelect(obj)} />
+        {classWindow && <>
+            <ClassSelectorWindow domain={props.domain} default={props.default} onClose={() => setClassWindow(false)} onSelect={obj => onSelect(obj)} />
         </>}
     </>;
 };
 
-export default ObjectSelector;
+export default ClassSelector;

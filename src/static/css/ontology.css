@@ -5,13 +5,13 @@
   height: 100%;
 }
 .og-left {
-  background: white;
   height: auto;
   overflow: auto;
 }
 .og-class-block {
   width: 100%;
   font-size: 12pt;
+  margin: 10px 0;
 }
 .og-class-subblock {
   margin-left: 20px;
@@ -19,21 +19,22 @@
   padding-left: 10px;
 }
 .og-class-title:hover {
-  background: black;
+  background: #252854;
   color: white;
   cursor: pointer;
 }
 .og-class-title {
-  padding: 10px 0;
+  padding: 10px;
   height: 30px;
   line-height: 30px;
   font-size: 10pt;
+  border-radius: 5px;
 }
 
 .og-class-name {
   text-align: center;
   font-size: 12pt;
-  background: black;
+  background: #252854;
   color: white;
   padding: 10px 0;
 }
@@ -42,22 +43,33 @@
   padding: 10px 0;
   text-align: center;
   display: block;
-  width: 100%;
+  width: 90%;
+  margin: 10px 5%;
+  border-radius: 5px;
+  font-size: 9pt;
 }
 .og-class-object:hover {
   background: black;
   color: white;
   cursor: pointer;
+  background: #252854;
 }
 
 .og-class-info-params {
   display: grid;
   grid-template-columns: 20px 20px 2fr 5fr;
   gap: 5px;
+  width: 90%;
+  margin: 0 5%;
 }
 .og-class-info-params label {
   font-size: 12pt;
   text-align: right;
+  background: gainsboro;
+  font-size: 8pt;
+  height: 20px;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .og-class-info-params p {
@@ -72,6 +84,7 @@
   z-index: 9;
   width: 100%;
   height: 100%;
+  margin: 0 !important;
 }
 .og-object-container {
   position: fixed;
@@ -80,13 +93,16 @@
   height: 100%;
   width: 700px;
   background: white;
-  z-index: 10;
+  z-index: 15;
+  overflow-y: auto;
+  margin: 0 !important;
 }
 .og-object-container-title {
-  background: black;
+  background: #252854;
   color: white;
-  padding: 10px 0;
   text-align: center;
+  height: 50px;
+  line-height: 50px;
 }
 .og-object-container-params {
   display: grid;
@@ -106,6 +122,7 @@
   line-height: 30px;
   padding: 0 10px;
   font-size: 9pt;
+  border-radius: 5px;
 }
 .og-object-container-save {
   height: 30px;
@@ -130,37 +147,56 @@ color: white;
 background: black;
 }
 .rl-control-pannel {
-  position: sticky;
   top: 0;
-  height: 30px;
+  height: 50px;
   line-height: 30px;
   background: white;
   margin-bottom: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 3px 0 gainsboro;
 }
 .rl-control-pannel button {
   float: left;
-  height: 30px;
+  height: 50px;
   padding: 0 10px;
 }
 .og-object-container-separator {
   height: 30px;
   line-height: 30px;
-  background: gainsboro;
+  background: #252854;
   text-align: center;
+  font-size: 10pt;
+  width: 96%;
+  margin: 10px auto;
+  border-radius: 5px;
+  color: white;
 }
 #open {
   float: left;
   display: block;
   font-size: 9pt;
-  margin: 0 10px;
+  margin: 0 0 0 5px;
   height: 30px;
+  background: #252854;
+  color: white;
+  width: 30px;
+  text-align: center;
+  border-radius: 5px;
 }
 .og-class-title p {
   float: left;
+  width: max-content;
+  margin: 0 10px 0 0;
 }
 .og-object-container-params p {
   font-size: 9pt;
   line-height: 30px;
+  width: 100%;
+  text-align: left;
+  overflow: hidden;
+  height: 25px;
+  line-height: 25px;
 }
 .og-object-container-params p:hover {
   cursor: pointer;
@@ -170,28 +206,30 @@ background: black;
 
 .ro-file-input {
   width: 900px;
-  height: 50px;
   background: white;
   box-shadow: 0 5px 0 gainsboro;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin: 0 auto;
-  gap: 20px;
+  margin: 0 auto !important;
+  gap: 5px;
   font-size: 13px;
   padding: 10px;
+  border-radius: 5px;
 }
 .ro-file-input >* {
   line-height: 30px;
   height: 30px;
-  margin: 10px;
 }
 .ro-file-input input {
   background: gainsboro;
   padding: 0 10px;
+  border-radius: 5px;
+  font-size: 9pt;
 }
 
 .ro-file-input button {
-  background: gainsboro;
+  background: #252854;
+  color: white;
+  border-radius: 5px;
 }
 .ro-file-card {
   width: 900px;
@@ -212,4 +250,368 @@ background: black;
 .ro-file-card label {
   background: gainsboro;
   padding: 0 10px;
+}
+.rl-add-obj button {
+  height: 30px;
+  padding: 0 15px;
+  background: #3ed29b;
+  color: white;
+  border-radius: 5px;
+  font-size: 8pt;
+}
+
+.og-object-control-pannel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 99;
+  color: white;
+}
+.og-object-control-pannel>* {
+  display: block;
+  width: 50px;
+  height: 50px;
+  float: left;
+  color: white;
+  line-height: 30px;
+  font-size: 12pt;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  line-height: 50px;
+}
+.og-class-title button {
+  background: grey;
+  color: white;
+}
+.og-domain-ontology-workspace {
+  margin: 75px auto;
+  width: 1400px;
+}
+
+.rl-main {
+  margin: 65px auto;
+  width: 1400px;
+}
+.rl-add-obj button i {
+  margin: 0 0 0 10px;
+}
+#open:hover {
+  background: white;
+  color: #252854;
+}
+.tl-content>* {
+  margin: 5px 0;
+}
+.rl-control-pannel button:hover {
+  background: #252854;
+  color: white;
+  transition: 0.3s ease-in-out;
+}
+.opened-indicator {
+  float: left;
+  margin: 0 5px;
+  font-size: 7pt;
+}
+.ontology-add-class {
+  height: 30px;
+  padding: 0 15px;
+  background: #3ed29b;
+  color: white;
+  border-radius: 5px;
+  font-size: 8pt;
+  margin: 10px 0;
+}
+.ontology-add-class i {
+  margin: 0 0 0 10px;
+}
+.ontology-space {
+  margin: 10px auto;
+  width: 1400px;
+}
+
+.og-domain-ontology-select i {
+  margin-left: 10px;
+  font-size: 7pt;
+}
+.og-domain-ontology-select>* {
+  background: white;
+  display: block;
+  color: black;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  border-radius: 5px;
+  float: left;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 9pt;
+}
+.og-domain-ontology-select {
+  min-height: 30px;
+}
+
+.og-class-info {
+  margin: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 0 gainsboro;
+  background: white;
+}
+.og-class-info-params input {
+  font-size: 9pt;
+  border-radius: 5px;
+  border: 1px solid #acaaaa;
+  padding: 0 5px;
+}
+.og-class-object {
+  width: 90%;
+  margin: 10px 5%;
+  border-radius: 5px;
+}
+.og-class-object p {
+  height: 20px;
+  line-height: 20px;
+  padding: 5px;
+  font-size: 9pt;
+}
+.og-class-info-params select {
+  font-size: 9pt;
+  border-radius: 5px;
+  border: 1px solid #858585;
+}
+.og-class-info-params span {
+  font-size: 9pt;
+  line-height: 30px;
+}
+
+.og-resource-ontology-container {
+  margin: 65px auto;
+}
+.og-object-file {
+  width: 100%;
+  height: 245px;
+  margin: 10px 0;
+}
+.og-object-file img {
+  object-fit: contain;
+  width: inherit;
+  height: inherit;
+}
+.og-class-objects-container>p {
+  width: 100%;
+  text-align: center;
+  font-size: 14pt;
+  color: #b6b6b6;
+  height: 50px;
+  line-height: 50px;
+  margin-bottom: 10px;
+}
+
+.og-objectlist-search {
+  margin: 10px 0;
+}
+.og-objectlist-search input {
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 0 #b2b2b2;
+}
+.rl-control-pannel-search {
+  float: right !important;
+  display: block;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+}
+
+.ontology-refresh-index {
+  height: 30px;
+  padding: 0 15px;
+  background: #df3d5c;
+  color: white;
+  border-radius: 5px;
+  font-size: 8pt;
+  margin: 10px 10px 10px 0;
+}
+.index-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: white;
+  box-shadow: 0 4px 0 gainsboro;
+  border-radius: 5px;
+  padding: 20px;
+}
+.index-form p {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 10pt;
+}
+.index-form button {
+  width: 50%;
+  font-size: 9pt;
+  height: 30px;
+  line-height: 20px;
+  color: white;
+}
+
+.og-search-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: 20px;
+  height: 80%;
+  width: 80%;
+  background: white;
+  transform: translate(-50%,-50%);
+  box-shadow: 0 4px 0 gainsboro;
+  border-radius: 5px;
+  z-index: 11;
+}
+.og-search-filters {
+  display: inline-block;
+  width: 100%;
+  margin: 10px 0;
+}
+.og-search-filters button {
+  float: left;
+  margin: 0 10px 0 0;
+  height: 30px;
+  line-height: 30px;
+  color: black;
+  border: 1px solid #949393;
+  border-radius: 5px;
+  font-size: 9pt;
+  padding: 0 10px;
+}
+.og-search-form input {
+  background: white;
+  border: 1px solid black;
+  padding: 0 2%;
+  border-radius: 5px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 9pt;
+}
+
+.og-search-input-container {
+  display: grid;
+  grid-template-columns: 1fr 30px;
+  gap: 5px;
+}
+.og-search-input-container button {
+  background: #252854;
+  color: white;
+  border-radius: 5px;
+  font-size: 8pt;
+}
+.ontology-search-index {
+  height: 30px;
+  padding: 0 15px;
+  background: #252854;
+  color: white;
+  border-radius: 5px;
+  font-size: 8pt;
+  margin: 10px 10px;
+}
+
+.ontology-search-index i {
+  margin: 0 0 0 10px;
+}
+
+.og-search-form-exit {
+  height: 30px;
+  width: 30px;
+  line-height: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 14pt;
+}
+
+.og-object-info-text-title {
+  height: 30px;
+  line-height: 30px;
+  background: #c65b5b;
+  text-align: center;
+  font-size: 10pt;
+  width: 96%;
+  margin: 10px auto;
+  border-radius: 5px;
+  color: white;
+}
+.og-object-info-text {
+  margin-bottom: 10px;
+}
+.og-object-info-text>p {
+  height: 30px;
+  line-height: 30px;
+  background: #3b3c48;
+  text-align: left;
+  font-size: 10pt;
+  width: 92%;
+  margin: 10px auto 0 auto;
+  border-radius: 5px;
+  color: white;
+  padding: 0 2%;
+}
+.og-object-info-text-entities {
+  background: gainsboro;
+  width: 92%;
+  border-radius: 5px;
+  color: white;
+  padding: 2%;
+  margin: 0px auto;
+}
+.og-object-info-text-entity {
+  width: 100%;
+  font-size: 8pt;
+  color: white;
+  display: inline-block;
+  padding: 5px;
+  background: #2ca260;
+  border-radius: 5px;
+  height: 15px;
+  line-height: 15px;
+}
+.og-object-info-text-entity>* {
+  float: left;
+  margin-right: 10px;
+}
+.og-object-info-text-entity a {
+  color: #f4bfd7;
+}
+.ontology-delete {
+  height: 30px;
+  padding: 0 15px;
+  background: #df3d5c;
+  color: white;
+  border-radius: 5px;
+  font-size: 8pt;
+  margin: 10px 10px 10px 0;
+}
+
+.object-info-relation-name {
+  height: 30px;
+  line-height: 30px;
+  background: #757797;
+  text-align: center;
+  font-size: 10pt;
+  width: 96%;
+  margin: 10px auto;
+  border-radius: 5px;
+  color: white;
+}
+.obj-add-rel {
+  margin: 0 10px;
+  color: white;
+}
+.object-info-relation-items {
+  width: 96%;
+  margin: 10px auto;
+  border-radius: 5px;
 }

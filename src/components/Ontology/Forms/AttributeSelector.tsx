@@ -1,44 +1,46 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getObjectsByClassUri } from '../../../actions/ontology/classes/classes';
-import { TClass, TRelation } from '../../../actions/ontology/classes/types';
+import { TClass } from '../../../actions/ontology/classes/types';
+import { getNodeAttributes } from '../../../actions/workspace/workspace';
 import { RootStore } from '../../../store';
-import { getName, nodeFilter, useKeyPress } from '../../../utils';
+import { getName, nodeFilter } from '../../../utils';
 import { useOnClickOutside } from '../../HandleClickOutside';
 
-interface IObjectSelectorWindowProps {
+interface IAttributeSelectorWindowProps {
     uri: string,
     onSelect: (object: TClass) => void,
     onClose: () => void,
     default?: TClass,
-
+    obj: boolean
 }
 
-const ObjectSelectorWindow: React.FunctionComponent<IObjectSelectorWindowProps> = (props) => {
+const AttributeSelectorWindow: React.FunctionComponent<IAttributeSelectorWindowProps> = (props) => {
 
     const dispatch = useDispatch()
-    const classState = useSelector((state: RootStore) => state.classes)
+    const workState = useSelector((state: RootStore) => state.workspace)
 
     const [objectWindowSearch, setObjectWindowSearch] = React.useState('')
 
     const onSelect = (object: TClass) => {
-
         props.onSelect(object)
         props.onClose()
     }
 
     const [objects, setObjects] = React.useState<TClass[]>([])
     React.useEffect(() => {
-        dispatch(getObjectsByClassUri(props.uri))
+        dispatch(getNodeAttributes(props.uri))
     }, [, props.uri])
 
     React.useEffect(() => {
-        const data = classState.selectedObjectsByUri
+        const data = workState.selectedAttributes
 
-        if (data.uri != props.uri) return;
-        setObjects(data.objects)
+        if (!data || data.node_uri != props.uri) return;
+        if (props.obj) setObjects(data.attributes_obj)
+        else setObjects(data.attributes)
 
-    }, [classState.selectedObjectsByUri])
+
+    }, [workState.selectedAttributes])
 
     const ref = React.useRef()
     useOnClickOutside(ref, () => {
@@ -74,41 +76,31 @@ const ObjectSelectorWindow: React.FunctionComponent<IObjectSelectorWindowProps> 
     </>
 }
 
-interface IObjectSelectorProps {
+interface IAttributeSelectorProps {
     uri: string,
-    onSelect: (object: TClass, relation?: TRelation) => void,
+    onSelect: (object: TClass) => void,
     default?: TClass,
-    onClick?: () => void,
-    relation?: TRelation
+    obj?: true
 }
 
-const ObjectSelector: React.FunctionComponent<IObjectSelectorProps> = (props) => {
-    const dispatch = useDispatch()
-    const classState = useSelector((state: RootStore) => state.classes)
-
-    const ctrlPress = useKeyPress('Control')
+const AttributeSelector: React.FunctionComponent<IAttributeSelectorProps> = (props) => {
 
     const [objectWindow, setObjectWindow] = React.useState(false)
 
     const onSelect = (object: TClass) => {
-        if (props.relation) props.onSelect(object, props.relation)
-        else props.onSelect(object)
+        props.onSelect(object)
     }
 
     return <>
         <div className='object-selector'>
-            <div className='object-selector-name-placeholder' onClick={_ => {
-                if (ctrlPress && props.onClick) props.onClick()
-                else
-                    setObjectWindow(true)
-            }}>
+            <div className='object-selector-name-placeholder' onClick={_ => setObjectWindow(true)}>
                 {props.default ? <p>{getName(props.default)}</p> : <p>Не указано</p>}
             </div>
         </div>
         {objectWindow && <>
-            <ObjectSelectorWindow uri={props.uri} default={props.default} onClose={() => setObjectWindow(false)} onSelect={obj => onSelect(obj)} />
+            <AttributeSelectorWindow obj={props.obj} uri={props.uri} default={props.default} onClose={() => setObjectWindow(false)} onSelect={obj => onSelect(obj)} />
         </>}
     </>;
 };
 
-export default ObjectSelector;
+export default AttributeSelector;

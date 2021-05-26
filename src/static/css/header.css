@@ -1,85 +1,88 @@
 
 .hr-menu {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 30px;
-    background: white;
-    box-shadow: 0 3px 0 #9b9b9b;
-    font-size: 10pt;
-    margin-bottom: 3px;
-  }
-  .hr-links a {
-    float: left;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 20px;
-    cursor: pointer;
-  }
-  .hr-links a:hover {
-    color: white;
-    background: black;
-  }
-  .hr-login {
-    float: right;
-  }
-  .hr-links {
-    float: left;
-  }
-  .hr-login>* {
-    height: 30px;
-    line-height: 30px;
-    padding: 0 20px;
-    display: block;
-    float: left;
-  }
-  .hr-login > *:hover {
-    color: white;
-    background: black;
-    cursor: pointer;
-  }
-  .hr-login p {
-    cursor: unset;
-  }
-  .hr-login p:hover {
-    background: white;
-    color: black;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: #252854;
+  box-shadow: 0 3px 0 #9b9b9b;
+  font-size: 10pt;
+  margin-bottom: 3px;
+  color: white;
+  z-index: 10;
+}
+.hr-links a {
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 20px;
+  cursor: pointer;
+  color: white;
+}
+.hr-links a:hover {
+  color: white;
+  background: #15161b6e;
+}
+.hr-login {
+  float: right;
+}
+.hr-links {
+  float: left;
+}
+.hr-login>* {
+  height: 50px;
+  line-height: 50px;
+  padding: 0 20px;
+  display: block;
+  float: left;
+  color: white;
+}
+.hr-login > *:hover {
+  color: white;
+  background: #15161b6e;
+  cursor: pointer;
+}
+.hr-login p {
+  cursor: unset;
+}
+.hr-login p:hover {
+  background: #15161b6e;
+}
+
 .login-form {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 500px;
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    background: white;
-    box-shadow: 0 5px 0 #bdbdbd;
-    padding: 20px;
-    font-size: 10pt;
-    gap: 5px;
-  }
-  .login-form input {
-    background: gainsboro;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 10px;
-  }
-  .login-form label {
-    line-height: 30px;
-    text-align: right;
-  }
-  .login-form button {
-    line-height: 30px;
-    height: 30px;
-    background: gainsboro;
-  }
-  .login-form a {
-    display: block;
-    line-height: 30px;
-    height: 30px;
-    background: gainsboro;
-    text-align: center;
-  }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 500px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  background: white;
+  box-shadow: 0 5px 0 #bdbdbd;
+  padding: 20px;
+  font-size: 10pt;
+  gap: 5px;
+}
+.login-form input {
+  background: gainsboro;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+}
+.login-form label {
+  line-height: 30px;
+  text-align: right;
+}
+.login-form button {
+  line-height: 30px;
+  height: 30px;
+  background: gainsboro;
+}
+.login-form a {
+  display: block;
+  line-height: 30px;
+  height: 30px;
+  background: gainsboro;
+  text-align: center;
+}

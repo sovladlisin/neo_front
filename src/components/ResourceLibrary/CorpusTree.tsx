@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TClass } from '../../actions/ontology/classes/types';
 import { getCorpuses } from '../../actions/ontology/corpuses/corpuses';
 import { RootStore } from '../../store';
+import ObjectForm from '../Ontology/Forms/ObjectForm';
 import ObjectInfo from '../Ontology/ObjectInfo';
 import CorpusItem from './CorpusItem';
 
@@ -22,6 +23,8 @@ export const CorpusTree: React.FunctionComponent<ICorpusTreeProps> = (props) => 
     const [corpuses, setCorpuses] = React.useState<TClass[]>([])
     React.useEffect(() => { setCorpuses(corpusState.parentCorpuses) }, [corpusState.parentCorpuses])
 
+    const [objectAddWindow, setObjectAddWindow] = React.useState(false)
+
     const [selectedCorpus, setSelectedCorpus] = React.useState(-1)
 
     return <>
@@ -31,6 +34,7 @@ export const CorpusTree: React.FunctionComponent<ICorpusTreeProps> = (props) => 
             </>
         })}
         {selectedCorpus != -1 && <ObjectInfo onSelect={id => setSelectedCorpus(id)} object_id={selectedCorpus} onClose={() => setSelectedCorpus(-1)} />}
+
 
     </>;
 };

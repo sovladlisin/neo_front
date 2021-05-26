@@ -1,0 +1,13 @@
+.alert-container {
+    position: fixed;
+    left: 50%;
+    bottom: 8%;
+    color: white;
+    z-index: 9999;
+    transform: translate(-50%,0%);
+}
+
+.alert-container p {
+    padding: 10px;
+    margin: 10px;
+}

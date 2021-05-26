@@ -1,14 +1,19 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getClass, getClassObjects, updateClass } from '../../actions/ontology/classes/classes';
-import { TAttributeType, TClass } from '../../actions/ontology/classes/types';
+import { getClass, getClassObjects, updateClass, updateEntity } from '../../actions/ontology/classes/classes';
+import { TAttributeType, TClass, TClassExtended } from '../../actions/ontology/classes/types';
 import { RootStore } from '../../store';
 import { DATA_TYPES, getName, LABEL, OBJECT_PROPERTY } from '../../utils';
+import Loading from '../Loading';
+import AttributeForm from './Forms/AttributeForm';
 import TypeSelect from './TypeSelect'
+import { Link } from 'react-router-dom'
+
 interface IClassInfoProps {
     class_id: number,
     onObjectSelect: (co: number) => void,
-    onObjectAdd: (class_id: number) => void
+    onObjectAdd: (class_uri: string) => void,
+    domain: string
 }
 
 const ClassInfo: React.FunctionComponent<IClassInfoProps> = (props) => {
@@ -16,6 +21,7 @@ const ClassInfo: React.FunctionComponent<IClassInfoProps> = (props) => {
     const classState = useSelector((state: RootStore) => state.classes)
 
     const [currentClass, setCurrentClass] = React.useState<TClass>(null)
+    const [currentClassExtended, setCurrentClassExtended] = React.useState<TClassExtended>(null)
 
     const [attributes, setAttributes] = React.useState<TClass[]>([])
     const [types, setTypes] = React.useState<TAttributeType>(null)
@@ -23,23 +29,29 @@ const ClassInfo: React.FunctionComponent<IClassInfoProps> = (props) => {
     const [attributesObj, setAttributesObj] = React.useState<TClass[]>([])
     const [typesObj, setTypesObj] = React.useState<TAttributeType>(null)
 
-    const [newAttributeName, setNewAttributeName] = React.useState('')
-    const [newAttributeValue, setNewAttributeValue] = React.useState('')
+    const [newAttributeWindow, setNewAttributeWindow] = React.useState(false)
 
-    const [localSignature, setLocalSignature] = React.useState('')
 
 
     const [classObjects, setClassObjects] = React.useState<TClass[]>([])
 
-    React.useEffect(() => { dispatch(getClass(props.class_id)) }, [, props.class_id])
+    React.useEffect(() => { setCurrentClass(null); dispatch(getClass(props.class_id)) }, [, props.class_id, classState.createdEntity])
     React.useEffect(() => {
         const data = classState.selectedClass
-        data.id === props.class_id && setClassObjects(data.objects)
-        data.id === props.class_id && setCurrentClass(data.class)
-        data.id === props.class_id && setAttributes(data.attributes)
-        data.id === props.class_id && setTypes(data.types)
-        data.id === props.class_id && setTypesObj(data.attribute_types)
-        data.id === props.class_id && setAttributesObj(data.attributes_obj)
+        if (data.id != props.class_id) return;
+
+        setClassObjects(data.objects)
+
+        var temp_class = { ...data.class }
+        temp_class.signature = temp_class.signature ? temp_class.signature : "{}"
+
+        setAttributes(data.attributes)
+        setTypes(data.types)
+        setTypesObj(data.attribute_types)
+        setAttributesObj(data.attributes_obj)
+        setCurrentClass(temp_class)
+        setCurrentClassExtended(data)
+
     }, [classState.selectedClass])
 
 
@@ -51,7 +63,15 @@ const ClassInfo: React.FunctionComponent<IClassInfoProps> = (props) => {
 
 
     const onSave = () => {
-        dispatch(updateClass(currentClass))
+        var node = {}
+        currentClass.params.map(p => {
+            node[p] = currentClass[p]
+        })
+        node['id'] = currentClass.id
+
+        if (currentClass.signature && Object.keys(JSON.parse(currentClass.signature) > 0))
+            node['signature'] = currentClass.signature
+        dispatch(updateEntity(node))
     }
 
     const onSignatureChange = (key: string, value) => {
@@ -61,7 +81,9 @@ const ClassInfo: React.FunctionComponent<IClassInfoProps> = (props) => {
             delete sig[key]
         }
         else {
-            sig[key] = value
+            if (Array.isArray(value))
+                sig[key] = value
+            else sig[key] = [value]
         }
         setCurrentClass({ ...currentClass, signature: JSON.stringify(sig) })
     }
@@ -72,14 +94,42 @@ const ClassInfo: React.FunctionComponent<IClassInfoProps> = (props) => {
         setCurrentClass({ ...currentClass, signature: JSON.stringify(sig) })
     }
 
-    const addAttributeToClass = () => {
-
+    const [selectedTexts, setSelectedTexts] = React.useState<number[]>([])
+    const renderEntities = () => {
+        if (!currentClassExtended) return <></>
+        if (currentClassExtended.texts.length === 0) return <></>
+        return <>
+            <div className='class-info-entities-container'>
+                <p className='og-object-info-text-title'>Размечен в текстах:</p>
+                {currentClassExtended.texts.map(text => {
+                    const is_selected = selectedTexts.includes(text.id)
+                    const entities = currentClassExtended.entities.filter(e => e.text_uri === text['uri'])
+                    return <>
+                        <div className='og-object-info-text' onClick={_ => setSelectedTexts(is_selected ? selectedTexts.filter(t => t != text.id) : [...selectedTexts, text.id])}>
+                            <p>{is_selected && <div className='opened-indicator'><i className="fas fa-arrow-down"></i></div>} {getName(text)}</p>
+                            {is_selected && <div className='og-object-info-text-entities'>
+                                {entities.map(entity => {
+                                    return <div className='og-object-info-text-entity'>
+                                        <p>{entity.pos_start} : {entity.pos_end}</p>
+                                        <p>{entity.markup_object.name}</p>
+                                        <Link to={'/workspace/' + text.id} target='_blank'><i className="fas fa-file-alt"></i></Link>
+                                    </div>
+                                })}
+                            </div>}
+                        </div>
+                    </>
+                })}
+            </div>
+        </>
     }
 
-
-
     return <>
-        {currentClass && <>
+        {(!currentClass || classState.classLoadingId === props.class_id) && <>
+            <div className='og-class-info'>
+                <Loading height={500} />
+            </div>
+        </>}
+        {currentClass && classState.classLoadingId != props.class_id && <>
             <div className='og-class-info'>
                 <p className='og-class-name'>{getName(currentClass)}</p>
                 <p className='og-class-info-title'>Параметры:</p>
@@ -95,6 +145,7 @@ const ClassInfo: React.FunctionComponent<IClassInfoProps> = (props) => {
                     })}
                 </div>
                 <p className='og-class-info-title'>Атрибуты</p>
+                <p className='og-class-info-title' style={{ background: '#3ed29b', color: 'white' }} onClick={_ => setNewAttributeWindow(true)}>Добавить аттрибут</p>
                 {/* <div className='og-class-add-field'>
                     <input onChange={(e) => setNewAttributeName(e.target.value)} placeholder='Имя аттрибута' value={newAttributeName} />
                     <input onChange={(e) => setNewAttributeValue(e.target.value)} placeholder='Тип аттрибута' value={newAttributeValue} />
@@ -110,7 +161,7 @@ const ClassInfo: React.FunctionComponent<IClassInfoProps> = (props) => {
                                     {currentClass.signature &&
                                         currentClass.signature.length > 0 &&
                                         types[attr.id] &&
-                                        Object.keys(JSON.parse(currentClass.signature)).includes(attr['uri']) ? 'Y' : 'N'}
+                                        Object.keys(JSON.parse(currentClass.signature)).includes(attr['uri']) ? <i className="fas fa-clipboard-check"></i> : <i className="fas fa-clipboard"></i>}
 
                                 </button>
                                 <span />
@@ -137,7 +188,7 @@ const ClassInfo: React.FunctionComponent<IClassInfoProps> = (props) => {
                                     onClick={_ => onSignatureChange(attr['uri'], typesObj[attr.id] &&
                                         [OBJECT_PROPERTY, 0, typesObj[attr.id]['uri']])}
                                 >
-                                    {included ? 'Y' : 'N'}
+                                    {included ? <i className="fas fa-clipboard-check"></i> : <i className="fas fa-clipboard"></i>}
 
                                 </button>
                                 {included ? <button
@@ -145,7 +196,7 @@ const ClassInfo: React.FunctionComponent<IClassInfoProps> = (props) => {
                                         [OBJECT_PROPERTY, sig[attr['uri']][1] === 1 ? 0 : 1, typesObj[attr.id]['uri']])}
                                 >
                                     {
-                                        sig[attr['uri']][1] === 1 ? '->' : '<-'
+                                        sig[attr['uri']][1] === 1 ? <i className="fas fa-arrow-right"></i> : <i className="fas fa-arrow-left"></i>
                                     }
                                 </button> : <span />}
 
@@ -162,8 +213,8 @@ const ClassInfo: React.FunctionComponent<IClassInfoProps> = (props) => {
                     }
                 </div>
 
-                <button className='og-class-info-title' onClick={onSave}>Сохранить</button>
-                <p className='og-class-info-title'>Объекты:<button id='add' onClick={_ => props.onObjectAdd(props.class_id)}>+</button></p>
+                <button className='og-class-info-title' style={{ background: '#3ed29b', color: 'white' }} onClick={onSave}>Сохранить</button>
+                <p className='og-class-info-title'>Объекты:<button id='add' onClick={_ => props.onObjectAdd(currentClass['uri'])}><i className='fas fa-plus'></i></button></p>
                 <div className='og-class-objects-container'>
                     {classObjects.length != 0 && classObjects.map(co => {
                         return <div className='og-class-object' onClick={_ => props.onObjectSelect(co.id)}>
@@ -172,11 +223,12 @@ const ClassInfo: React.FunctionComponent<IClassInfoProps> = (props) => {
                     })}
                     {classObjects.length === 0 && <p>Объектов нет</p>}
                 </div>
+                {renderEntities()}
             </div>
 
         </>}
-
-    </>;
-};
+        {newAttributeWindow && <AttributeForm domain={props.domain} class_id={props.class_id} onClose={() => setNewAttributeWindow(false)}></AttributeForm>}
+    </>
+}
 
 export default ClassInfo;

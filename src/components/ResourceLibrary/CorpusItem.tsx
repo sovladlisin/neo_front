@@ -32,8 +32,10 @@ const CorpusItem: React.FunctionComponent<ICorpusItemProps> = (props) => {
     }
 
     return <div className='og-class-block' >
-        <div onClick={onClick} className='og-class-title' style={isOpened && subCorpuses.length != 0 ? { background: 'grey' } : {}}>
-            <p>{getName(currentCorpus)}</p> <p id='open' onClick={_ => props.onSelect(currentCorpus.id)}>открыть</p>
+        <div className='og-class-title'>
+            {isOpened && subCorpuses.length != 0 && <div className='opened-indicator'><i className="fas fa-arrow-down"></i></div>}
+            <p onClick={onClick} >{getName(currentCorpus)}</p>
+            <p id='open' onClick={_ => props.onSelect(currentCorpus.id)}><i className="fas fa-pen-square"></i></p>
         </div>
         {isOpened && <div className='og-class-subblock'>
             {subCorpuses.map(sc => {

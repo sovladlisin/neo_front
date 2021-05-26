@@ -1,0 +1,350 @@
+
+.ws-container {
+  margin: 30px auto;
+  width: 1100px;
+}
+.ws-title {
+  width: 1100px;
+  height: 50px;
+  line-height: 50px;
+  padding: 10px 0;
+  margin-top: 65px;
+}
+.ws-control-panel {
+  width: 1100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  margin: 10px 0;
+}
+.ws-control-panel button {
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #b1b1b1;
+  border-radius: 5px;
+  font-size: 9pt;
+}
+.ws-content {
+  width: 1100px;
+  margin: 20px 0;
+}
+.nav-bar {
+  height: 30px;
+  line-height: 30px;
+  width: 1100px;
+  gap: 10px;
+  background: gainsboro;
+}
+.nav-bar>* {
+  line-height: 30px;
+  height: 30px;
+  font-size: 8pt;
+  text-align: right;
+  padding: 0 10px;
+  float: left;
+  width: auto;
+}
+.main-line {
+  display: grid;
+  grid-template-columns: 30px 1fr 1fr;
+  margin: 10px 0;
+  gap: 10px;
+}
+.main-line p {
+  height: 30px;
+  line-height: 30px;
+  font-size: 9pt;
+  background: white;
+  padding: 0 5px;
+}
+.line-index {
+  text-align: center;
+}
+.ws-text-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.ws-text-note {
+  white-space: pre-wrap;
+}
+.ws-word {
+  padding: 5px;
+  position: relative;
+  overflow: auto;
+}
+.ws-word:hover {
+  background: gainsboro;
+  cursor: pointer;
+}
+#ws-add-entity {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  font-size: 12pt;
+  height: 50px;
+  width: 50px;
+  line-height: 30px;
+  background: #252854;
+  border-radius: 50px;
+  color: white;
+  font-size: 14pt;
+}
+
+.ws-ontology-list button {
+  height: 30px;
+  line-height: 30px;
+  margin-right: 10px;
+  font-size: 9pt;
+  background: white;
+  color: black;
+  padding: 0 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.ws-ontology-list {
+  display: inline-block;
+  width: 1100px;
+}
+.ws-markup-list {
+  display: inline-block;
+  width: 1100px;
+}
+.ws-markup-list > * {
+  height: 30px;
+  line-height: 30px;
+  margin-right: 10px;
+  font-size: 9pt;
+  background: white;
+  color: black;
+  padding: 0 10px;
+  border-radius: 5px;
+  width: max-content;
+  float: left;
+  margin-bottom: 10px;
+}
+.ws-markup-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  padding: 30px;
+  background: white;
+  box-shadow: 0 4px 0 gainsboro;
+  border-radius: 5px;
+}
+.ws-markup-form input {
+  width: 90%;
+  padding: 0 5%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 9pt;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+}
+.ws-markup-form button {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 9pt;
+  margin: 10px 0 0 0;
+  background: #38c087;
+  border-radius: 5px;
+  color: white;
+}
+.ws-markup-list p {
+  display: inline-grid;
+  grid-template-columns: 3fr 1fr;
+  cursor: pointer;
+}
+
+.ws-entity-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  padding: 40px;
+  background: white;
+  box-shadow: 0 4px 0 gainsboro;
+  border-radius: 5px;
+}
+.ws-entity-form-types {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 0 0 10px 0;
+}
+.ws-entity-form-types button {
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+}
+.ws-entity-form-params {
+  display: grid;
+  font-size: 9pt;
+  grid-template-columns: 1fr 3fr;
+  line-height: 30px;
+  gap: 5px;
+}
+#ws-entity-form-add {
+  width: 100%;
+  font-size: 9pt;
+  color: white;
+  height: 30px;
+  line-height: 30px;
+  background: #54bc95;
+  border-radius: 5px;
+  margin: 10px 0 0 0;
+}
+.ws-node-label {
+  position: absolute;
+  top: -22px;
+  font-size: 7pt;
+  border-radius: 30px;
+  padding: 0 3px;
+  height:  14px;
+  line-height: 14px;
+  z-index: 5;
+  color: white;
+  display: inline-block;
+  left: 0;
+  width: max-content;
+}
+
+#ws-add-relation {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 12pt;
+  height: 50px;
+  width: 50px;
+  line-height: 30px;
+  background: #d12878;
+  border-radius: 50px;
+  color: white;
+  font-size: 14pt;
+}
+.ws-relation-window {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  font-size: 12pt;
+  width: 300px;
+  line-height: 30px;
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  font-size: 9pt;
+  box-shadow: 0 4px 0 gainsboro;
+}
+.ws-relation-window-placeholder {
+  border-radius: 5px;
+  border: 1px solid #959595;
+  margin-bottom: 10px;
+}
+.ws-relation-window button {
+  background: #43b982;
+  width: 100%;
+  color: white;
+  height: 30px;
+  border-radius: 5px;
+}
+.ws-relation-window-placeholder span {
+  padding: 0 5px;
+}
+
+.ws-relation-window-entity-title {
+  width: max-content;
+  margin: 10px 10px 0 10px;
+  border-radius: 5px;
+  color: white;
+  font-size: 9pt;
+  height: 17px;
+  line-height: 17px;
+  padding: 0 5px;
+}
+.ws-relation-window-entity-pos {
+  margin: 0 10px;
+  padding: 0 5px;
+  font-size: 7pt;
+}
+.ws-class-container {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translate(0%,-50%);
+  height: 600px;
+  overflow-y: auto;
+  z-index: 50;
+  width: 50%;
+}
+
+.ws-class-container-exit {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
+}
+.ws-markup-list p button {
+  color: #ed1e45;
+  margin: 0 7px;
+}
+.class-info-entities-container {
+  margin: 0 3%;
+}
+
+.text-line {
+  position: relative;
+}
+.text-line>button {
+  position: absolute;
+  right: -25px;
+  top: 0;
+  height: 30px;
+  line-height: 30px;
+  color: #f0f0f0;
+}
+.text-line > button:hover {
+  color: #252854;
+}
+.commentary-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background: white;
+  box-shadow: 0 4px 0 gainsboro;
+  padding: 30px;
+  border-radius: 5px;
+  transform: translate(-50%,-50%);
+}
+.commentary-window textarea {
+  width: 90%;
+  font-size: 9pt;
+  background: gainsboro;
+  border-radius: 5px;
+  resize: none;
+  padding: 5%;
+}
+.commentary-window button {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 5px;
+  background: #12ae7b;
+  color: white;
+  margin: 10px 0 0 0;
+}
+
+#save-comments {
+  position: fixed;
+  top: 70px;
+  right: 10px;
+  font-size: 9pt;
+  background: #2bb883;
+  color: white;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 5px;
+  padding: 0 5px;
+}

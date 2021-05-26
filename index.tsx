@@ -10,6 +10,8 @@ import './src/static/css/home.css'
 import './src/static/css/forms.css'
 import './src/static/css/header.css'
 import './src/static/css/account.css'
+import './src/static/css/workspace.css'
+import './src/static/css/alerts.css'
 
 
 import { persistStore } from 'redux-persist'

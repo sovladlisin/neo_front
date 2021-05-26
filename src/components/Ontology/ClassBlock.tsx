@@ -8,15 +8,21 @@ import { getName } from '../../utils';
 
 interface IClassBlockProps {
     class: TClass,
-    onSelect: (sc: TClass) => void
+    selectedClass: number,
+    onSelect: (sc: TClass) => void,
+    onAddChild: (cl: TClass) => void
 }
 
 const ClassBlock: React.FunctionComponent<IClassBlockProps> = (props) => {
     const dispatch = useDispatch()
     const classState = useSelector((state: RootStore) => state.classes)
 
+    const [currentClass, setCurrentClass] = React.useState(props.class)
+    React.useEffect(() => setCurrentClass(props.class), [props.class])
+
     //on SubClass info update
     const [subClasses, setSubClasses] = React.useState<TClass[]>([])
+    React.useEffect(() => { dispatch(getSubClasses(currentClass.id)) }, [currentClass])
     React.useEffect(() => {
         const data = classState.selectedSubClasses
         data.id === currentClass.id && setSubClasses(data.classes)
@@ -27,23 +33,30 @@ const ClassBlock: React.FunctionComponent<IClassBlockProps> = (props) => {
         }
     }, [classState.updatedClass])
 
-    const [currentClass, setCurrentClass] = React.useState(props.class)
-    React.useEffect(() => setCurrentClass(props.class), [props.class])
+
 
     const [isOpened, setIsOpened] = React.useState(false)
 
     const onClick = () => {
         subClasses.length === 0 && dispatch(getSubClasses(currentClass.id))
         setIsOpened(!isOpened)
+    }
+    const onExpand = () => {
         props.onSelect(currentClass)
     }
+    const onAdd = () => {
+        props.onAddChild(currentClass)
+    }
+
     return <div className='og-class-block' >
-        <div onClick={onClick} className='og-class-title' style={isOpened && subClasses.length != 0 ? { background: 'grey' } : {}}>
-            <p>{getName(currentClass)}</p>
+        <div className='og-class-title' style={props.selectedClass === currentClass.id ? { background: '#252854', color: 'white' } : {}}>
+            <p onClick={onClick}>{isOpened && subClasses.length != 0 && <div className='opened-indicator'><i className="fas fa-arrow-down"></i></div>} {getName(currentClass)}</p>
+            <button id='open' onClick={onExpand}><i className="fas fa-pen-square"></i></button>
+            <button id='open' onClick={onAdd}><i className='fas fa-plus'></i></button>
         </div>
         {isOpened && <div className='og-class-subblock'>
             {subClasses.map(sc => {
-                return <ClassBlock onSelect={props.onSelect} class={sc} />
+                return <ClassBlock selectedClass={props.selectedClass} onAddChild={props.onAddChild} onSelect={props.onSelect} class={sc} />
             })}
         </div>}
     </div>;
