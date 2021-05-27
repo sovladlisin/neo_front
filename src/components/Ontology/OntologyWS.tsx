@@ -30,7 +30,7 @@ const OntologyWS: React.FunctionComponent<IOntologyWSProps> = (props) => {
 
     React.useEffect(() => {
         dispatch(getClasses(props.domain))
-    }, [])
+    }, [, props.domain])
 
     const [selectedClass, setSelectedClass] = React.useState<number>(-1)
     const [selectedObject, setSelectedObject] = React.useState<number>(-1)

@@ -38,7 +38,7 @@ const ClassInfo: React.FunctionComponent<IClassInfoProps> = (props) => {
     React.useEffect(() => { setCurrentClass(null); dispatch(getClass(props.class_id)) }, [, props.class_id, classState.createdEntity])
     React.useEffect(() => {
         const data = classState.selectedClass
-        if (data.id != props.class_id) return;
+        if (!data || (data.id != props.class_id)) return;
 
         setClassObjects(data.objects)
 

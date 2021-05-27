@@ -22,12 +22,12 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
                 <Link to='/domain-ontology'>Онтологии ПрО</Link>
             </div>
             <div className='hr-login'>
-                {authState.user.token.length > 0 && <>
+                {authState.user.token && authState.user.token.length > 0 && <>
                     <p>{authState.user.username}</p>
                     <Link to='/account'>Личный кабинет</Link>
                     <button onClick={_ => dispatch(logout())}>Выход</button>
                 </>}
-                {authState.user.token.length === 0 && <>
+                {(!authState.user.token || authState.user.token.length === 0) && <>
                     <Link to='/login'>Вход</Link>
                 </>}
 

@@ -164,7 +164,9 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
         const l_props = newCurrentObject.object.params.map(p => {
 
             const attr = newCurrentObject.class_attributes.find(a => p === a['uri'])
-            const name = attr ? getName(attr) : p
+            var name = attr ? getName(attr) : p
+            name = name.includes('#') ? name.split('#').pop() : name
+            name = name.includes('/') ? name.split('/').pop() : name
 
             const value = updatedObject[p] ? updatedObject[p] : newCurrentObject.object[p]
             return <>
@@ -199,7 +201,10 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
         const rel_start = Object.keys(relations_start).map(rel_key => {
             const local_relations = relations_start[rel_key]
             const attribute = newCurrentObject.class_attributes.find(a => a['uri'] === rel_key)
-            var name = attribute ? getName(attribute) : rel_key.split('/').pop()
+            var name = attribute ? getName(attribute) : rel_key
+            name = name.includes('#') ? name.split('#').pop() : name
+            name = name.includes('/') ? name.split('/').pop() : name
+
             const object_uri = signature[rel_key] ? signature[rel_key][2] : ''
 
             return <>
@@ -240,7 +245,9 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
 
             const local_relations = relations_end[rel_key]
             const attribute = newCurrentObject.class_attributes.find(a => a['uri'] === rel_key)
-            const end_name = attribute ? getName(attribute) : rel_key.split('/').pop()
+            var end_name = attribute ? getName(attribute) : rel_key
+            end_name = end_name.includes('#') ? end_name.split('#').pop() : end_name
+            end_name = end_name.includes('/') ? end_name.split('/').pop() : end_name
             const object_uri = signature[rel_key] ? signature[rel_key][2] : ''
 
             return <>

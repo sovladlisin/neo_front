@@ -54,8 +54,10 @@ export const getName = (node: TClass, lang = 1) => {
 
     const params = node.params
     if (!params.includes(LABEL)) {
-        if (node['uri'])
-            return node['uri'].split('/').pop()
+        if (node['uri']) {
+            if (node['uri'].includes('#')) return node['uri'].split('#').pop()
+            if (node['uri'].includes('/')) return node['uri'].split('/').pop()
+        }
         return 'TTT'
     }
     const label: String[] = node[LABEL]

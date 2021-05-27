@@ -16,6 +16,7 @@ export const login = (username: string, password: string) => (dispatch: Dispatch
         window.location.replace(HOST);
 
     }).catch(err => {
+        console.log(err)
         dispatch({
             type: CREATE_ALERT,
             payload: handleError(err)
