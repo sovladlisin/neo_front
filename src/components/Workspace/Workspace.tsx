@@ -350,7 +350,7 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
                         </div>
                         {ontologies.length > 0 && selectedOntology && <>
                             <div className='ws-markup-list'>
-                                {markups.map(m => {
+                                {markups.filter(m => m.ontology_uri === selectedOntology['uri']).map(m => {
                                     const selected = selectedMarkup && selectedMarkup.id === m.id
                                     return <p style={selected ? { background: '#252854', color: 'white' } : {}} onClick={_ => setSelectedMarkup(m)}>
                                         {m.name}
