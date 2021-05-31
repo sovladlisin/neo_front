@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import { getDomainOntologies } from '../../actions/ontology/classes/classes';
 import { TClass } from '../../actions/ontology/classes/types';
 import { TEntity, TMarkup, TTextRelation, TWorkspaceInfo } from '../../actions/workspace/types';
-import { deleteTextEnitity, editMarkup, getMarkups, getTextEntities, getTextRelations, getWorkspace } from '../../actions/workspace/workspace';
+import { deleteMarkup, deleteTextEnitity, editMarkup, getMarkups, getTextEntities, getTextRelations, getWorkspace } from '../../actions/workspace/workspace';
 import { RootStore } from '../../store';
 import { getName, SERVER_DOMAIN, SERVER_URL, NOTE_URI, useKeyPress, NAMED_IND, CLASS } from '../../utils';
 import EntityForm from './EntityForm';
@@ -355,6 +355,7 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
                                     return <p style={selected ? { background: '#252854', color: 'white' } : {}} onClick={_ => setSelectedMarkup(m)}>
                                         {m.name}
                                         <button onClick={_ => setOnEditMarkup(m)}><i className="fas fa-edit"></i></button>
+                                        <button onClick={_ => dispatch(deleteMarkup(m.id))}><i className="fas fa-trash"></i></button>
                                     </p>
                                 })}
                                 <button
