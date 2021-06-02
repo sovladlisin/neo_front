@@ -42,7 +42,7 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
     const [translatedText, setTranslatedText] = React.useState<string[]>([])
     const [commentaryText, setCommentaryText] = React.useState<TComment[]>([])
 
-    const [selectedView, setSelectedView] = React.useState(3)
+    const [selectedView, setSelectedView] = React.useState(1)
 
     const [relationAddWindow, setRelationAddWindow] = React.useState(false)
 
@@ -333,11 +333,11 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
         {workInfo === null ? <>LOADING</> : <>
             <div className='ws-container'>
                 <p className='ws-title'>{getName(workInfo.origin_node) + ' - ' + getName(workInfo.translation_node)}</p>
-                <div className='ws-control-panel'>
+                {/* <div className='ws-control-panel'>
                     <button style={selectedView === 1 ? { background: '#252854', color: 'white' } : {}} onClick={_ => setSelectedView(1)}>Текст</button>
                     <button style={selectedView === 2 ? { background: '#252854', color: 'white' } : {}} onClick={_ => setSelectedView(2)}>Ресурсы</button>
                     <button style={selectedView === 3 ? { background: '#252854', color: 'white' } : {}} onClick={_ => setSelectedView(3)}>Описание</button>
-                </div>
+                </div> */}
                 <div className='ws-content'>
                     {selectedView === 1 && <>
                         <div className='ws-ontology-list'>

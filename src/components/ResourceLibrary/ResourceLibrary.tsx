@@ -6,6 +6,8 @@ import ObjectList from './ObjectList';
 import { CORPUS_URI, DIGITAL_CARRIER_URI, LING_OBJECT_URI, PERSON_URI, PLACE_URI, VISUAL_ITEM_URI } from '../../utils';
 import Files from './Files';
 import ObjectForm from '../Ontology/Forms/ObjectForm';
+import SearchForm from '../Ontology/Forms/SearchForm';
+import ObjectInfo from '../Ontology/ObjectInfo';
 
 interface IResourceLibraryProps {
 }
@@ -22,6 +24,9 @@ const ResourceLibrary: React.FunctionComponent<IResourceLibraryProps> = (props) 
         { name: 'Мультимедия', id: 7 },
     ]
 
+    const [searchIndexWindow, setSearchIndexWindow] = React.useState(false)
+
+
     const uris = {
         1: CORPUS_URI,
         2: PERSON_URI,
@@ -34,6 +39,7 @@ const ResourceLibrary: React.FunctionComponent<IResourceLibraryProps> = (props) 
 
     const [selectedMode, setSelectedMode] = React.useState(1)
     const [objectAddWindow, setObjectAddWindow] = React.useState(false)
+    const [selectedItem, setSelectedItem] = React.useState(-1)
 
     return <>
         <div className='rl-main'>
@@ -41,7 +47,7 @@ const ResourceLibrary: React.FunctionComponent<IResourceLibraryProps> = (props) 
                 {buttons.map(b => {
                     return <button style={selectedMode === b.id ? { background: '#252854', color: 'white' } : {}} onClick={_ => setSelectedMode(b.id)}>{b.name}</button>
                 })}
-                <button className='rl-control-pannel-search'><i className='fas fa-search'></i></button>
+                <button className='rl-control-pannel-search' onClick={_ => setSearchIndexWindow(true)}><i className='fas fa-search'></i></button>
             </div>
             <div className='rl-add-obj'>
                 {selectedMode != 4 && <button onClick={_ => setObjectAddWindow(true)}>Добавить экземпляр<i className='fas fa-plus'></i></button>}
@@ -58,6 +64,8 @@ const ResourceLibrary: React.FunctionComponent<IResourceLibraryProps> = (props) 
         </div>
 
         {objectAddWindow && <ObjectForm domain={'Resource'} class_uri={uris[selectedMode]} onClose={() => setObjectAddWindow(false)} />}
+        {searchIndexWindow && <SearchForm domain={'Resource'} onClose={() => setSearchIndexWindow(false)} onObjectSelect={co => setSelectedItem(co)}  ></SearchForm>}
+        {selectedItem != -1 && <ObjectInfo onSelect={id => setSelectedItem(id)} object_id={selectedItem} onClose={() => setSelectedItem(-1)} />}
 
     </>;
 };

@@ -25,7 +25,7 @@ export const deleteOntology = (domain: string) => (dispatch: Dispatch<TClassDisp
     })
 }
 
-export const searchIndex = (domain: string, connector: string, search: string[]) => (dispatch: Dispatch<TClassDispatchTypes | alertDispatchTypes>) => {
+export const searchIndex = (domain: string, connector: string, search: string) => (dispatch: Dispatch<TClassDispatchTypes | alertDispatchTypes>) => {
     const params = withToken()
     dispatch({
         type: IS_SEARCHING,

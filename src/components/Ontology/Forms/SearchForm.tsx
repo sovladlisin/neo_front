@@ -28,16 +28,16 @@ const SearchForm: React.FunctionComponent<ISearchFormProps> = (props) => {
 
 
     const onSearch = () => {
-        dispatch(searchIndex(props.domain, connector, searchString.split(' ')))
+        dispatch(searchIndex(props.domain, connector, searchString))
     }
 
     return <>
         <div className='og-search-form'>
             <button className='og-search-form-exit' onClick={props.onClose}><i className='fas fa-times'></i></button>
-            <div className='og-search-filters'>
+            {/* <div className='og-search-filters'>
                 <button style={connector === 'OR' ? { background: '#252854', color: 'white', border: 'none' } : {}} onClick={_ => setConnector('OR')}>"Или"</button>
                 <button style={connector === 'AND' ? { background: '#252854', color: 'white', border: 'none' } : {}} onClick={_ => setConnector('AND')}>"И"</button>
-            </div>
+            </div> */}
             <div className='og-search-input-container'>
                 <input onChange={e => setSearchString(e.target.value)} value={searchString}></input>
                 <button onClick={onSearch} className='og-search-search'>

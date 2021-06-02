@@ -46,11 +46,10 @@ const OntologyWS: React.FunctionComponent<IOntologyWSProps> = (props) => {
         <div className='ontology-space'>
             <button className='ontology-add-class' onClick={_ => setClassAddWindow(true)}>Добавить класс<i className='fas fa-plus'></i></button>
             {props.domain != 'Resource' && <>
-                <button className='ontology-search-index' onClick={_ => setSearchIndexWindow(true)}>Поиск <i className='fas fa-search'></i></button>
-                <button className='ontology-refresh-index' onClick={_ => setUpdateIndexWindow(true)}>Обновить индекс</button>
                 <button className='ontology-delete' onClick={_ => setDeleteOntologyWindow(true)}>Удалить онтологию</button>
             </>}
-
+            <button className='ontology-search-index' onClick={_ => setSearchIndexWindow(true)}>Поиск <i className='fas fa-search'></i></button>
+            <button className='ontology-refresh-index' onClick={_ => setUpdateIndexWindow(true)}>Обновить индекс</button>
             <div className='ontology'>
                 <div className='og-left'>
                     {classState.parentClasses && classState.parentClasses.map(c => {
