@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getClassesWithSignatures, createEntity, getClassFullSignature } from '../../../actions/ontology/classes/classes';
 import { TClass, TClassFullSignature } from '../../../actions/ontology/classes/types';
@@ -130,6 +131,7 @@ const ObjectForm: React.FunctionComponent<IObjectFormProps> = (props) => {
             {object_forms}
         </>
     }
+
 
     const ref = React.useRef()
     useOnClickOutside(ref, () => props.onClose())

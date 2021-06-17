@@ -8,6 +8,7 @@ import { useOnClickOutside } from '../HandleClickOutside';
 import ObjectSelector from './Forms/ObjectSelector'
 import { Link } from 'react-router-dom'
 import Loading from '../Loading';
+import { useEffect } from 'react';
 
 interface IObjectInfoProps {
     object_id: number,
@@ -269,7 +270,7 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
                                         ...newCurrentObject,
                                         relations: newCurrentObject.relations.map(r => {
                                             if (r.id === rel.id) {
-                                                return { ...rel, end_node: obj }
+                                                return { ...rel, start_node: obj }
                                             }
                                             return r
                                         })
@@ -302,6 +303,8 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
 
         </>
     }
+
+    useEffect(() => { newCurrentObject && newCurrentObject.relations && console.log(newCurrentObject.relations) }, [newCurrentObject])
 
     const onDelete = () => {
         props.onClose()
