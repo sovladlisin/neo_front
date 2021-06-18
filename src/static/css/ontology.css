@@ -98,11 +98,12 @@
   margin: 0 !important;
 }
 .og-object-container-title {
-  background: #252854;
+  background: #414582;
   color: white;
   text-align: center;
   height: 50px;
   line-height: 50px;
+  font-size: 9pt;
 }
 .og-object-container-params {
   display: grid;

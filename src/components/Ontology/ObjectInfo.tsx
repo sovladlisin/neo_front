@@ -315,7 +315,7 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
         if (obj === null) return;
 
         return <>
-            {obj.object.labels.includes(LING_OBJECT_URI) && <>
+            {obj.object.labels.includes(LING_OBJECT_URI) && obj.object.id != 544 && <>
                 <Link to={'/workspace/' + newCurrentObject.id} target='_blank'><i className="fas fa-file-alt"></i></Link>
             </>}
             <button onClick={onDelete}><i className="fas fa-trash"></i></button>
