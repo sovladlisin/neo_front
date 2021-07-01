@@ -55,7 +55,7 @@ export const searchIndex = (domain: string, connector: string, search: string) =
 export const updateIndex = (domain: string) => (dispatch: Dispatch<TClassDispatchTypes | alertDispatchTypes>) => {
     const params = withToken()
     axios.post(SERVER_URL + 'updateIndex', JSON.stringify({ domain }), params).then(res => {
-
+        console.log('g')
     }).catch(err => {
         dispatch({
             type: CREATE_ALERT,
