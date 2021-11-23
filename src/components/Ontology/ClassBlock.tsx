@@ -49,7 +49,7 @@ const ClassBlock: React.FunctionComponent<IClassBlockProps> = (props) => {
     }
 
     return <div className='og-class-block' >
-        <div className='og-class-title' style={props.selectedClass === currentClass.id ? { background: '#252854', color: 'white' } : {}}>
+        <div className='og-class-title' style={props.selectedClass === currentClass.id ? { background: '#f1eee8' } : {}}>
             <p onClick={onClick}>{isOpened && subClasses.length != 0 && <div className='opened-indicator'><i className="fas fa-arrow-down"></i></div>} {getName(currentClass)}</p>
             <button id='open' onClick={onExpand}><i className="fas fa-pen-square"></i></button>
             <button id='open' onClick={onAdd}><i className='fas fa-plus'></i></button>

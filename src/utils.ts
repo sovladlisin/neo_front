@@ -38,6 +38,16 @@ export const DOMAIN_ONTOLOGY = "DomainOntology"
 
 export const RDF_TYPE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
 
+// images
+import logo from './static/images/f-logo.jpg'
+export const LOGO = logo
+import logo2 from './static/images/f-logo-2.jpg'
+export const LOGO2 = logo2
+import home1 from './static/images/home-1.png'
+export const HOME_1 = home1
+import corpus1 from './static/images/corpus-1.png'
+export const CORPUS_1 = corpus1
+
 export type TDataType = { type: string, name: string, uri: string }
 export const DATA_TYPES: TDataType[] = [
     {
@@ -59,6 +69,7 @@ export const getName = (node: TClass, lang = 1) => {
     const language = lang_list[lang]
 
     const params = node.params
+    if (params.includes('http://dbpedia.org/ontology/title')) return node['http://dbpedia.org/ontology/title']
     if (!params.includes(LABEL)) {
         if (node['uri']) {
             if (node['uri'].includes('#')) return node['uri'].split('#').pop()
@@ -66,6 +77,7 @@ export const getName = (node: TClass, lang = 1) => {
         }
         return 'TTT'
     }
+
     const label: String[] = node[LABEL]
 
     var result = ''

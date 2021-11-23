@@ -56,9 +56,9 @@ const EntityForm: React.FunctionComponent<IEntityFormProps> = (props) => {
     return <>
         <div className='ws-entity-form' ref={ref}>
             <div className='ws-entity-form-types'>
-                <button style={selectedType === 1 ? { background: 'grey' } : {}} onClick={_ => setSelectedType(1)}>Класс</button>
-                <button style={selectedType === 2 ? { background: 'grey' } : {}} onClick={_ => setSelectedType(2)}>Объект</button>
-                <button style={selectedType === 3 ? { background: 'grey' } : {}} onClick={_ => setSelectedType(3)}>Связь</button>
+                <button style={selectedType === 1 ? { color: 'red' } : {}} onClick={_ => setSelectedType(1)}>Класс</button>
+                <button style={selectedType === 2 ? { color: 'red' } : {}} onClick={_ => setSelectedType(2)}>Объект</button>
+                <button style={selectedType === 3 ? { color: 'red' } : {}} onClick={_ => setSelectedType(3)}>Связь</button>
 
             </div>
             <div className='ws-entity-form-params'>
@@ -78,7 +78,7 @@ const EntityForm: React.FunctionComponent<IEntityFormProps> = (props) => {
                     </>}
                 </>}
             </div>
-            <button id='ws-entity-form-add' onClick={onSave}>Сохранить</button>
+            <button id='ws-entity-form-add' onClick={onSave}>СОХРАНИТЬ</button>
         </div>
     </>;
 };

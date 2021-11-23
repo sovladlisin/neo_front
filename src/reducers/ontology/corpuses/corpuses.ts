@@ -1,9 +1,9 @@
 import { GET_CLASS, GET_CLASSES, GET_CLASS_OBJECT, GET_CLASS_OBJECTS, GET_SUBCLASSES, TAttributeType, TClass, TClassDispatchTypes, UPDATE_CLASS } from "../../../actions/ontology/classes/types"
-import { GET_CORPUSES, GET_SUB_CORPUSES, TCorpusDispatchTypes } from "../../../actions/ontology/corpuses/types"
+import { GET_CORPUSES, GET_SUB_CORPUSES, TCorpus, TCorpusDispatchTypes } from "../../../actions/ontology/corpuses/types"
 
 
 interface IDefaultState {
-    parentCorpuses: TClass[],
+    parentCorpuses: TCorpus[],
     subCorpuses: { corpus_id: number, corpuses: TClass[] },
 }
 

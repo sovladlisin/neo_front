@@ -1,0 +1,92 @@
+
+.person-search-container {
+    position: relative;
+    margin-bottom: 160px;
+  }
+  .person-search-container > span {
+    position: absolute;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+  }
+  .person-search-container > input {
+    height: 50px;
+    padding: 0 0 0 50px;
+    border-radius: 5px;
+    border: 1px solid gainsboro;
+    width: calc(100% - 50px);
+  }
+  
+.person-abc-container {
+    position: absolute;
+    width: 300%;
+    background: #f1eee8;
+    left: 50%;
+    transform: translate(-50%);
+    height: 90px;
+    bottom: -125px;
+  }
+  .person-abc-inner-container {
+    width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(30, 1fr);
+    justify-content: center;
+    justify-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .person-abc-inner-container > button {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .person-abc-inner-container > button {
+    width: 30px;
+    height: 30px;
+    margin: auto auto;
+    display: block;
+  }
+  .selected-letter {
+    color: #E31219 !important;
+  }
+  .selected-letter-container {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 52px;
+    margin-bottom: 40px;
+  }
+  .actor-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 40px;
+    gap: 10px 100px;
+  }
+  .actor-item > p {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    height: 40px;
+    line-height: 40px;
+  }
+  
+.actor-item {
+    display: grid;
+    grid-template-columns: auto 30px 30px;
+    gap: 30px;
+  }
+  .actor-item > a {
+    height: 40px;
+    line-height: 40px;
+    display: block;
+  }
+  .actor-item > button {
+    color: #959090;
+  }
+  .actor-item > a {
+    color: #959090;
+  }

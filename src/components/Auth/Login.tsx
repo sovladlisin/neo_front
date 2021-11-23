@@ -21,7 +21,6 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
             <label>Логин</label><input onChange={e => setLoginInfo({ ...loginInfo, username: e.target.value })} value={loginInfo.username}></input>
             <label>Пароль</label><input type="password" onChange={e => setLoginInfo({ ...loginInfo, password: e.target.value })} value={loginInfo.password}></input>
             <button onClick={onLogin}>Вход</button>
-            <Link to='/register' >Создать аккаунт</Link>
         </div>
     </>;
 };

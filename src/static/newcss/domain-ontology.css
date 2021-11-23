@@ -1,0 +1,22 @@
+
+.domain-ontology-select-container > button {
+    height: 50px;
+    padding: 0 10px;
+    border: 1px solid black;
+    margin-right: 20px;
+    font-size: 11pt;
+  }
+  
+.domain-ontology-select-container-inner-add-ontology {
+    background: white !important;
+    border-color: white !important;
+    color: #e31218;
+  }
+  .domain-ontology-select-container-inner-add-ontology > i {
+    margin-left: 10px;
+  }
+  
+.domain-ontology-select-container-selected {
+    border-color: #e31218 !important;
+    font-weight: 700;
+  }

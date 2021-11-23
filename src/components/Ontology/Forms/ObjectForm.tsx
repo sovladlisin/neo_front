@@ -162,7 +162,7 @@ const ObjectForm: React.FunctionComponent<IObjectFormProps> = (props) => {
                             {renderForm()}
                         </>}
                     </div>
-                    <button onClick={onSave}>Сохранить</button>
+                    <button onClick={onSave}>СОХРАНИТЬ</button>
 
                 </>}
 

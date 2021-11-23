@@ -3,15 +3,18 @@
   display: grid;
   grid-template-columns: 2fr 3fr;
   height: 100%;
+  gap: 20px;
+  width: 1200px;
 }
 .og-left {
   height: auto;
   overflow: auto;
+  border: 1px solid #f1eee8;
+  border-radius: 5px;
 }
 .og-class-block {
   width: 100%;
   font-size: 12pt;
-  margin: 10px 0;
 }
 .og-class-subblock {
   margin-left: 20px;
@@ -19,34 +22,34 @@
   padding-left: 10px;
 }
 .og-class-title:hover {
-  background: #252854;
-  color: white;
   cursor: pointer;
+  font-weight: 700;
 }
 .og-class-title {
   padding: 10px;
   height: 30px;
   line-height: 30px;
   font-size: 10pt;
-  border-radius: 5px;
 }
 
 .og-class-name {
   text-align: center;
-  font-size: 12pt;
-  background: #252854;
-  color: white;
-  padding: 10px 0;
+  font-size: 14pt;
+  background: #f1eee8;
+  height: 50px;
+  color: black;
+  line-height: 50px;
 }
 .og-class-info-title {
-  background: gainsboro;
   padding: 10px 0;
-  text-align: center;
   display: block;
   width: 90%;
   margin: 10px 5%;
   border-radius: 5px;
-  font-size: 9pt;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 32px;
 }
 .og-class-object:hover {
   background: black;
@@ -63,13 +66,11 @@
   margin: 0 5%;
 }
 .og-class-info-params label {
-  font-size: 12pt;
-  text-align: right;
-  background: gainsboro;
-  font-size: 8pt;
-  height: 20px;
+  font-size: 10pt;
   padding: 5px;
   border-radius: 5px;
+  height: 30px;
+  line-height: 30px;
 }
 
 .og-class-info-params p {
@@ -98,12 +99,13 @@
   margin: 0 !important;
 }
 .og-object-container-title {
-  background: #414582;
-  color: white;
+  background: #F1EEE8;
+  color: black;
   text-align: center;
   height: 50px;
   line-height: 50px;
-  font-size: 9pt;
+  font-size: 14pt;
+  font-weight: 600;
 }
 .og-object-container-params {
   display: grid;
@@ -116,6 +118,7 @@
   line-height: 30px;
   font-size: 8pt;
   width: 260px;
+  color: #E31219;
 }
 .og-object-container-params input {
   border: 1px solid;
@@ -124,6 +127,7 @@
   padding: 0 10px;
   font-size: 9pt;
   border-radius: 5px;
+  border-color: #E31219;
 }
 .og-object-container-save {
   height: 30px;
@@ -165,13 +169,13 @@ background: black;
 .og-object-container-separator {
   height: 30px;
   line-height: 30px;
-  background: #252854;
+  background: #F1EEE8;
   text-align: center;
   font-size: 10pt;
   width: 96%;
   margin: 10px auto;
   border-radius: 5px;
-  color: white;
+  color: black;
 }
 #open {
   float: left;
@@ -179,11 +183,10 @@ background: black;
   font-size: 9pt;
   margin: 0 0 0 5px;
   height: 30px;
-  background: #252854;
-  color: white;
   width: 30px;
   text-align: center;
   border-radius: 5px;
+  color: #e31218;
 }
 .og-class-title p {
   float: left;
@@ -273,7 +276,7 @@ background: black;
   width: 50px;
   height: 50px;
   float: left;
-  color: white;
+  color: #9b9793;
   line-height: 30px;
   font-size: 12pt;
   text-align: center;
@@ -282,8 +285,6 @@ background: black;
   line-height: 50px;
 }
 .og-class-title button {
-  background: grey;
-  color: white;
 }
 .og-domain-ontology-workspace {
   margin: 75px auto;
@@ -319,9 +320,8 @@ background: black;
   padding: 0 15px;
   background: #3ed29b;
   color: white;
-  border-radius: 5px;
   font-size: 8pt;
-  margin: 10px 0;
+  margin: 10px 10px 0 0;
 }
 .ontology-add-class i {
   margin: 0 0 0 10px;
@@ -353,17 +353,17 @@ background: black;
 }
 
 .og-class-info {
-  margin: 10px;
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0 4px 0 gainsboro;
   background: white;
+  border: 1px solid #f1eee8;
 }
 .og-class-info-params input {
-  font-size: 9pt;
   border-radius: 5px;
-  border: 1px solid #acaaaa;
   padding: 0 5px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
 }
 .og-class-object {
   width: 90%;
@@ -430,9 +430,8 @@ background: black;
 .ontology-refresh-index {
   height: 30px;
   padding: 0 15px;
-  background: #df3d5c;
+  background: #e31218;
   color: white;
-  border-radius: 5px;
   font-size: 8pt;
   margin: 10px 10px 10px 0;
 }
@@ -515,9 +514,8 @@ background: black;
   padding: 0 15px;
   background: #252854;
   color: white;
-  border-radius: 5px;
   font-size: 8pt;
-  margin: 10px 10px;
+  margin: 10px 10px 0 0;
 }
 
 .ontology-search-index i {
@@ -589,9 +587,8 @@ background: black;
 .ontology-delete {
   height: 30px;
   padding: 0 15px;
-  background: #df3d5c;
+  background: #e31218;
   color: white;
-  border-radius: 5px;
   font-size: 8pt;
   margin: 10px 10px 10px 0;
 }
@@ -599,7 +596,7 @@ background: black;
 .object-info-relation-name {
   height: 30px;
   line-height: 30px;
-  background: #757797;
+  background: #E31219;
   text-align: center;
   font-size: 10pt;
   width: 96%;
@@ -615,4 +612,21 @@ background: black;
   width: 96%;
   margin: 10px auto;
   border-radius: 5px;
+}
+
+.og-class-info-params-short {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  width: 90%;
+  margin: 0 5%;
+  gap: 20px;
+}
+.og-class-info-params-short > label {
+  font-size: 10pt;
+  color: #999999;
+  font-weight: 500;
+}
+.og-class-info-params-short > input {
+  font-size: 10pt;
+  font-weight: 500;
 }

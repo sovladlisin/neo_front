@@ -8,7 +8,7 @@ interface ILoadingProps {
 const Loading: React.FunctionComponent<ILoadingProps> = (props) => {
     return <>
         <div style={{ position: 'relative', height: props.height + 'px' }}>
-            <BlockLoading color='#252854' size='large' />
+            <BlockLoading color='#E31219' size='large' />
         </div>
     </>
 };

@@ -59,43 +59,45 @@
   top: 50%;
   left: 50%;
   background: white;
-  height: 300px;
+  height: 360px;
   width: 400px;
   overflow-y: auto;
   transform: translate(-50%,-50%);
   z-index: 99;
   border-radius: 5px;
   overflow-x: hidden;
+  box-shadow: 0 0 4px 3px #c4c4c4;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .object-selector-window input {
-  width: 100%;
+  width: calc(100% - 20px);
   padding: 5px 10px;
   font-size: 9pt;
   height: 30px;
-  background: gainsboro;
-  margin: 0 0 5px 0;
+  background: #f1eee8;
+  position: sticky;
+  top: 0;
 }
 .object-selector-window button {
   text-align: left;
-  width: 96%;
-  height: 30px;
-  line-height: 30px;
-  margin: 2px 2%;
-  padding: 0 5px;
   background: none;
   color: black;
+  height: 50px;
+  line-height: 50px;
+  width: 100%;
+  padding: 0 15px;
 }
 .object-selector-window button:hover {
-  background: #252854;
-  transition: 0.3s ease-in-out;
-  color: white;
+  background: #f1eee8;
+  color: #3f3f3f;
 }
 .object-selector {
   font-size: 10pt;
   position: relative;
-  border: 1px solid black;
-  height: 25px;
-  border-radius: 5px;
+  border: 1px solid #3f3f3f;
+  height: 50px;
+  color: #3f3f3f;
 }
 .object-selector-name-placeholder {
   position: absolute;
@@ -218,4 +220,14 @@
   color: white;
   background: #3dc48b;
   border-radius: 5px;
+}
+
+.ws-entity-form-params > label {
+  height: 50px;
+  line-height: 50px;
+  font-size: 11pt;
+  color: #454545;
+}
+.object-selector-name-placeholder > p {
+  padding: 0 0 0 10px;
 }

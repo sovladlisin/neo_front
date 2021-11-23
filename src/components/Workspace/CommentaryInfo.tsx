@@ -34,6 +34,7 @@ const CommentaryInfo: React.FunctionComponent<ICommentaryInfoProps> = (props) =>
             <textarea value={text} onChange={(e) => setText(e.target.value)}></textarea>
             <button onClick={save}>{props.comment.text.length > 1 ? 'Изменить комментарий' : 'Добавить комментарий'}</button>
         </div>
+        <span className='decorative-comment-arrow'></span>
     </>;
 };
 

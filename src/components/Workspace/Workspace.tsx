@@ -16,6 +16,7 @@ import ObjectForm from '../Ontology/Forms/ObjectForm';
 import ObjectInfo from '../Ontology/ObjectInfo';
 import CommentaryInfo from './CommentaryInfo';
 import { changeComments } from '../../actions/ontology/files/files';
+import Loading from '../Loading';
 
 interface IWorkspaceProps {
     id: string
@@ -42,7 +43,7 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
     const [translatedText, setTranslatedText] = React.useState<string[]>([])
     const [commentaryText, setCommentaryText] = React.useState<TComment[]>([])
 
-    const [selectedView, setSelectedView] = React.useState(1)
+    const [selectedView, setSelectedView] = React.useState(2)
 
     const [relationAddWindow, setRelationAddWindow] = React.useState(false)
 
@@ -133,7 +134,15 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
                 <p>Число строк на странице: </p>
                 <input type="number" min="1" step="1" value={numberOfLines} onChange={(e) => setNumberOfLines(parseInt(e.target.value))} />
                 <p>Всего строк: </p>
-                <p>{originalText.length}</p>
+                <p className='text-all-lines-counter'>{originalText.length}</p>
+
+                {selectedMarkup &&
+                    <button onClick={_ => setRelationAddWindow(!relationAddWindow)} className='text-create-new-relation'><i className='fas fa-link'></i></button>}
+                {!addEntityWindow &&
+                    newEntity.pos_start != -1 &&
+                    newEntity.pos_end != -1 &&
+                    selectedMarkup &&
+                    <button className='text-add-entity' onClick={_ => setAddEntityWindow(true)}><i className="fas fa-paperclip"></i></button>}
             </div>
         </>
     }
@@ -303,9 +312,20 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
                     <p className='line-index'>{start}</p>
                     <p>{original_line}</p>
                     <p>{translated_text[i]}</p>
+                    <span></span>
                 </div>
-                <button style={comment && comment.text.length > 1 ? { color: '#252854' } : {}} onClick={() => setSelectedComment(comment)}><i className='fas fa-comment'></i></button>
+                <button onClick={() => setSelectedComment(comment)} style={comment && comment.text.length > 1 ? { color: '#787672' } : {}}><i className='fas fa-comment'></i></button>
                 <p className='link-line-info'>{p_relations} {c_relations}</p>
+
+                {selectedComment && selectedComment.position === comment.position &&
+                    <CommentaryInfo
+                        onSave={(comm: TComment) => {
+                            setCommentsChanged(true); setCommentaryText(commentaryText.map(c => c.position === comm.position ? comm : c))
+                        }}
+                        comment={selectedComment}
+                        onClose={() => setSelectedComment(null)}>
+                    </CommentaryInfo>}
+
             </div>
         })
 
@@ -329,71 +349,112 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
 
     const markEntity = () => { }
 
+    const [textMode, setTextMode] = React.useState(2)
+    const [commentMode, setCommentMode] = React.useState(true)
     return <>
-        {workInfo === null ? <>LOADING</> : <>
-            <div className='ws-container'>
-                <p className='ws-title'>{getName(workInfo.origin_node) + ' - ' + getName(workInfo.translation_node)}</p>
-                {/* <div className='ws-control-panel'>
+        <div className='sub-page-container'>
+
+            {workInfo === null ? <>
+
+                <Loading height={500} />
+
+            </> :
+
+                <>
+                    <button className='workspace-return'><i className='fas fa-long-arrow-alt-left'></i>Обратно к списку</button>
+                    <p className='workspace-title'>{getName(workInfo.origin_node)}</p>
+
+                    <div className='workspace-menu-outer'>
+                        <div className='workspace-menu-line'>
+                            <div className='workspace-menu-content'>
+                                <button className={selectedView === 1 ? 'workspace-menu-content-selected' : ''} onClick={_ => setSelectedView(1)}>Описание</button>
+                                <button className={selectedView === 2 ? 'workspace-menu-content-selected' : ''} onClick={_ => setSelectedView(2)}>Текст</button>
+                                <button className={selectedView === 3 ? 'workspace-menu-content-selected' : ''} onClick={_ => setSelectedView(3)}>Ресурсы</button>
+                                <button className={selectedView === 4 ? 'workspace-menu-content-selected' : ''} onClick={_ => setSelectedView(4)}>Онтология по разметке</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='ws-container'>
+                        {/* <div className='ws-control-panel'>
                     <button style={selectedView === 1 ? { background: '#252854', color: 'white' } : {}} onClick={_ => setSelectedView(1)}>Текст</button>
                     <button style={selectedView === 2 ? { background: '#252854', color: 'white' } : {}} onClick={_ => setSelectedView(2)}>Ресурсы</button>
                     <button style={selectedView === 3 ? { background: '#252854', color: 'white' } : {}} onClick={_ => setSelectedView(3)}>Описание</button>
                 </div> */}
-                <div className='ws-content'>
-                    {selectedView === 1 && <>
-                        <div className='ws-ontology-list'>
-                            {ontologies.map(o => {
-                                const selected = selectedOntology && selectedOntology.id === o.id
-                                return <button style={selected ? { background: '#252854', color: 'white' } : {}} onClick={_ => setSelectedOntology(o)}>
-                                    {getName(o)}
-                                </button>
-                            })}
-                        </div>
-                        {ontologies.length > 0 && selectedOntology && <>
-                            <div className='ws-markup-list'>
-                                {markups.filter(m => m.ontology_uri === selectedOntology['uri']).map(m => {
-                                    const selected = selectedMarkup && selectedMarkup.id === m.id
-                                    return <p style={selected ? { background: '#252854', color: 'white' } : {}} onClick={_ => setSelectedMarkup(m)}>
-                                        {m.name}
-                                        <button onClick={_ => setOnEditMarkup(m)}><i className="fas fa-edit"></i></button>
-                                        <button onClick={_ => dispatch(deleteMarkup(m.id))}><i className="fas fa-trash"></i></button>
-                                    </p>
-                                })}
-                                <button
-                                    style={{ background: '#3ed29b', color: 'white' }}
-                                    onClick={_ => {
-                                        var new_markup: TMarkup = {
-                                            id: -1,
-                                            name: 'Не указано',
-                                            user: { id: -1, username: '' },
-                                            original_object_uri: workState.info.origin_node['uri'],
-                                            ontology_uri: selectedOntology['uri'],
-                                            ontology: selectedOntology
-                                        }
-                                        setOnEditMarkup(new_markup)
-                                    }}
-                                >Добавить разметку</button>
-                            </div>
-                        </>}
+                        <div className='text-content-main-container'>
 
-                        {renderNavBar()}
-                        {renderText()}
-                        {renderNavBar()}
-                    </>}
-                    {selectedView === 2 && <>
-                        {renderResources()}
-                    </>}
-                    {selectedView === 3 && <>
-                        {renderInfo()}
-                    </>}
-                </div>
-            </div>
-        </>}
-        {!addEntityWindow &&
-            newEntity.pos_start != -1 &&
-            newEntity.pos_end != -1 &&
-            selectedMarkup &&
-            <button id='ws-add-entity' onClick={_ => setAddEntityWindow(true)}><i className="fas fa-paperclip"></i></button>}
-        {selectedMarkup && <button id='ws-add-relation' onClick={_ => setRelationAddWindow(!relationAddWindow)}><i className="fas fa-link"></i></button>}
+                            <div className='ws-content'>
+                                {selectedView === 2 && <>
+
+                                    <div className='workspace-text-mode'>
+                                        <button className={textMode === 1 ? 'workspace-text-mode-selected' : ''} onClick={_ => setTextMode(1)}>Просмотр</button>
+                                        <button className={textMode === 2 ? 'workspace-text-mode-selected' : ''} onClick={_ => setTextMode(2)}>Разметка</button>
+                                    </div>
+
+
+
+                                    <div className='ws-ontology-list'>
+                                        {ontologies.map(o => {
+                                            const selected = selectedOntology && selectedOntology.id === o.id
+                                            return <button className={selected ? 'ws-ontology-list-selected' : ''} onClick={_ => setSelectedOntology(o)}>
+                                                {getName(o)}
+                                            </button>
+                                        })}
+                                    </div>
+
+
+                                    {ontologies.length > 0 && selectedOntology && <>
+                                        <div className='ws-markup-list'>
+                                            {markups.filter(m => m.ontology_uri === selectedOntology['uri']).map(m => {
+                                                const selected = selectedMarkup && selectedMarkup.id === m.id
+                                                return <p className={selected ? 'ws-markup-list-selected' : ''} onClick={_ => setSelectedMarkup(m)}>
+                                                    {m.name}
+                                                    <button onClick={_ => setOnEditMarkup(m)}><i className="fas fa-edit"></i></button>
+                                                    <button onClick={_ => dispatch(deleteMarkup(m.id))}><i className="fas fa-trash"></i></button>
+                                                </p>
+                                            })}
+                                            <button
+                                                className='ws-markup-list-add-markup-button'
+                                                onClick={_ => {
+                                                    var new_markup: TMarkup = {
+                                                        id: -1,
+                                                        name: 'Не указано',
+                                                        user: { id: -1, username: '' },
+                                                        original_object_uri: workState.info.origin_node['uri'],
+                                                        ontology_uri: selectedOntology['uri'],
+                                                        ontology: selectedOntology
+                                                    }
+                                                    setOnEditMarkup(new_markup)
+                                                }}
+                                            >Добавить разметку</button>
+                                        </div>
+                                    </>}
+
+                                    {renderNavBar()}
+
+                                    <div className='text-lines-main-container'>
+                                        <div className='text-line-labels'>
+                                            <span></span>
+                                            <p style={{ paddingLeft: '5xp' }}>Оригинальный текст</p>
+                                            <p>Перевод</p>
+                                            <p>Комментарии</p>
+                                        </div>
+                                        {renderText()}
+                                    </div>
+                                </>}
+                                {selectedView === 2 && <>
+                                    {renderResources()}
+                                </>}
+                                {selectedView === 3 && <>
+                                    {renderInfo()}
+                                </>}
+                            </div>
+                        </div>
+                    </div>
+                </>}
+        </div>
+
+        {/* {selectedMarkup && <button id='ws-add-relation' onClick={_ => setRelationAddWindow(!relationAddWindow)}><i className="fas fa-link"></i></button>} */}
 
         {addEntityWindow && <EntityForm onClose={() => { setAddEntityWindow(false); setNewEntity({ ...newEntity, pos_start: -1, pos_end: -1 }) }} markup_id={selectedMarkup.id} domain={selectedMarkup.ontology_uri} entity={newEntity} />}
         {onEditMarkup && <MarkupForm markup={onEditMarkup} onClose={() => setOnEditMarkup(null)} />}
@@ -442,7 +503,6 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
         </>}
 
         {objectAddWindow && <ObjectForm domain={selectedMarkup.ontology_uri} class_uri={selectedClassForObjectAdd} onClose={() => setObjectAddWindow(false)} />}
-        {selectedComment && <CommentaryInfo onSave={(comm: TComment) => { setCommentsChanged(true); setCommentaryText(commentaryText.map(c => c.position === comm.position ? comm : c)) }} comment={selectedComment} onClose={() => setSelectedComment(null)}></CommentaryInfo>}
         {commentsChanged && <button id='save-comments' onClick={() => { dispatch(changeComments(commentaryText, workInfo.commentary_node['uri'])); setCommentsChanged(false) }}>Сохранить комментарии</button>}
 
     </>;

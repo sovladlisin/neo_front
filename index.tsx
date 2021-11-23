@@ -13,6 +13,20 @@ import './src/static/css/account.css'
 import './src/static/css/workspace.css'
 import './src/static/css/alerts.css'
 
+import './src/static/newcss/header.css'
+import './src/static/newcss/home.css'
+import './src/static/newcss/corpuses.css'
+import './src/static/newcss/footer.css'
+import './src/static/newcss/actors.css'
+import './src/static/newcss/domain-ontology.css'
+import './src/static/newcss/corpus-view.css'
+import './src/static/newcss/about.css'
+import './src/static/newcss/resources.css'
+import './src/static/font/font.css'
+
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
+
 
 import { persistStore } from 'redux-persist'
 import store from './src/store'

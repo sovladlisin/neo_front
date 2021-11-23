@@ -1,0 +1,23 @@
+
+.about-page-container {
+    min-height: 700px;
+    width: 850px;
+    margin: 50px auto;
+  }
+  .about-title {
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 32px !important;
+    line-height: 40px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+  }
+  .about-page-container > p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 30px 0;
+    text-align: justify;
+  }

@@ -1,7 +1,5 @@
 
 .ws-container {
-  margin: 30px auto;
-  width: 1100px;
 }
 .ws-title {
   width: 1100px;
@@ -25,37 +23,34 @@
   font-size: 9pt;
 }
 .ws-content {
-  width: 1100px;
-  margin: 20px 0;
 }
 .nav-bar {
-  height: 30px;
+  height: 40px;
   line-height: 30px;
-  width: 1100px;
+  width: 100%;
   gap: 10px;
-  background: gainsboro;
+  margin-top: 30px;
 }
 .nav-bar>* {
-  line-height: 30px;
-  height: 30px;
-  font-size: 8pt;
+  line-height: 40px;
+  height: 40px;
+  font-size: 9pt;
   text-align: right;
-  padding: 0 10px;
   float: left;
   width: auto;
+  border: 1px solid gray;
 }
 .main-line {
   display: grid;
-  grid-template-columns: 30px 1fr 1fr;
+  grid-template-columns: 30px 445px 445px 240px;
   margin: 10px 0;
   gap: 10px;
 }
 .main-line p {
-  height: 30px;
   line-height: 30px;
   font-size: 9pt;
   background: white;
-  padding: 0 5px;
+  display: inline-block;
 }
 .line-index {
   text-align: center;
@@ -69,9 +64,13 @@
   white-space: pre-wrap;
 }
 .ws-word {
-  padding: 5px;
+  padding: 0 5px;
   position: relative;
-  overflow: auto;
+  display: block;
+  line-height: 30px;
+  height: 30px;
+  width: max-content;
+  float: left;
 }
 .ws-word:hover {
   background: gainsboro;
@@ -92,33 +91,32 @@
 }
 
 .ws-ontology-list button {
-  height: 30px;
+  height: 50px;
   line-height: 30px;
   margin-right: 10px;
-  font-size: 9pt;
+  font-size: 10pt;
   background: white;
-  color: black;
-  padding: 0 10px;
-  border-radius: 5px;
+  color: #919191;
   margin-bottom: 10px;
+  border: 1px solid #d2d2d2;
+  padding: 0 20px;
 }
 .ws-ontology-list {
   display: inline-block;
-  width: 1100px;
+  width: 100%;
 }
 .ws-markup-list {
   display: inline-block;
-  width: 1100px;
+  width: 100%;
 }
 .ws-markup-list > * {
-  height: 30px;
-  line-height: 30px;
+  height: 40px;
+  line-height: 40px;
   margin-right: 10px;
   font-size: 9pt;
   background: white;
   color: black;
   padding: 0 10px;
-  border-radius: 5px;
   width: max-content;
   float: left;
   margin-bottom: 10px;
@@ -156,6 +154,8 @@
   display: inline-grid;
   grid-template-columns: 3fr 1fr 1fr;
   cursor: pointer;
+  border: 1px solid #bdbdbd;
+  color: #aeaeae;
 }
 
 .ws-entity-form {
@@ -163,39 +163,39 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  padding: 40px;
   background: white;
-  box-shadow: 0 4px 0 gainsboro;
-  border-radius: 5px;
+  box-shadow: 0 0 4px 3px #dcdada;
+  padding: 25px;
 }
 .ws-entity-form-types {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  border-radius: 5px;
   overflow: hidden;
   margin: 0 0 10px 0;
+  font-size: 12pt;
 }
 .ws-entity-form-types button {
-  height: 30px;
   line-height: 30px;
   padding: 0 10px;
+  width: 100px;
+  height: 50px;
 }
 .ws-entity-form-params {
   display: grid;
   font-size: 9pt;
   grid-template-columns: 1fr 3fr;
   line-height: 30px;
-  gap: 5px;
+  gap: 10px;
+  margin: 20px 0;
 }
 #ws-entity-form-add {
   width: 100%;
-  font-size: 9pt;
-  color: white;
-  height: 30px;
+  font-size: 12pt;
+  color: #3f3f3f;
+  height: 40px;
   line-height: 30px;
-  background: #54bc95;
-  border-radius: 5px;
   margin: 10px 0 0 0;
+  border: 1px solid red;
 }
 .ws-node-label {
   position: absolute;
@@ -229,26 +229,27 @@
   position: fixed;
   bottom: 80px;
   right: 20px;
-  font-size: 12pt;
-  width: 300px;
   line-height: 30px;
   background: white;
-  border-radius: 20px;
   padding: 20px;
   font-size: 9pt;
-  box-shadow: 0 4px 0 gainsboro;
+  box-shadow: 0 0px 6px 0 #adabab;
 }
 .ws-relation-window-placeholder {
-  border-radius: 5px;
   border: 1px solid #959595;
   margin-bottom: 10px;
+  height: 40px;
+  line-height: 40px;
+  width: 250px;
+  font-size: 11pt;
+  color: #404040;
 }
 .ws-relation-window button {
-  background: #43b982;
   width: 100%;
-  color: white;
-  height: 30px;
-  border-radius: 5px;
+  color: #444;
+  border: 1px solid red;
+  height: 40px;
+  font-size: 11pt;
 }
 .ws-relation-window-placeholder span {
   padding: 0 5px;
@@ -256,18 +257,18 @@
 
 .ws-relation-window-entity-title {
   width: max-content;
-  margin: 10px 10px 0 10px;
+  margin: 5px 5px 0 5px;
   border-radius: 5px;
   color: white;
   font-size: 9pt;
-  height: 17px;
-  line-height: 17px;
+  height: 30px;
+  line-height: 30px;
   padding: 0 5px;
 }
 .ws-relation-window-entity-pos {
   margin: 0 10px;
   padding: 0 5px;
-  font-size: 7pt;
+  font-size: 12pt;
 }
 .ws-class-container {
   position: fixed;
@@ -287,7 +288,7 @@
   color: white;
 }
 .ws-markup-list p button {
-  color: #ed1e45;
+  color: #727171;
   margin: 0 7px;
 }
 .class-info-entities-container {
@@ -296,10 +297,11 @@
 
 .text-line {
   position: relative;
+  padding: 0 10px;
 }
 .text-line>button {
   position: absolute;
-  right: -25px;
+  right: 20px;
   top: 0;
   height: 30px;
   line-height: 30px;
@@ -309,31 +311,32 @@
   color: #252854;
 }
 .commentary-window {
-  position: fixed;
-  top: 50%;
-  left: 50%;
+  position: absolute;
   background: white;
-  box-shadow: 0 4px 0 gainsboro;
-  padding: 30px;
+  box-shadow: 0 0px 3px 2px gainsboro;
+  padding: 15px;
   border-radius: 5px;
-  transform: translate(-50%,-50%);
+  z-index: 999;
+  right: 0;
+  bottom: 45px;
+  height: 300px;
+  width: 250px;
 }
 .commentary-window textarea {
   width: 90%;
   font-size: 9pt;
-  background: gainsboro;
-  border-radius: 5px;
   resize: none;
   padding: 5%;
+  height: 230px;
+  border: 1px solid #525151;
 }
 .commentary-window button {
   width: 100%;
-  height: 30px;
+  height: 40px;
   line-height: 30px;
-  border-radius: 5px;
-  background: #12ae7b;
-  color: white;
+  color: #525151;
   margin: 10px 0 0 0;
+  border: 1px solid #525151;
 }
 
 #save-comments {
@@ -347,4 +350,149 @@
   line-height: 20px;
   border-radius: 5px;
   padding: 0 5px;
+}
+
+.workspace-return {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
+  color: #848282;
+}
+.workspace-return > i {
+  margin-right: 10px;
+}
+.workspace-title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 52px;
+  margin: 40px 0;
+}
+.workspace-menu-outer {
+  position: relative;
+  height: 90px;
+}
+.workspace-menu-line {
+  position: absolute;
+  width: 300%;
+  left: 50%;
+  transform: translate(-50%);
+  background: #f1eee8;
+  height: 90px;
+}
+.workspace-menu-content {
+  height: 90px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  width: 1200px;
+}
+.workspace-menu-content > button {
+  height: 90px;
+
+  text-align: left;
+  margin-right: 90px;
+}
+.workspace-text-mode {
+  height: 70px;
+}
+.workspace-text-mode > button {
+  height: 70px;
+  margin-right: 35px;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+}
+.nav-bar > p {
+  border: none;
+  color: #323131;
+}
+.nav-bar > input {
+  width: 75px;
+  margin: 0 25px 0 10px;
+  text-align: center;
+}
+.text-create-new-relation {
+  float: right;
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+  text-align: center;
+  background: #f1eee8;
+  color: #666565;
+  font-size: 13pt;
+  line-height: 40px;
+  border: none;
+  margin-left: 15px;
+}
+.text-add-entity {
+  float: right;
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+  text-align: center;
+  background: #f1eee8;
+  color: #666565;
+  font-size: 13pt;
+  line-height: 40px;
+  border: none;
+}
+
+.ws-ontology-list-selected {
+  color: black !important;
+  border-color: black !important;
+}
+.ws-markup-list-selected {
+  border-color: black !important;
+  color: black !important;
+}
+.ws-markup-list-add-markup-button {
+  border: 1px solid red;
+  color: #585858;
+  padding: 0 20px;
+}
+
+.text-line-labels {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 30px 445px 445px 240px;
+  width: 100%;
+  height: 65px;
+  background: #f1eee8;
+  padding: 0 10px;
+  border-radius: 10px 10px 0 0;
+}
+.text-line-labels > p {
+  height: 65px;
+  line-height: 65px;
+  text-align: left;
+  font-size: 11pt;
+}
+
+.text-lines-main-container {
+  border: 1px solid #f1eee8;
+  margin-top: 30px;
+  border-radius: 10px;
+}
+
+.decorative-comment-arrow {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  display: block;
+  bottom: 40px;
+  right: 15px;
+  background: white;
+  transform: rotate(-45deg);
+  box-shadow: 0 0 3px 4px #dbd9d9;
+}
+
+.ws-relation-window-entity {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.ws-relation-window-placeholder > span {
+  padding: 0 0 0 15px;
 }

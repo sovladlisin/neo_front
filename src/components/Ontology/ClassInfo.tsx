@@ -132,20 +132,18 @@ const ClassInfo: React.FunctionComponent<IClassInfoProps> = (props) => {
         {currentClass && classState.classLoadingId != props.class_id && <>
             <div className='og-class-info'>
                 <p className='og-class-name'>{getName(currentClass)}</p>
-                <p className='og-class-info-title'>Параметры:</p>
-                <div className='og-class-info-params'>
+                <p className='og-class-info-title'>Параметры</p>
+                <div className='og-class-info-params-short'>
                     {currentClass.params.map(param => {
                         if (param.includes('signature')) return <></>
+                        var p_name = param.includes('#') ? param.split('#').pop() : param
                         return <>
-                            <span></span>
-                            <span></span>
-                            <label>{param}</label>
+                            <label>{p_name}</label>
                             <input onChange={e => { setCurrentClass({ ...currentClass, [param]: e.target.value }) }} value={currentClass[param]}></input>
                         </>
                     })}
                 </div>
-                <p className='og-class-info-title'>Атрибуты</p>
-                <p className='og-class-info-title' style={{ background: '#3ed29b', color: 'white' }} onClick={_ => setNewAttributeWindow(true)}>Добавить аттрибут</p>
+                <p className='og-class-info-title'>Атрибуты <button id='add' onClick={_ => setNewAttributeWindow(true)}><i className='fas fa-plus'></i></button></p>
                 {/* <div className='og-class-add-field'>
                     <input onChange={(e) => setNewAttributeName(e.target.value)} placeholder='Имя аттрибута' value={newAttributeName} />
                     <input onChange={(e) => setNewAttributeValue(e.target.value)} placeholder='Тип аттрибута' value={newAttributeValue} />
@@ -214,7 +212,7 @@ const ClassInfo: React.FunctionComponent<IClassInfoProps> = (props) => {
                 </div>
 
                 <button className='og-class-info-title' style={{ background: '#3ed29b', color: 'white' }} onClick={onSave}>Сохранить</button>
-                <p className='og-class-info-title'>Объекты:<button id='add' onClick={_ => props.onObjectAdd(currentClass['uri'])}><i className='fas fa-plus'></i></button></p>
+                <p className='og-class-info-title'>Объекты<button id='add' onClick={_ => props.onObjectAdd(currentClass['uri'])}><i className='fas fa-plus'></i></button></p>
                 <div className='og-class-objects-container'>
                     {classObjects.length != 0 && classObjects.map(co => {
                         return <div className='og-class-object' onClick={_ => props.onObjectSelect(co.id)}>

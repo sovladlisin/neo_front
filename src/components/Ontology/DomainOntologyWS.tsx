@@ -22,19 +22,32 @@ const DomainOntologyWS: React.FunctionComponent<IDomainOntologyWSProps> = (props
     const [selectedOntology, setSelectedOntology] = React.useState<TClass>(null)
 
     return <>
-        <div className='og-domain-ontology-workspace'>
-            <div className='og-domain-ontology-select'>
+
+        <div className='sub-page-container'>
+            <p className='sub-page-title'>Онтологии</p>
+
+
+            <div className='domain-ontology-select-container'>
+
                 {ontologies.map(o => {
                     const selected = selectedOntology && selectedOntology.id === o.id
-                    return <button onClick={_ => setSelectedOntology(o)} style={selected ? { background: '#252854', color: 'white' } : {}}>{getName(o)}</button>
+                    return <button onClick={_ => setSelectedOntology(o)} className={selected ? 'domain-ontology-select-container-selected' : ''}>{getName(o)}</button>
                 })}
-                <p style={{ background: '#3ed29b', color: 'white' }} className='og-domain-ontology-add' onClick={_ => setAddOntologyWindow(true)}>Добавить онтологию<i className='fas fa-plus'></i></p>
+                <button className='domain-ontology-select-container-inner-add-ontology' onClick={_ => setAddOntologyWindow(true)}>Добавить онтологию<i className='fas fa-plus'></i></button>
+
             </div>
+
+
             {selectedOntology && <>
-                <OntologyWS domain={selectedOntology['uri']}></OntologyWS>
+                <div className='domain-ontology-selected-container'>
+                    <OntologyWS domain={selectedOntology['uri']}></OntologyWS>
+                </div>
+
             </>}
+
+            {addOntologyWindow && <OntologyForm onClose={() => setAddOntologyWindow(false)}></OntologyForm>}
         </div>
-        {addOntologyWindow && <OntologyForm onClose={() => setAddOntologyWindow(false)}></OntologyForm>}
+
     </>;
 };
 

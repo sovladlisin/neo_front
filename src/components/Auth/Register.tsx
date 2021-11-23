@@ -22,7 +22,6 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
             <label>Пароль</label><input type="password" onChange={e => setLoginInfo({ ...loginInfo, password: e.target.value })} value={loginInfo.password}></input>
             <label>Почта</label><input type="email" onChange={e => setLoginInfo({ ...loginInfo, email: e.target.value })} value={loginInfo.email}></input>
             <button onClick={onLogin}>Регистрация</button>
-            <Link to='/login' >Вход с существующего аккаунта</Link>
         </div>
     </>;
 };

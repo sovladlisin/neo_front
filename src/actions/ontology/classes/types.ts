@@ -50,6 +50,11 @@ export type TClassExtended = {
     entities?: TEntity[]
 }
 
+export interface TActor extends TClass {
+    photo?: string,
+    name?: string
+}
+
 export type TRelation = {
     id: number,
     labels: string[],
@@ -58,6 +63,13 @@ export type TRelation = {
     end_node: TClass,
     start_class_uri?: string,
     end_class_uri?: string
+}
+
+export interface TCorpusExtended extends TObjectExtended {
+    texts?: TClass[],
+    photos?: TClass[],
+    videos?: TClass[],
+    actors?: TClass[]
 }
 
 export type TObjectExtended = {

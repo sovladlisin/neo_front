@@ -95,7 +95,7 @@ const RelationForm: React.FunctionComponent<IRelationFormProps> = (props) => {
                     </div>
                 </> : <span>Второй элемент связи</span>}
             </div>
-            <button onClick={onSave}>Создать связь</button>
+            <button onClick={onSave}>СОЗДАТЬ СВЯЗЬ</button>
         </div>
     </>
 };

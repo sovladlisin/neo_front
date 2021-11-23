@@ -1,0 +1,142 @@
+
+.home-card {
+  background: #F1EEE8;
+  padding: 50px 0;
+}
+.home-card-inner {
+  width: 1200px;
+  margin: 0 auto;
+}
+.home-card-inner > p {
+  font-size: 55px;
+  line-height: 72px;
+  font-weight: 410;
+  line-height: 60px;
+}
+.home-card-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 30px;
+}
+.home-card-text > p {
+  font-size: 17px;
+  line-height: 26px;
+  padding: 0 112px 0 0;
+}
+.home-card-text > a {
+  border: 1px solid #E31219;
+  box-sizing: border-box;
+  width: 230px;
+  height: 50px;
+  line-height: 50px;
+  margin-top: 70px;
+  display: block;
+  text-align: center;
+}
+.home-card-info > img {
+  width: 740px;
+}
+.home-block-inner {
+  width: 1200px;
+  margin: 0 auto;
+}
+.home-block-inner > p {
+  font-size: 42px;
+  line-height: 56px;
+  margin: 20px 0;
+}
+.home-block {
+  padding: 30px 0;
+}
+.home-corpus-block {
+  width: 265px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.home-corpuses-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 30px;
+}
+.home-corpus-block > img {
+  width: 265px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.home-corpus-block > p {
+  position: absolute;
+  bottom: 65px;
+  color: white;
+  left: 17px;
+  font-size: 14pt;
+  z-index: 2;
+}
+.home-coprus-meta {
+  position: absolute;
+  bottom: 5px;
+  border-top: 1px solid white;
+  width: 75%;
+  left: 50%;
+  transform: translate(-50%);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 17px;
+  color: white;
+  z-index: 2;
+  font-size: 10pt;
+}
+.home-block.home-block-gray {
+  background: #F1EEE8;
+}
+.home-resourse-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 30px;
+}
+.home-resourse-block {
+  background: white;
+  border-radius: 5px;
+  width: 265px;
+  height: 200px;
+  position: relative;
+}
+.home-resourse-block > p {
+  position: absolute;
+  bottom: 30px;
+  border-radius: 50px;
+  background: black;
+  color: white;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  left: 30px;
+}
+.home-resourse-meta {
+  position: absolute;
+  bottom: 37px;
+  left: 100px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+}
+
+.home-corpus-image-backdrop {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 89px;
+  background: #00000091;
+  z-index: 1;
+  box-shadow: 0px -15px 33px 17px #0000009e;
+}
+.home-resourse-title {
+  font-size: 14pt !important;
+}
+.home-resourse-meta p {
+  font-size: 9pt;
+}

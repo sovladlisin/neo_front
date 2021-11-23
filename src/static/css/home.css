@@ -1,64 +1,64 @@
 .h-menu {
-    margin: 30px auto;
-    width: 900px;
-  }
-  .h-menu a {
-    background: white;
-    display: block;
-    width: max-content;
-    padding: 20px;
-    float: left;
-    margin: 10px;
-  }
-  
+  margin: 30px auto;
+  width: 900px;
+}
+.h-menu a {
+  background: white;
+  display: block;
+  width: max-content;
+  padding: 20px;
+  float: left;
+  margin: 10px;
+}
+
 #background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: black;
-    opacity: 0.5;
-  }
-  #add {
-    line-height: inherit;
-    font-size: 9pt;
-    margin: 0 10px;
-  }
-  #delete {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 15px;
-    width: 15px;
-    line-height: 15px;
-  }
-  #file {
-    background: none;
-  }
-  
-#empty {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
   width: 100%;
-  text-align: center;
-  font-size: 35pt;
-  color: #a3a3a3;
-  margin: 50px 0;
+  background: black;
+  opacity: 0.5;
+}
+#add {
+  font-size: 11pt;
+  height: 24px;
+  margin: 0 10px;
+}
+#delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 15px;
+  width: 15px;
+  line-height: 15px;
+}
+#file {
+  background: none;
+}
+
+#empty {
+width: 100%;
+text-align: center;
+font-size: 35pt;
+color: #a3a3a3;
+margin: 50px 0;
 }
 .info {
-  margin: 90px auto;
-  background: white;
-  padding: 30px;
-  text-indent: 1.5em;
-  text-align: justify;
-  width: 900px;
+margin: 90px auto;
+background: white;
+padding: 30px;
+text-indent: 1.5em;
+text-align: justify;
+width: 900px;
 }
 
 .info p {
-  padding: 10px 0;
+padding: 10px 0;
 }
 
 .info a {
-  color: #777cc7;
-  font-weight: bold;
-  text-decoration: underline;
+color: #777cc7;
+font-weight: bold;
+text-decoration: underline;
 }

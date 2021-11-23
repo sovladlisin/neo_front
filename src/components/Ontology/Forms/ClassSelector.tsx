@@ -62,9 +62,9 @@ const ClassSelectorWindow: React.FunctionComponent<IClassSelectorWindowProps> = 
     return <>
         <div className='object-selector-window' ref={ref}>
             <input placeholder='Поиск' value={classWindowSearch} onChange={e => setClassWindowSearch(e.target.value)}></input>
-            <button style={props.default === null ? { background: '#252854', color: 'white' } : {}} onClick={_ => onSelect(null)}>Не указано</button>
+            <button style={props.default === null ? { background: '#f1eee8', color: 'black', fontWeight: 700 } : {}} onClick={_ => onSelect(null)}>Не указано</button>
             {objects.filter(node => nodeFilter(classWindowSearch, node)).map(object => {
-                return <button style={props.default && object.id === props.default.id ? { background: '#252854', color: 'white' } : {}} onClick={_ => onSelect(object)}>{getName(object)}</button>
+                return <button style={props.default && object.id === props.default.id ? { background: '#f1eee8', color: 'black', fontWeight: 700 } : {}} onClick={_ => onSelect(object)}>{getName(object)}</button>
             })}
         </div>
         <div className='object-selector-background'></div>
