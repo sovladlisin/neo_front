@@ -457,7 +457,6 @@
   display: grid;
   gap: 10px;
   grid-template-columns: 30px 445px 445px 240px;
-  width: 100%;
   height: 65px;
   background: #f1eee8;
   padding: 0 10px;
