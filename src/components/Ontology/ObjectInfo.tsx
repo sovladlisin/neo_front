@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getClassObject, updateClass, updateEntity } from '../../actions/ontology/classes/classes';
 import { TClass, TObjectExtended } from '../../actions/ontology/classes/types';
 import { RootStore } from '../../store';
-import { DATA_TYPES, getName, LING_OBJECT_URI, SERVER_DOMAIN, useKeyPress } from '../../utils';
+import { DATA_TYPES, getName, getRandomInt, LABEL, LING_OBJECT_URI, SERVER_DOMAIN, useKeyPress } from '../../utils';
 import { useOnClickOutside } from '../HandleClickOutside';
 import ObjectSelector from './Forms/ObjectSelector'
 import { Link } from 'react-router-dom'
 import Loading from '../Loading';
 import { useEffect } from 'react';
+import LangStringInput from './Forms/LangStringInput';
 
 interface IObjectInfoProps {
     object_id: number,
@@ -39,6 +40,7 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
         var new_obj = classState.selectedObject
         if (new_obj && props.object_id === new_obj.id) {
             setCurrentObject(new_obj)
+            console.log('HEHEHEHEHEHEH', new_obj.relations.map(r => r.labels[0]))
         }
     }, [classState.selectedObject])
 
@@ -110,7 +112,6 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
         var obj = {}
         obj['id'] = newCurrentObject.object.id
         obj['uri'] = newCurrentObject.object['uri']
-        console.log(newCurrentObject.relations)
         newCurrentObject.object.params.map(p => {
             obj[p] = newCurrentObject.object[p]
         })
@@ -127,7 +128,6 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
             }
             obj[r.labels[0] + '' + new_r.id] = new_r
         })
-        console.log(obj)
         dispatch(updateEntity(obj))
     }
 
@@ -170,6 +170,29 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
             name = name.includes('/') ? name.split('/').pop() : name
 
             const value = updatedObject[p] ? updatedObject[p] : newCurrentObject.object[p]
+            if (p === LABEL) {
+                return <>
+                    <label>Короткое название</label>
+
+                    <LangStringInput
+                        value={
+                            value.map(item => {
+
+                                return { val: item.split('@')[0], type: '@' + item.split('@')[1], id: getRandomInt(0, 1000) }
+                            })
+                        }
+                        onChange={val => {
+                            setNewCurrentObject(
+                                {
+                                    ...newCurrentObject,
+                                    // @ts-ignore
+                                    object: { ...newCurrentObject.object, [p]: val.map(item => item.val + item.type) }
+                                })
+                        }}
+
+                    />
+                </>
+            }
             return <>
                 <label>{name}</label>
                 <input value={value} onChange={e => {
@@ -304,11 +327,12 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
         </>
     }
 
-    useEffect(() => { newCurrentObject && newCurrentObject.relations && console.log(newCurrentObject.relations) }, [newCurrentObject])
 
     const onDelete = () => {
         props.onClose()
     }
+
+    const authState = useSelector((state: RootStore) => state.auth)
 
     const renderControlPanel = () => {
         const obj = newCurrentObject
@@ -318,8 +342,11 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
             {obj.object.labels.includes(LING_OBJECT_URI) && obj.object.id != 544 && <>
                 <Link to={'/workspace/' + newCurrentObject.id} target='_blank'><i className="fas fa-file-alt"></i></Link>
             </>}
-            <button onClick={onDelete}><i className="fas fa-trash"></i></button>
-            <button onClick={_ => onSave()}><i className="fas fa-save"></i></button>
+            {authState.user.is_editor && <>
+                <button onClick={onDelete}><i className="fas fa-trash"></i></button>
+                <button onClick={_ => onSave()}><i className="fas fa-save"></i></button>
+            </>}
+
             <button onClick={_ => props.onClose()}><i className="fas fa-times"></i></button>
         </>
     }

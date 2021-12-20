@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { createEntity } from '../../../actions/ontology/classes/classes';
 import { TClass } from '../../../actions/ontology/classes/types';
-import { CLASS, LABEL, SUB_CLASS_OF } from '../../../utils';
+import { CLASS, getRandomInt, LABEL, SUB_CLASS_OF } from '../../../utils';
 import { useOnClickOutside } from '../../HandleClickOutside';
 import ClassSelector from './ClassSelector';
 import LangStringInput from './LangStringInput';
@@ -35,10 +35,23 @@ const ClassForm: React.FunctionComponent<IClassFormProps> = (props) => {
     }
 
     return <>
+        <div className='m-background'></div>
+
         <div className='og-add-class-form' ref={ref}>
             <div className="og-add-class-inputs">
                 <label>URI</label><input value={uri} onChange={e => setUri(e.target.value)}></input>
-                <label>Именная метка</label><LangStringInput value={label} onChange={e => setLabel(e)}></LangStringInput>
+                <label>Именная метка</label>
+
+                <LangStringInput
+                    value={
+                        label.map(item => {
+
+                            return { val: item.split('@')[0], type: '@' + item.split('@')[1], id: getRandomInt(0, 1000) }
+                        })
+                    }
+                    onChange={val => setLabel(val.map(item => item.val + item.type))} />
+
+
                 <label>Родитель</label><ClassSelector domain={props.domain} default={selectedParent} onSelect={cl => setSelectedParent(cl)}></ClassSelector>
             </div>
             <button onClick={onSave}>Добавить класс</button>

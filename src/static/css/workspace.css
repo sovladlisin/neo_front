@@ -495,3 +495,82 @@
 .ws-relation-window-placeholder > span {
   padding: 0 0 0 15px;
 }
+
+.file-upload-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  padding: 20px;
+  display: grid;
+  background: white;
+  box-shadow: 0 0 3px 0px white;
+  gap: 10px;
+}
+.file-upload-window > input {
+  width: 400px;
+  border: 1px solid gainsboro;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px;
+}
+.file-upload-window > button {
+  border: 1px solid red;
+  height: 40px;
+  color: #484848;
+}
+.file-upload-window > select {
+  height: 40px;
+  line-height: 40px;
+  background: white;
+  border: 1px solid gainsboro;
+  padding: 0 20px;
+}
+
+.file-upload-window > textarea {
+  border: 1px solid gainsboro;
+  resize: none;
+  height: 220px;
+  padding: 15px 20px;
+}
+
+.text-info-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 150px;
+  margin: 30px auto;
+}
+.text-info-container div {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 25px 30px;
+}
+.text-info-container div label {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  color: #969090;
+  margin: auto 0;
+  display: block;
+  height: max-content;
+  width: 160px;
+}
+.text-info-container div p {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  height: max-content;
+  margin: auto 0;
+}
+.text-info-description {
+  border-top: 1px solid gainsboro;
+  padding: 30px 0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.text-info-container-event-item {
+  text-decoration: underline;
+  cursor: pointer;
+}

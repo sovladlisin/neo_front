@@ -1,154 +1,279 @@
 
 .resource-search-container {
-    position: relative;
-    width: 100%;
-    height: 60px;
-    margin-bottom: 70px;
-  }
-  .resource-search-container > span {
-    position: absolute;
-    left: 0;
-    height: 40px;
-    width: 40px;
-    margin: 10px;
-    text-align: center;
-    line-height: 43px;
-    color: #abaaaa;
-    font-size: 10pt;
-  }
-  .resource-search-container > input {
-    height: 60px;
-    line-height: 60px;
-    padding: 0 0 0 60px;
-    width: calc(100% - 60px);
-    border: 1px solid #b2b2b2;
-  }
-  .resource-search-container > button {
-    float: left;
-    color: #6c6c6c;
-    height: 30px;
-    line-height: 30px;
-    font-size: 10pt;
-  }
-  .resource-search-container > label {
-    float: right;
-    color: #6c6c6c;
-    height: 30px;
-    line-height: 30px;
-    font-size: 10pt;
-  }
-  .keyboard-container {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translate(-50%);
-    background: white;
-    border-radius: 5px;
-    padding: 30px;
-    box-shadow: 0 0px 4px 2px #0000002e;
-  }
-  .keyboard-container > button {
-    height: 50px;
-    width: 50px;
-    border: 1px solid gainsboro;
-    margin: 4px;
-    border-radius: 5px;
-  }
-  .resource-content-container {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 30px;
-  }
-  .resource-nav-panel {
-    width: 300px;
-    border: 1px solid #b2b2b2;
-    height: max-content;
-  }
-  .resource-nav-panel-collapse-list > button {
-    padding: 15px;
-    width: calc(100%);
-    text-align: left;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 26px;
-  }
-  .resource-nav-panel-collapse-list > button > i {
-    margin-left: 10px;
-    font-size: 11pt;
-  }
-  .resource-nav-panel-collapse-list-content > button {
-    width: 100%;
-    text-align: left;
-    padding: 5px 15px;
-    color: #545151;
-    font-size: 10pt;
-  }
-  .resource-nav-panel-collapse-list-content > button > i {
-    margin-right: 10px;
-  }
-  .resource-nav-panel-collapse-list-second > button {
-    width: 100%;
-    text-align: left;
-    padding: 10px 15px;
-    font-size: 11pt;
-  }
-  .resource-nav-panel-collapse-list-second > button > i {
-    margin-left: 10px;
-    font-size: 9pt;
-  }
-  .resource-nav-panel-collapse-list > input {
-    margin: 0 15px 15px 15px;
-    width: calc(100% - 40px);
-    border: 1px solid gainsboro;
-    height: 40px;
-    padding: 0 0 0 10px;
-  }
-  
+  position: relative;
+  width: 100%;
+  height: 60px;
+  margin-bottom: 70px;
+}
+.resource-search-container > span {
+  position: absolute;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  margin: 10px;
+  text-align: center;
+  line-height: 43px;
+  color: #abaaaa;
+  font-size: 10pt;
+}
+.resource-search-container > input {
+  height: 60px;
+  line-height: 60px;
+  padding: 0 0 0 60px;
+  width: calc(100% - 60px);
+  border: 1px solid #b2b2b2;
+}
+.resource-search-container > button {
+  float: left;
+  color: #6c6c6c;
+  height: 30px;
+  line-height: 30px;
+  font-size: 10pt;
+}
+.resource-search-container > label {
+  float: right;
+  color: #6c6c6c;
+  height: 30px;
+  line-height: 30px;
+  font-size: 10pt;
+}
+.keyboard-container {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translate(-50%);
+  background: white;
+  border-radius: 5px;
+  padding: 30px;
+  box-shadow: 0 0px 4px 2px #0000002e;
+}
+.keyboard-container > button {
+  height: 50px;
+  width: 50px;
+  border: 1px solid gainsboro;
+  margin: 4px;
+  border-radius: 5px;
+}
+.resource-content-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 30px;
+}
+.resource-nav-panel {
+  width: 300px;
+  border: 1px solid #b2b2b2;
+  height: max-content;
+  position: relative;
+}
+.resource-nav-panel-collapse-list > button {
+  padding: 15px;
+  width: calc(100%);
+  text-align: left;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 26px;
+}
+.resource-nav-panel-collapse-list > button > i {
+  margin-left: 10px;
+  font-size: 11pt;
+}
+.resource-nav-panel-collapse-list-content > button {
+  width: 100%;
+  text-align: left;
+  padding: 5px 15px;
+  color: #545151;
+  font-size: 10pt;
+}
+.resource-nav-panel-collapse-list-content > button > i {
+  margin-right: 10px;
+}
+.resource-nav-panel-collapse-list-second > button {
+  width: 100%;
+  text-align: left;
+  padding: 10px 15px;
+  font-size: 11pt;
+}
+.resource-nav-panel-collapse-list-second > button > i {
+  margin-left: 10px;
+  font-size: 9pt;
+}
+.resource-nav-panel-collapse-list > input {
+  margin: 0 15px 15px 15px;
+  width: calc(100% - 40px);
+  border: 1px solid gainsboro;
+  height: 40px;
+  padding: 0 0 0 10px;
+}
+
 .resource-nav-panel-reset {
-    width: calc(100% - 30px);
-    margin: 15px;
-    border: 1px solid #e31218;
-    padding: 10px;
-    color: #393838;
-  }
-  
+  width: calc(100% - 30px);
+  margin: 15px;
+  border: 1px solid #e31218;
+  padding: 10px;
+  color: #393838;
+}
+
 .resource-item-container {
-    border: 1px solid #b2b2b2;
-    margin-bottom: 30px;
-    padding: 30px;
-    display: grid;
-    grid-template-columns: 1fr 160px;
-  }
-  .resource-item-title {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 32px;
-  }
-  .resource-item-note {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 20px;
-    color: #8e8e8e;
-  }
-  .resource-item-open {
-    display: block;
-    width: 160px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    border: 1px solid red;
-    margin-bottom: 10px;
-  }
-  .resource-item-more {
-    color: #8f8f8f;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 20px;
-  }
-  .resource-item-more > i {
-    margin-left: 5px;
-    font-size: 8pt;
-  }
+  border: 1px solid #b2b2b2;
+  margin-bottom: 30px;
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 1fr 160px;
+}
+.resource-item-title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 32px;
+}
+.resource-item-note {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
+  color: #8e8e8e;
+  max-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 490px;
+  white-space: pre;
+}
+.resource-item-open {
+  display: block;
+  width: 160px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border: 1px solid red;
+  margin-bottom: 10px;
+}
+.resource-item-more {
+  color: #8f8f8f;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
+}
+.resource-item-more > i {
+  margin-left: 5px;
+  font-size: 8pt;
+}
+
+.text-resource-items-list {
+display: grid;
+grid-template-columns: repeat(4,1fr);
+gap: 30px;
+}
+.image-carrier {
+width: 410px;
+height: 230px;
+background: white;
+box-shadow: 0 0 4px 1px #ccc9c9;
+}
+.image-carrier > img {
+width: inherit;
+object-fit: contain;
+object-position: center;
+height: inherit;
+}
+.image-carrier > p {
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 32px;
+margin-top: 10px;
+}
+
+#add-media-to-resource {
+font-size: 14pt;
+color: red;
+line-height: 9px;
+display: block;
+position: absolute;
+right: -30px;
+top: 20px;
+}
+
+
+.resource-item-counter > label {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  margin-right: 12px;
+}
+.resource-item-counter {
+  margin-top: 10px;
+}
+
+.resource-corpus-list-outer {
+  width: 100%;
+  background: #F1EEE87D;
+  height: 90px;
+}
+.resource-corpus-list-outer button {
+  color: #636261;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  height: 90px;
+  margin-right: 50px;
+  display: inline-block;
+}
+.resource-corpus-list-outer > div {
+  width: 1200px;
+  margin: 0 auto;
+  overflow-x: auto;
+  height: 90px;
+  white-space: nowrap;
+  overflow-y: hidden;
+}
+
+.resource-corpus-list-selected {
+  color: red !important;
+}
+
+.add-object-to-resource-button {
+  margin-left: 10px;
+  font-size: 11pt;
+  color: red;
+}
+
+.admin-resource-filter-add-button-container > button {
+  width: 100%;
+  margin: 15px 0px 0px 0px;
+  border: 1px solid #e31218;
+  padding: 10px;
+  color: #393838;
+}
+.admin-resource-filter-add-button-container {
+  position: absolute;
+}
+
+.resource-item-outer-container {
+  position: relative;
+}
+#selected-for-edit-item-resource-list-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: red;
+}
+
+.event-form-container label {
+  text-align: right;
+  line-height: 50px;
+  height: 50px;
+  font-size: 11pt;
+}
+.event-form-container input {
+  background: #f1eee8;
+  padding: 0 5px;
+  font-size: 11pt;
+  height: 50px;
+  line-height: 50px;
+}
+.event-form-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 5px;
+}

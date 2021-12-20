@@ -23,22 +23,26 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
                 <Link to='/'><img src={LOGO}></img></Link>
                 <div className='header-buttons'>
                     <Link to='/corpuses'>Корпусы</Link>
-                    <Link to=''>Новости</Link>
+                    <Link to='/news'>Новости</Link>
                     <Link to='/domain-ontology'>Онтология</Link>
                     <Link to='/actors'>Персоны</Link>
                     <Link to='/about'>О проекте</Link>
                     <Link to='/resources'>Ресурсы</Link>
                 </div>
-                <div className='header-auth'>
-                    {authState.user.token && authState.user.token.length > 0 && <>
-                        <p>{authState.user.username}</p>
+
+                {authState.user.token && authState.user.token.length > 0 && <>
+                    <div className='header-auth'>
+                        <p>{authState.user.email}</p>
                         <Link to='/account'>Личный кабинет</Link>
                         <button className='button-logout' onClick={_ => dispatch(logout())}>Выход</button>
-                    </>}
-                    {(!authState.user.token || authState.user.token.length === 0) && <>
+                    </div>
+
+                </>}
+                {(!authState.user.token || authState.user.token.length === 0) && <>
+                    <div className='header-not-auth'>
                         <button onClick={_ => props.onAuthWindow()} className='button-login'>Вход</button>
-                    </>}
-                </div>
+                    </div>
+                </>}
             </div>
         </div>
 

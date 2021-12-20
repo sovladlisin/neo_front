@@ -1,4 +1,4 @@
-import { TClass } from "../ontology/classes/types"
+import { TClass, TConnectedVisualItem, TRelation } from "../ontology/classes/types"
 
 export const GET_WORKSPACE = 'GET_WORKSPACE'
 
@@ -26,7 +26,9 @@ export type TWorkspaceInfo = {
     translation_node: TClass,
     id?: number,
     commentary_node: TClass,
-    commentary_url: string
+    commentary_url: string,
+    resources: TConnectedVisualItem[],
+    origin_node_extended: { node: TClass, relations: TRelation[] }
 }
 export type TEntity = {
     pos_start: number,

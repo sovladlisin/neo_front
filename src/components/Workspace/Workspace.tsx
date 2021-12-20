@@ -17,6 +17,9 @@ import ObjectInfo from '../Ontology/ObjectInfo';
 import CommentaryInfo from './CommentaryInfo';
 import { changeComments } from '../../actions/ontology/files/files';
 import Loading from '../Loading';
+import TextResourceList from './TextResourceList';
+import TextInfo from './TextInfo';
+import TextOntology from './TextOntology';
 
 interface IWorkspaceProps {
     id: string
@@ -384,6 +387,9 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
                         <div className='text-content-main-container'>
 
                             <div className='ws-content'>
+                                {selectedView === 3 && <TextResourceList resources={workInfo.resources} object_id={workInfo.origin_node.id} />}
+                                {selectedView === 1 && <TextInfo node_info={workInfo.origin_node_extended} />}
+                                {selectedView === 4 && selectedOntology && <TextOntology uri={selectedOntology['uri']} />}
                                 {selectedView === 2 && <>
 
                                     <div className='workspace-text-mode'>

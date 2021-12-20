@@ -70,7 +70,6 @@ const ObjectSelectorWindow: React.FunctionComponent<IObjectSelectorWindowProps> 
                 return <button style={props.default && object.id === props.default.id ? { background: '#252854', color: 'white' } : {}} onClick={_ => onSelect(object)}>{getName(object)}</button>
             })}
         </div>
-        <div className='object-selector-background'></div>
     </>
 }
 
@@ -96,7 +95,7 @@ const ObjectSelector: React.FunctionComponent<IObjectSelectorProps> = (props) =>
     }
 
     return <>
-        <div className='object-selector'>
+        <div className='object-selector' style={{ position: 'relative' }}>
             <div className='object-selector-name-placeholder' onClick={_ => {
                 if (ctrlPress && props.onClick) props.onClick()
                 else
@@ -104,10 +103,11 @@ const ObjectSelector: React.FunctionComponent<IObjectSelectorProps> = (props) =>
             }}>
                 {props.default ? <p>{getName(props.default)}</p> : <p>Не указано</p>}
             </div>
+            {objectWindow && <>
+                <ObjectSelectorWindow uri={props.uri} default={props.default} onClose={() => setObjectWindow(false)} onSelect={obj => onSelect(obj)} />
+            </>}
         </div>
-        {objectWindow && <>
-            <ObjectSelectorWindow uri={props.uri} default={props.default} onClose={() => setObjectWindow(false)} onSelect={obj => onSelect(obj)} />
-        </>}
+
     </>;
 };
 

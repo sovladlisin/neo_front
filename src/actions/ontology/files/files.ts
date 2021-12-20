@@ -3,7 +3,7 @@ import { Dispatch } from "react"
 import { handleError, SERVER_URL } from "../../../utils"
 import axios from "axios";
 import { withToken } from "../../auth/auth";
-import { DELETE_FILE, GET_FILE, GET_FILES, TFileDispatchTypes } from "./types";
+import { DELETE_FILE, GET_FILE, GET_FILES, GET_FIRST_TEXT_TABLE, TFileDispatchTypes } from "./types";
 import { alertDispatchTypes, CREATE_ALERT } from "../../alerts/types";
 import { TComment } from "../../../components/Workspace/CommentaryInfo";
 
@@ -19,6 +19,44 @@ export const uploadFile = (name: string, file: File, carrier_uri: string, type_u
         //     type: GET_FILE,
         //     payload: res.data
         // })
+    }).catch(err => {
+        dispatch({
+            type: CREATE_ALERT,
+            payload: handleError(err)
+        })
+    })
+}
+
+export const uploadDocxFirstTable = (file: File, request_id: string) => (dispatch: Dispatch<TFileDispatchTypes | alertDispatchTypes>) => {
+    var params = withToken({})
+    params['headers'] = { ...params['headers'], ['Content-Type']: 'multipart/form-data' }
+    var formData = new FormData();
+    formData.append("file", file);
+
+    axios.post(SERVER_URL + 'uploadDocxFirstTable', formData, params).then(res => {
+
+        console.log(res)
+        dispatch({
+            type: GET_FIRST_TEXT_TABLE,
+            payload: { request_id: request_id, params: res.data }
+        })
+    }).catch(err => {
+        dispatch({
+            type: CREATE_ALERT,
+            payload: handleError(err)
+        })
+    })
+}
+
+export const uploadDocx = (node, file: File, corpus_id) => (dispatch: Dispatch<TFileDispatchTypes | alertDispatchTypes>) => {
+    var params = withToken({})
+    params['headers'] = { ...params['headers'], ['Content-Type']: 'multipart/form-data' }
+    var formData = new FormData();
+    formData.append("file", file);
+    formData.append('data', JSON.stringify({ node, corpus_id }))
+
+    axios.post(SERVER_URL + `uploadDocx`, formData, params).then(res => {
+
     }).catch(err => {
         dispatch({
             type: CREATE_ALERT,

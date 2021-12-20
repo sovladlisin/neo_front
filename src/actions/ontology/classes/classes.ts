@@ -302,6 +302,20 @@ export const createEntity = (labels: string[], node) => (dispatch: Dispatch<TCla
         })
     })
 }
+
+export const createEvent = (actor_id: number, place_id: number, time_string: string, label: string[]) => (dispatch: Dispatch<TClassDispatchTypes | alertDispatchTypes>) => {
+    const params = withToken()
+    const body = JSON.stringify({ actor_id, place_id, time_string, label })
+    axios.post(SERVER_URL + `createEvent`, body, params).then(res => {
+
+    }).catch(err => {
+        dispatch({
+            type: CREATE_ALERT,
+            payload: handleError(err)
+        })
+    })
+}
+
 export const updateEntity = (node) => (dispatch: Dispatch<TClassDispatchTypes | alertDispatchTypes>) => {
     const params = withToken()
 

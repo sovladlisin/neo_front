@@ -1,34 +1,44 @@
 
 .header-inner-container {
-    margin: auto auto;
-    height: 100px;
-    width: 1200px;
-    display: grid;
-    grid-template-columns: 400px auto auto;
-  }
-  .header-container {
-    width: 100%;
-    height: 140px;
-    background: #F1EEE8;
-    display: grid;
-  }
-  .header-inner-container  img {
-    height: 100px;
-  }
-  .header-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: auto 0 auto auto;
-    gap: 20px 75px;
-    font-size: 10pt;
-  }
-  .header-auth {
-    height: max-content;
-    width: max-content;
-    margin: auto 0 auto auto;
-  }
-  
+  margin: auto auto;
+  height: 100px;
+  width: 1200px;
+  display: grid;
+  grid-template-columns: 400px auto auto;
+}
+.header-container {
+  width: 100%;
+  height: 140px;
+  background: #F1EEE8;
+  display: grid;
+}
+.header-inner-container  img {
+  height: 100px;
+}
+.header-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: auto 0 auto auto;
+  gap: 20px 75px;
+  font-size: 10pt;
+}
+.header-auth {
+  height: max-content;
+  width: max-content;
+  margin: auto 0 auto auto;
+  display: grid;
+  gap: 20px;
+  font-size: 10pt;
+}
+
 .header-buttons a:hover {
-    color: #E31219;
-    transition: 0.3s;
-  }
+  color: #E31219;
+  transition: 0.3s;
+}
+
+.header-auth > * {
+  text-align: right;
+}
+.header-auth > p {
+  color: red;
+}

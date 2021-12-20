@@ -1,23 +1,16 @@
 export const LOGIN = "LOGIN"
 export const LOGOUT = "LOGOUT"
-export const GET_USERS = "GET_USERS"
 export const UPDATE_USER = "UPDATE_USER"
-
+export const GET_USERS = 'GET_USERS'
 
 export type TUser = {
     token: string,
-    username: string,
-    is_admin: boolean,
-    is_editor: boolean
-}
-export type TUserInfo = {
-    id?: number,
-    user: number,
+    email: string,
     is_admin: boolean,
     is_editor: boolean,
-    email: string,
-    username: string,
+    id?: number
 }
+
 
 interface ILogin {
     type: typeof LOGIN
@@ -29,12 +22,12 @@ interface ILogout {
     payload: null
 }
 interface IGetUsers {
-    type: typeof GET_USERS
-    payload: TUserInfo[]
+    type: typeof GET_USERS,
+    payload: TUser[]
 }
 interface IUpdateUser {
-    type: typeof UPDATE_USER
-    payload: TUserInfo
+    type: typeof UPDATE_USER,
+    payload: TUser
 }
 
 export type TAuthDispatchTypes = ILogin | ILogout | IGetUsers | IUpdateUser

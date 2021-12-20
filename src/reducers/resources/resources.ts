@@ -1,14 +1,18 @@
 import { TClass } from "../../actions/ontology/classes/types"
-import { GET_ALL_RESOURCES, TResourceDispatchTypes, TResourcesMeta } from "../../actions/ontology/resources/types"
+import { GET_ALL_CORPUS_RESOURCES, GET_ALL_RESOURCES, IS_RESOURCES_LOADING, TMainResource, TResourceDispatchTypes, TResourcesMeta } from "../../actions/ontology/resources/types"
 
 
 
 interface IDefaultState {
-    all_resources: TResourcesMeta
+    all_resources: TResourcesMeta,
+    corpus_resources: TMainResource[],
+    is_loading: boolean
 }
 
 const defaultState: IDefaultState = {
-    all_resources: null
+    all_resources: null,
+    corpus_resources: [],
+    is_loading: false
 }
 
 const resourceReducer = (state: IDefaultState = defaultState, action: TResourceDispatchTypes) => {
@@ -19,6 +23,17 @@ const resourceReducer = (state: IDefaultState = defaultState, action: TResourceD
                 ...state,
                 all_resources: action.payload
             }
+        case GET_ALL_CORPUS_RESOURCES:
+            return {
+                ...state,
+                corpus_resources: action.payload
+            }
+        case IS_RESOURCES_LOADING:
+            return {
+                ...state,
+                is_loading: action.payload
+            }
+
 
         default:
             return state

@@ -7,8 +7,7 @@ import { alertDispatchTypes, CREATE_ALERT } from "../alerts/types";
 
 
 export const login = (username: string, password: string) => (dispatch: Dispatch<TAuthDispatchTypes | alertDispatchTypes>) => {
-    const body = JSON.stringify({ username, password })
-    axios.post(SERVER_URL_AUTH + 'login', body).then(res => {
+    axios.post(SERVER_URL_AUTH + 'login', { username, password }).then(res => {
         dispatch({
             type: LOGIN,
             payload: res.data
@@ -30,9 +29,8 @@ export const logout = () => (dispatch: Dispatch<TAuthDispatchTypes | alertDispat
     })
     window.location.replace(HOST);
 }
-export const register = (username: string, password: string, email: string) => (dispatch: Dispatch<TAuthDispatchTypes | alertDispatchTypes>) => {
-    const body = JSON.stringify({ username, password, email })
-    axios.post(SERVER_URL_AUTH + 'register', body).then(res => {
+export const register = (password: string, email: string, password2: string) => (dispatch: Dispatch<TAuthDispatchTypes | alertDispatchTypes>) => {
+    axios.post(SERVER_URL_AUTH + 'register', { email: email, password: password, password2: password2 }).then(res => {
         dispatch({
             type: LOGIN,
             payload: res.data
@@ -45,6 +43,7 @@ export const register = (username: string, password: string, email: string) => (
         })
     })
 }
+
 export const getUsers = () => (dispatch: Dispatch<TAuthDispatchTypes | alertDispatchTypes>) => {
     const params = withToken()
     axios.get(SERVER_URL_AUTH + 'getUsers', params).then(res => {
@@ -59,10 +58,11 @@ export const getUsers = () => (dispatch: Dispatch<TAuthDispatchTypes | alertDisp
         })
     })
 }
-export const setUserPermissions = (user_id: number, is_admin: boolean, is_editor: boolean) => (dispatch: Dispatch<TAuthDispatchTypes | alertDispatchTypes>) => {
-    const body = JSON.stringify({ user_id, is_admin, is_editor })
+
+export const updateUser = (user_pk: number, is_admin: boolean, is_editor: boolean) => (dispatch: Dispatch<TAuthDispatchTypes | alertDispatchTypes>) => {
     const params = withToken()
-    axios.post(SERVER_URL_AUTH + 'setUserPermissions', body, params).then(res => {
+    const body = JSON.stringify({ user_pk, is_admin, is_editor })
+    axios.post(SERVER_URL_AUTH + 'updateUserPerm', body, params).then(res => {
         dispatch({
             type: UPDATE_USER,
             payload: res.data
@@ -79,5 +79,5 @@ export const withToken = (params = {}): {} => {
     const state = store.getState()
     const user: TUser = state['auth']['user']
     if (user.token.length === 0) return { headers: { Token: '' }, params: params }
-    return { headers: { Token: user.token }, params: params }
+    return { headers: { Authorization: 'Token ' + user.token }, params: params }
 }

@@ -12,15 +12,19 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
     const [loginInfo, setLoginInfo] = React.useState<{ username: string, password: string }>({ username: '', password: '' })
 
 
-    const onLogin = () => {
+    const onLogin = (e) => {
+        e.preventDefault()
         dispatch(login(loginInfo.username, loginInfo.password))
     }
 
     return <>
         <div className='login-form'>
-            <label>Логин</label><input onChange={e => setLoginInfo({ ...loginInfo, username: e.target.value })} value={loginInfo.username}></input>
-            <label>Пароль</label><input type="password" onChange={e => setLoginInfo({ ...loginInfo, password: e.target.value })} value={loginInfo.password}></input>
-            <button onClick={onLogin}>Вход</button>
+            <form onSubmit={onLogin}>
+                <label>Почта</label><input required type='email' onChange={e => setLoginInfo({ ...loginInfo, username: e.target.value })} value={loginInfo.username}></input>
+                <label>Пароль</label><input required type="password" onChange={e => setLoginInfo({ ...loginInfo, password: e.target.value })} value={loginInfo.password}></input>
+                <button>Вход</button>
+            </form>
+
         </div>
     </>;
 };

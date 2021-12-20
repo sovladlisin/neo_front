@@ -4,7 +4,7 @@ import { TClass } from '../../actions/ontology/classes/types';
 import { getCorpuses } from '../../actions/ontology/corpuses/corpuses';
 import { TCorpus } from '../../actions/ontology/corpuses/types';
 import { RootStore } from '../../store';
-import { CORPUS_1, getName } from '../../utils';
+import { CORPUS_1, CORPUS_URI, getName } from '../../utils';
 import Footer from '../Footer';
 import ObjectForm from '../Ontology/Forms/ObjectForm';
 import ObjectInfo from '../Ontology/ObjectInfo';
@@ -19,6 +19,9 @@ interface ICorpusTreeProps {
 export const CorpusTree: React.FunctionComponent<ICorpusTreeProps> = (props) => {
     const dispatch = useDispatch()
     const corpusState = useSelector((state: RootStore) => state.corpuses)
+    const authState = useSelector((state: RootStore) => state.auth)
+
+
     React.useEffect(() => {
         dispatch(getCorpuses())
     }, [])
@@ -33,10 +36,16 @@ export const CorpusTree: React.FunctionComponent<ICorpusTreeProps> = (props) => 
     const openCorpus = (id: number) => {
 
     }
+
+    const [addItemWindow, setAddItemWindow] = React.useState(false)
+
     return <>
         <div className='sub-page-container'>
 
-            <p className='sub-page-title'>Корпусы</p>
+            <p className='sub-page-title'>Корпусы
+                {authState.user.is_editor && <button onClick={_ => setAddItemWindow(true)} ><i className='fas fa-plus'></i></button>}
+
+            </p>
             <div className='corpuses-page-container'>
                 {corpuses.map(c => {
                     return <>
@@ -58,6 +67,9 @@ export const CorpusTree: React.FunctionComponent<ICorpusTreeProps> = (props) => 
             </div>
             {selectedCorpus != -1 && <ObjectInfo onSelect={id => setSelectedCorpus(id)} object_id={selectedCorpus} onClose={() => setSelectedCorpus(-1)} />}
         </div>
+
+        {addItemWindow && <ObjectForm class_uri={CORPUS_URI} onClose={() => setAddItemWindow(false)} domain='Resource' />}
+
 
     </>;
 };

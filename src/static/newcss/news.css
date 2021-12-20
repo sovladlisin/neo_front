@@ -1,0 +1,86 @@
+
+.news-item {
+    height: 200px;
+    display: grid;
+    grid-template-columns: 300px auto 50px;
+    gap: 20px;
+  }
+  .news-item > img {
+    width: 288px;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  .news-item-meta > label {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #8a8787;
+  }
+  .news-item-meta-title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 40px;
+  }
+  .news-temp-meta-summary {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: #8a8787;
+    text-align: justify;
+  }
+  .news-item-meta {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .news-item > a {
+    height: 100%;
+    width: 50px;
+    font-size: 23pt;
+    color: #8a8787;
+    text-align: center;
+  }
+  
+.news-item-page-container {
+    width: 850px;
+    margin: 50px auto;
+  }
+  .news-item-page-date {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #757474;
+  }
+  .news-item-page-title {
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 44px;
+    font-style: normal;
+    margin-top: 15px;
+  }
+  .news-item-page-paragraph {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: justify;
+    margin: 25px 0px;
+  }
+  .news-item-page-container > img {
+    width: inherit;
+  }
+  .news-item-page-quote {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: justify;
+    margin: 25px 0px;
+    width: calc(100% - 30px);
+    padding-left: 30px;
+    border-left: 3px solid gainsboro;
+  }

@@ -1,6 +1,10 @@
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { CORPUS_1, HOME_1 } from '../utils';
+import { getCorpuses } from '../actions/ontology/corpuses/corpuses';
+import { TCorpus } from '../actions/ontology/corpuses/types';
+import { RootStore } from '../store';
+import { CORPUS_1, getName, HOME_1, NEWS_1 } from '../utils';
 import Footer from './Footer';
 import OntologyWS from './Ontology/OntologyWS';
 
@@ -8,6 +12,14 @@ interface IHomeProps {
 }
 
 const Home: React.FunctionComponent<IHomeProps> = (props) => {
+    const dispatch = useDispatch()
+    const corpusState = useSelector((state: RootStore) => state.corpuses)
+    React.useEffect(() => {
+        dispatch(getCorpuses())
+    }, [])
+    const [corpuses, setCorpuses] = React.useState<TCorpus[]>([])
+    React.useEffect(() => { setCorpuses(corpusState.parentCorpuses) }, [corpusState.parentCorpuses])
+
     return <>
         <>
             <div className='home-container'>
@@ -29,23 +41,25 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                     <div className='home-block-inner'>
                         <p>Корпусы</p>
                         <div className='home-corpuses-container'>
-                            {[1, 1, 1, 1, 1, 1, 1, 1].map(i => {
-                                return <div className='home-corpus-block'>
-                                    <img src={CORPUS_1}></img>
-                                    <p>Алтайский</p>
-                                    <div className='home-coprus-meta'>
-                                        <p>10 текстов</p>
-                                        <p>5 ресурсов</p>
+                            {corpuses.map(c => {
+                                return <>
+                                    <div className='home-corpus-block'>
+                                        <Link target={'_blank'} to={'/corpus/' + c.id}><img src={CORPUS_1}></img></Link>
+                                        <p>{getName(c)}</p>
+                                        <div className='home-coprus-meta'>
+                                            <p>{c.texts.length + ' текстов'}</p>
+                                        </div>
+                                        <div className='home-corpus-image-backdrop'></div>
                                     </div>
-                                    <div className='home-corpus-image-backdrop'></div>
-                                </div>
+
+                                </>
                             })}
                         </div>
                     </div>
                 </div>
 
 
-                <div className='home-block home-block-gray'>
+                {/* <div className='home-block home-block-gray'>
                     <div className='home-block-inner'>
                         <p>Ресурсы</p>
                         <div className='home-resourse-container'>
@@ -101,11 +115,26 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                         </div>
 
                     </div>
-                </div>
+                </div> */}
 
-                <div className='home-block'>
+                <div className='home-block home-block-gray'>
                     <div className='home-block-inner'>
                         <p>Новости</p>
+                    </div>
+                    <div className='home-block-inner'>
+                        <div className='news-item'>
+                            <img src={NEWS_1}></img>
+                            <div className='news-item-meta'>
+                                <label>{'28.07.2021'}</label>
+                                <p className='news-item-meta-title'>
+                                    Кто такие теленгиты и зачем им топшур? Исчезающие народы России
+                                </p>
+                                <p className='news-temp-meta-summary'>
+                                    На земле осталось всего около четырех тысяч теленгитов — древнего тюркского народа. Долгое время теленгиты считались субэтнической группой алтайцев и лишь во время ...
+                                </p>
+                            </div>
+                            <Link to='/news/1'><i className="fas fa-external-link-alt"></i></Link>
+                        </div>
                     </div>
                 </div>
 

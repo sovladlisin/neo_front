@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getObjectsByClassUri } from '../../actions/ontology/classes/classes';
 import { TActor, TClass } from '../../actions/ontology/classes/types';
 import { RootStore } from '../../store';
-import { nodeFilter, getName, PERSON_URI } from '../../utils';
+import { nodeFilter, getName, PERSON_URI, ACTOR_URI } from '../../utils';
 import Loading from '../Loading';
 import ObjectInfo from '../Ontology/ObjectInfo';
 import { Link } from 'react-router-dom'
 import Footer from '../Footer';
+import ObjectForm from '../Ontology/Forms/ObjectForm';
 interface IActorsProps {
 }
 
@@ -17,6 +18,7 @@ const Actors: React.FunctionComponent<IActorsProps> = (props) => {
 
     const dispatch = useDispatch()
     const classState = useSelector((state: RootStore) => state.classes)
+    const authState = useSelector((state: RootStore) => state.auth)
 
     const [objectWindowSearch, setObjectWindowSearch] = React.useState('')
 
@@ -34,11 +36,15 @@ const Actors: React.FunctionComponent<IActorsProps> = (props) => {
     }, [, classState.selectedObjectsByUri])
 
     const [selectedLetter, setSelectedLetter] = React.useState('~')
+
+    const [addActorWindow, setAddActorWindow] = React.useState(false)
     return <>
         <div className='sub-page-container'>
             {classState.isObjectsLoadingByUri && <><Loading height={300} /></>}
             {!classState.isObjectsLoadingByUri && <>
-                <p className='sub-page-title'>Персоны</p>
+                <p className='sub-page-title'>Персоны
+                    {authState.user.is_editor && <button onClick={_ => setAddActorWindow(true)} ><i className='fas fa-plus'></i></button>}
+                </p>
                 <div className='person-search-container'>
                     <span><i className='fas fa-search'></i></span>
                     <input placeholder='Поиск' value={objectWindowSearch} onChange={e => setObjectWindowSearch(e.target.value)}></input>
@@ -65,8 +71,8 @@ const Actors: React.FunctionComponent<IActorsProps> = (props) => {
                             return <>
                                 <div className='actor-item'>
                                     <p>{getName(item)}</p>
-                                    <button onClick={_ => setSelectedItem(item.id)}><i className="fas fa-info"></i></button>
-                                    <Link to=''><i className="fas fa-external-link-alt"></i></Link>
+                                    <button onClick={_ => setSelectedItem(item.id)}><i className="fas fa-cog"></i></button>
+                                    <Link to={'/actor/' + item.id}><i className="fas fa-external-link-alt"></i></Link>
                                 </div>
                             </>
                         return <></>
@@ -75,11 +81,12 @@ const Actors: React.FunctionComponent<IActorsProps> = (props) => {
 
 
 
-                {selectedItem != -1 && <ObjectInfo onSelect={id => setSelectedItem(id)} object_id={selectedItem} onClose={() => setSelectedItem(-1)} />}
 
 
             </>}
         </div>
+        {addActorWindow && <ObjectForm class_uri={ACTOR_URI} onClose={() => setAddActorWindow(false)} domain='Resource' />}
+        {selectedItem != -1 && <ObjectInfo onSelect={id => setSelectedItem(id)} object_id={selectedItem} onClose={() => setSelectedItem(-1)} />}
 
     </>
 };

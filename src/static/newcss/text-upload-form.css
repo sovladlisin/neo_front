@@ -1,0 +1,54 @@
+
+.og-text-upload-form-body {
+    display: grid;
+    gap: 10px;
+  }
+  .text-upload-form-params-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+  }
+  .og-text-upload-form-body label {
+    text-align: right;
+    font-size: 11pt;
+    height: max-content;
+    margin: auto 0;
+  }
+  .og-text-upload-form-body input {
+    background: #f1eee8;
+    padding: 0 0 0 15px;
+    font-size: 11pt;
+    height: 50px;
+    line-height: 50px;
+  }
+
+  .text-upload-form-tooltip-field {
+  display: block !important;
+  background: #f1eee8;
+  padding: 20px;
+  text-align: right;
+  font-size: 10pt;
+  line-height: 20px;
+  color: #5b5854;
+  margin-bottom: 10px;
+  }
+  
+.text-upload-form-rel-container > div {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .text-upload-form-rel-container-with-tooltip > div {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5px;
+    position: relative;
+  }
+  .text-upload-form-rel-container-with-tooltip {
+    margin: 10px 0;
+  }
+  .og-text-upload-form-body div.object-selector {
+    margin: auto 0;
+  }

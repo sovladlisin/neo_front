@@ -1,13 +1,15 @@
 
-import { DELETE_FILE, GET_FILE, GET_FILES, TFile, TFileDispatchTypes } from "../../../actions/ontology/files/types"
+import { DELETE_FILE, GET_FILE, GET_FILES, GET_FIRST_TEXT_TABLE, TFile, TFileDispatchTypes, TTextParams } from "../../../actions/ontology/files/types"
 
 
 interface IDefaultState {
     files: TFile[],
+    textFirstTable: { request_id: string, params: TTextParams }
 }
 
 const defaultState: IDefaultState = {
     files: [],
+    textFirstTable: null
 }
 
 const fileReducer = (state: IDefaultState = defaultState, action: TFileDispatchTypes) => {
@@ -28,7 +30,11 @@ const fileReducer = (state: IDefaultState = defaultState, action: TFileDispatchT
                 ...state,
                 files: state.files.filter(f => f.id != action.payload)
             })
-
+        case GET_FIRST_TEXT_TABLE:
+            return {
+                ...state,
+                textFirstTable: action.payload
+            }
         default:
             return state
     }

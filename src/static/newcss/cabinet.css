@@ -1,0 +1,103 @@
+
+.account-container {
+    display: grid;
+    grid-template-columns: 300px auto;
+    gap: 70px;
+  }
+  .account-container > img {
+    width: 300px;
+    height: 300px;
+    border-radius: 300px;
+    object-fit: contain;
+  }
+  .account-meta {
+    margin: auto 0;
+    display: grid;
+    grid-template-columns: max-content auto;
+    gap: 10px;
+  }
+  .account-meta > label {
+    text-align: right;
+    color: #8b8b8b;
+    height: 20px;
+    line-height: 20px;
+  }
+  
+  .account-meta > * {
+    height: 20px;
+    line-height: 20px;
+  }
+  .account-meta i {
+    width: 20px;
+    font-size: 9pt;
+    color: red;
+  }
+  .account-admin-user-list {
+    display: grid;
+    border-top: 1px solid gainsboro;
+    padding: 40px 0px;
+  }
+  .account-admin-user-list-item {
+    display: grid;
+    grid-template-columns: 50px auto auto auto;
+    border: white;
+    font-size: 10pt;
+  }
+  .account-admin-user-list-item > img {
+    height: 30px;
+    width: 30px;
+    object-fit: contain;
+    margin: 10px;
+  }
+  .account-admin-user-list-item > p {
+    height: 30px;
+    line-height: 30px;
+    margin: 10px;
+    width: 300px;
+  }
+  .account-admin-user-list-item-perm > label {
+    height: 30px;
+    line-height: 30px;
+    margin: 10px;
+    display: block;
+  }
+  .account-admin-user-list-item-perm {
+    display: grid;
+    grid-template-columns: auto 30px;
+    width: max-content;
+  }
+  .account-admin-user-list-item-perm > button {
+    height: 30px;
+    width: 30px;
+    margin: 10px;
+    font-size: 10pt;
+  }
+  .account-admin-user-list-item-perm > button:hover {
+    background: gainsboro;
+    color: white;
+    transition: 0.2s all;
+    border-radius: 30px;
+  }
+  
+.account-admin-user-list-search-container {
+    height: 70px;
+    line-height: 70px;
+    border-top: 1px solid gainsboro;
+    margin-top: 50px;
+    position: relative;
+  }
+  .account-admin-user-list-search-container > span {
+    height: 70px;
+    line-height: 70px;
+    width: 70px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: center;
+    color: #7d7c7c;
+  }
+  .account-admin-user-list-search-container > input {
+    height: 70px;
+    padding: 0 0 0 70px;
+    width: calc(100% - 70px);
+  }

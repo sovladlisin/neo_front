@@ -97,6 +97,8 @@
   z-index: 15;
   overflow-y: auto;
   margin: 0 !important;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .og-object-container-title {
   background: #F1EEE8;
@@ -109,25 +111,25 @@
 }
 .og-object-container-params {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 260px 420px;
   gap: 5px;
 }
 .og-object-container-params label {
-  text-align: right;
-  height: 30px;
-  line-height: 30px;
-  font-size: 8pt;
   width: 260px;
   color: #E31219;
+  text-align: right;
+  line-height: 50px;
+  height: 50px;
+  font-size: 11pt;
 }
 .og-object-container-params input {
-  border: 1px solid;
-  height: 30px;
-  line-height: 30px;
-  padding: 0 10px;
-  font-size: 9pt;
-  border-radius: 5px;
   border-color: #E31219;
+  background: #f1eee8;
+  padding: 0 5px;
+  font-size: 11pt;
+  height: 50px;
+  line-height: 50px;
+  width: calc(100% - 10px);
 }
 .og-object-container-save {
   height: 30px;

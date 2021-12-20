@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { createEntity } from '../../../actions/ontology/classes/classes';
-import { DOMAIN_ONTOLOGY, LABEL } from '../../../utils';
+import { DOMAIN_ONTOLOGY, getRandomInt, LABEL } from '../../../utils';
 import { useOnClickOutside } from '../../HandleClickOutside';
 import ClassSelector from './ClassSelector';
 import LangStringInput from './LangStringInput';
@@ -31,7 +31,16 @@ const OntologyForm: React.FunctionComponent<IOntologyFormProps> = (props) => {
         <div className='og-add-class-form' ref={ref}>
             <div className="og-add-class-inputs">
                 <label>URI</label><input value={uri} onChange={e => setUri(e.target.value)}></input>
-                <label>Именная метка</label><LangStringInput value={label} onChange={e => setLabel(e)}></LangStringInput>
+                <label>Именная метка</label>
+
+                <LangStringInput
+                    value={
+                        label.map(item => {
+
+                            return { val: item.split('@')[0], type: '@' + item.split('@')[1], id: getRandomInt(0, 1000) }
+                        })
+                    }
+                    onChange={val => setLabel(val.map(item => item.val + item.type))} />
             </div>
             <button onClick={onSave}>Добавить онтологию</button>
         </div>

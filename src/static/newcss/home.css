@@ -43,10 +43,11 @@
 .home-block-inner > p {
   font-size: 42px;
   line-height: 56px;
-  margin: 20px 0;
+  margin-bottom: 30px;
+  font-weight: 500;
 }
 .home-block {
-  padding: 30px 0;
+  padding: 40px 0;
 }
 .home-corpus-block {
   width: 265px;
@@ -103,6 +104,7 @@
   width: 265px;
   height: 200px;
   position: relative;
+  cursor: pointer;
 }
 .home-resourse-block > p {
   position: absolute;

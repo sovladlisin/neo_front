@@ -35,7 +35,8 @@ export type TClass = {
     id?: number
     labels: string[]
     params: string[]
-    signature: string
+    signature: string,
+    resources: TConnectedVisualItem[],
 }
 
 export type TClassExtended = {
@@ -71,7 +72,16 @@ export interface TCorpusExtended extends TObjectExtended {
     videos?: TClass[],
     actors?: TClass[]
 }
-
+export type TFile = {
+    name: string,
+    source: string,
+    id: number,
+    type: string
+}
+export type TConnectedVisualItem = {
+    file: TFile,
+    node: TClass
+}
 export type TObjectExtended = {
     id?: number,
     object: TClass,
@@ -81,6 +91,9 @@ export type TObjectExtended = {
     fileLink?: string,
     texts?: TClass[],
     entities?: TEntity[],
+    resources?: TConnectedVisualItem[],
+
+    notations?: number
 }
 
 export type TClassFullSignature = {

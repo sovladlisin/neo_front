@@ -9,8 +9,11 @@ import Register from './components/Auth/Register';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './components/Home';
+import News from './components/News';
+import NewsItem from './components/NewsItem';
 import DomainOntologyWS from './components/Ontology/DomainOntologyWS';
 import ResourceOntologyWS from './components/Ontology/ResourceOntologyWS';
+import Actor from './components/ResourceLibrary/Actor';
 import Actors from './components/ResourceLibrary/Actors';
 import { CorpusTree } from './components/ResourceLibrary/CorpusTree';
 import CorpusView from './components/ResourceLibrary/CorpusView';
@@ -34,14 +37,19 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
       <Route exact path="/corpuses" component={CorpusTree} />
       <Route exact path="/about" component={About} />
       <Route exact path="/actors" component={Actors} />
+      <Route exact path="/actor/:id" component={Actor} />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/register" component={Register} />
       <Route exact path="/account" component={Cabinet} />
+      <Route exact path="/register" component={Register} />
       <Route exact path="/workspace/:id" component={Workspace} />
 
       <Route exact path="/resources" component={Resources} />
 
       <Route exact path="/corpus/:id" component={CorpusView} />
+
+      <Route exact path="/news/:id" component={NewsItem} />
+      <Route exact path="/news" component={News} />
+
 
     </Switch>
     <Footer />

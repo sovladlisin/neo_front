@@ -5,6 +5,8 @@
   font-size: 44px;
   line-height: 52px;
   margin-bottom: 30px;
+  position: relative;
+  width: max-content;
 }
 .sub-page-container {
   width: 1200px;
@@ -65,4 +67,30 @@
   width: 30px;
   height: 30px;
   color: #717171;
+}
+
+.sub-page-title > button {
+  font-size: 14pt;
+  color: red;
+  line-height: 9px;
+  display: block;
+  position: absolute;
+  right: -30px;
+  top: 17px;
+}
+
+.corpus-connected-objects-container {
+  border-top: 1px solid gainsboro;
+  border-bottom: 1px solid gainsboro;
+  padding: 20px 0;
+  margin-bottom: 30px;
+}
+.corpus-view-connected-objects-container-actor {
+  height: 50px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  line-height: 50px;
+}
+.corpus-view-connected-objects-container-actor > a {
+  color: #8e8e8e;
 }

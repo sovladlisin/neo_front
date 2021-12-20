@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getClassesWithSignatures, createEntity, getClassFullSignature } from '../../../actions/ontology/classes/classes';
 import { TClass, TClassFullSignature } from '../../../actions/ontology/classes/types';
 import { RootStore } from '../../../store';
-import { DATA_TYPES, getName, LABEL, NAMED_IND, RDF_TYPE } from '../../../utils';
+import { DATA_TYPES, getName, getRandomInt, LABEL, NAMED_IND, RDF_TYPE } from '../../../utils';
 import { useOnClickOutside } from '../../HandleClickOutside';
 import Loading from '../../Loading';
 import LangStringInput from './LangStringInput';
@@ -38,7 +38,7 @@ const ObjectForm: React.FunctionComponent<IObjectFormProps> = (props) => {
     React.useEffect(() => { setSelectedClass(props.class_uri) }, [props.class_uri])
 
     const [object, setObject] = React.useState({})
-    const [objectUri, setObjectUri] = React.useState(props.domain === 'Resource' ? 'http://erlangen-crm.org/current/[ваш_uri]' : props.domain + '/[ваш_uri]')
+    const [objectUri, setObjectUri] = React.useState(props.domain === 'Resource' ? 'http://erlangen-crm.org/current/ваш_uri' : props.domain + '/ваш_uri')
     const [objectRDFS, setObjectRDFS] = React.useState(['название_объекта@ru'])
 
     React.useEffect(() => {
@@ -122,11 +122,19 @@ const ObjectForm: React.FunctionComponent<IObjectFormProps> = (props) => {
             </>
         })
 
+
         return <>
-            <label>URI</label>
-            <input value={objectUri} onChange={e => setObjectUri(e.target.value)}></input>
-            <label>Метка названия:</label>
-            <LangStringInput value={objectRDFS} onChange={val => setObjectRDFS(val)} />
+            {/* <label>URI</label>
+            <input value={objectUri} onChange={e => setObjectUri(e.target.value)}></input> */}
+            <label>Краткое название:</label>
+            <LangStringInput
+                value={
+                    objectRDFS.map(item => {
+
+                        return { val: item.split('@')[0], type: '@' + item.split('@')[1], id: getRandomInt(0, 1000) }
+                    })
+                }
+                onChange={val => setObjectRDFS(val.map(item => item.val + item.type))} />
             {props_forms}
             {object_forms}
         </>
@@ -149,6 +157,7 @@ const ObjectForm: React.FunctionComponent<IObjectFormProps> = (props) => {
     }
 
     return <>
+        <div className='m-background'></div>
         <div className='og-form' ref={ref}>
             {classState.isFullSignatureLoading ?
                 <>
@@ -167,7 +176,7 @@ const ObjectForm: React.FunctionComponent<IObjectFormProps> = (props) => {
                 </>}
 
         </div>
-        <div id='background'></div>
+
     </>;
 };
 

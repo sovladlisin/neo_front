@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, setUserPermissions } from '../../actions/auth/auth';
-import { TUserInfo } from '../../actions/auth/types';
+import { getUsers, updateUser } from '../../actions/auth/auth';
+import { TUser } from '../../actions/auth/types';
 import { RootStore } from '../../store';
+import { getImage } from '../../utils';
 
 interface ICabinetProps {
 }
@@ -12,43 +13,63 @@ const Cabinet: React.FunctionComponent<ICabinetProps> = (props) => {
     const authState = useSelector((state: RootStore) => state.auth)
 
 
-    const [users, setUsers] = React.useState<TUserInfo[]>([])
-    const check_true = <i className="fas fa-check-circle"></i>
-    const check_false = <i className="fas fa-times-circle"></i>
-
+    const [userAdminList, setUserAdminList] = React.useState<TUser[]>(null)
     React.useEffect(() => {
-        if (authState.user.is_admin) {
-            dispatch(getUsers())
-        }
+        authState.user.is_admin && dispatch(getUsers())
     }, [])
-    React.useEffect(() => {
-        setUsers(authState.users)
-    }, [authState.users])
 
-    const onUserPermChange = (user: TUserInfo) => {
-        dispatch(setUserPermissions(user.id, user.is_admin, user.is_editor))
+
+    React.useEffect(() => {
+        authState.user_list && setUserAdminList(authState.user_list)
+    }, [authState.user_list])
+
+
+    const updateUserPerms = (new_user: TUser) => {
+        dispatch(updateUser(new_user.id, new_user.is_admin, new_user.is_editor))
+        setUserAdminList(userAdminList.map(u => u.id === new_user.id ? new_user : u))
     }
 
+    const [userSearch, setUserSearch] = React.useState('')
+
     return <>
-        <div className='ac-card'>
-            <p className='ac-photo'><i className="fas fa-user-tie"></i></p>
-            <div className='ac-card-info'>
-                <p>Администратор:</p><span>{authState.user.is_admin ? check_true : check_false}</span>
-                <p>Редактор:</p><span>{authState.user.is_editor ? check_true : check_false}</span>
-            </div>
-        </div>
-        <div className='ac-admin-perms'>
-            {users.map(user => {
-                return <div className='ac-user-card'>
-                    <p className='ac-user-card-photo'><i className="fas fa-user"></i></p>
-                    <p>{user.email}</p>
-                    <p>{user.username}</p>
-                    <label>Администратор:</label>
-                    <button onClick={_ => onUserPermChange({ ...user, is_admin: !user.is_admin })}>{user.is_admin ? check_true : check_false}</button>
-                    <label>Редактор:</label>
-                    <button onClick={_ => onUserPermChange({ ...user, is_editor: !user.is_editor })}>{user.is_editor ? check_true : check_false}</button>
+        <div className='sub-page-container'>
+            <p className='sub-page-title'>Личный кабинет</p>
+
+            <div className='account-container'>
+                <img src={getImage(null)}></img>
+                <div className='account-meta'>
+                    <label>Почта:</label><span>{authState.user.email}</span>
+                    <label>Администратор:</label><span>{authState.user.is_admin ? <i className='fas fa-check'></i> : <i className='fas fa-times'></i>}</span>
+                    <label>Редактор:</label><span>{authState.user.is_editor ? <i className='fas fa-check'></i> : <i className='fas fa-times'></i>}</span>
                 </div>
-            })}
+
+
+
+            </div>
+            {userAdminList && userAdminList.length > 0 && <>
+                <div className='account-admin-user-list-search-container'>
+                    <span><i className='fas fa-search'></i></span>
+                    <input value={userSearch} onChange={e => setUserSearch(e.target.value)} placeholder='Поиск пользователей'></input>
+                </div>
+                <div className='account-admin-user-list'>
+                    {userAdminList.filter(u => JSON.stringify(u).toLocaleLowerCase().includes(userSearch.toLocaleLowerCase())).map(u => {
+                        return <>
+                            <div className='account-admin-user-list-item'>
+                                <img src={getImage(null)}></img>
+                                <p>{u.email}</p>
+                                <div className='account-admin-user-list-item-perm'>
+                                    <label>Администратор</label>
+                                    <button onClick={_ => updateUserPerms({ ...u, is_admin: !u.is_admin })}>{u.is_admin ? <i className='fas fa-check'></i> : <i className='fas fa-times'></i>}</button>
+                                </div>
+                                <div className='account-admin-user-list-item-perm'>
+                                    <label>Редактор</label>
+                                    <button onClick={_ => updateUserPerms({ ...u, is_editor: !u.is_editor })}>{u.is_editor ? <i className='fas fa-check'></i> : <i className='fas fa-times'></i>}</button>
+                                </div>
+                            </div>
+                        </>
+                    })}
+                </div>
+            </>}
         </div>
     </>;
 };

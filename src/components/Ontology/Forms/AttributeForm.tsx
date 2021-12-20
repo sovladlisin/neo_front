@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { addClassAttribute, addClassAttributeObject } from '../../../actions/ontology/classes/classes';
 import { TClass } from '../../../actions/ontology/classes/types';
+import { getRandomInt } from '../../../utils';
 import { useOnClickOutside } from '../../HandleClickOutside';
 import ClassSelector from './ClassSelector';
 import LangStringInput from './LangStringInput';
@@ -42,7 +43,16 @@ const AttributeForm: React.FunctionComponent<IAttributeFormProps> = (props) => {
             </div>
             <div className='og-attribute-form-inputs'>
                 <label>URI</label><input value={uri} onChange={e => setUri(e.target.value)}></input>
-                <label>Именная метка</label><LangStringInput value={label} onChange={e => setLabel(e)}></LangStringInput>
+                <label>Именная метка</label>
+
+                <LangStringInput
+                    value={
+                        label.map(item => {
+
+                            return { val: item.split('@')[0], type: '@' + item.split('@')[1], id: getRandomInt(0, 1000) }
+                        })
+                    }
+                    onChange={val => setLabel(val.map(item => item.val + item.type))} />
 
                 {selectedFormType === 2 && <>
                     <label>Класс атрибута</label><ClassSelector domain={props.domain} default={selectedClass} onSelect={cl => setSelectedClass(cl)}></ClassSelector>
