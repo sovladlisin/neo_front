@@ -94,9 +94,9 @@ const CorpusView: React.FunctionComponent<ICorpusViewProps> = ({ match }: RouteC
             f.genres = removeDuplFromStringList(f.genres)
             f.actors = removeDuplFromNodeList(f.actors)
             f.places = removeDuplFromNodeList(f.places)
-            setFilterCount(f)
         })
         // types
+        setFilterCount(f)
 
     }
 

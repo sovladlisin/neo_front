@@ -74,12 +74,14 @@ import logo2 from './static/images/f-logo-2.jpg'
 export const LOGO2 = logo2
 import home1 from './static/images/home-1.png'
 export const HOME_1 = home1
-import corpus1 from './static/images/corpus-1.png'
+import corpus1 from './static/images/template.png'
 export const CORPUS_1 = corpus1
-import news1 from './static/images/news-placeholder.png'
+import news1 from './static/images/template.png'
 export const NEWS_1 = news1
-import account1 from './static/images/account.png'
+import account1 from './static/images/template.png'
 export const ACCOUNT_1 = account1
+
+
 
 export type TDataType = { type: string, name: string, uri: string }
 export const DATA_TYPES: TDataType[] = [
