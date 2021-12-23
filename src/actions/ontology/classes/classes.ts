@@ -332,6 +332,19 @@ export const updateEntity = (node) => (dispatch: Dispatch<TClassDispatchTypes | 
     })
 }
 
+export const deleteEntity = (id: number) => (dispatch: Dispatch<TClassDispatchTypes | alertDispatchTypes>) => {
+    const params = withToken({ id })
+
+    axios.delete(SERVER_URL + `deleteEntity`, params).then(res => {
+
+    }).catch(err => {
+        dispatch({
+            type: CREATE_ALERT,
+            payload: handleError(err)
+        })
+    })
+}
+
 export const addClassAttribute = (domain: string, class_id: number, label: string[], uri: string) => (dispatch: Dispatch<TClassDispatchTypes | alertDispatchTypes>) => {
     const params = withToken()
 

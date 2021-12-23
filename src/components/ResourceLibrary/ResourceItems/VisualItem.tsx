@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { TClass, TConnectedVisualItem } from '../../../actions/ontology/classes/types';
 import { getName, getNote } from '../../../utils';
 import ImageCard from '../../Workspace/ImageCard'
+import VideoCard from './VideoCard';
 interface IVisualItemProps {
     node: TClass
     file?: TConnectedVisualItem
@@ -12,6 +13,9 @@ interface IVisualItemProps {
 export const VisualItem: React.FunctionComponent<IVisualItemProps> = (props) => {
 
     const [imageCardWindow, setImageCardWindow] = React.useState(false)
+    const [videoCardWindow, setVideoCardWindow] = React.useState(false)
+
+
     return <>
         <div className='resource-item-container'>
             <div>
@@ -19,7 +23,13 @@ export const VisualItem: React.FunctionComponent<IVisualItemProps> = (props) => 
                 <p className='resource-item-note'>{getNote(props.node)}</p>
             </div>
             <div>
-                <Link className='resource-item-open' onClick={_ => setImageCardWindow(true)}>ОТКРЫТЬ</Link>
+                {props.file.file.type.includes('mp4, wav, avi, mp3, mkv') ? <>
+                    <Link className='resource-item-open' onClick={_ => setImageCardWindow(true)}>ОТКРЫТЬ</Link>
+
+                </> : <>
+                    <Link className='resource-item-open' onClick={_ => setVideoCardWindow(true)}>ОТКРЫТЬ</Link>
+
+                </>}
                 <button className='resource-item-more'>Подробнее <i className='fas fa-chevron-down'></i></button>
             </div>
 
@@ -27,5 +37,6 @@ export const VisualItem: React.FunctionComponent<IVisualItemProps> = (props) => 
 
 
         {imageCardWindow && <ImageCard onClose={() => setImageCardWindow(false)} file={props.file ? props.file : null} />}
+        {videoCardWindow && <VideoCard onClose={() => setVideoCardWindow(false)} file={props.file ? props.file : null} />}
     </>
 }

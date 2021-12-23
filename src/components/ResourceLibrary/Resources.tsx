@@ -111,9 +111,9 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
             f.actors = removeDuplFromStringList(f.actors)
             f.langs = removeDuplFromStringList(f.langs)
             f.genres = removeDuplFromStringList(f.genres)
-            setFilterCount(f)
         })
         // types
+        setFilterCount(f)
 
     }
 
@@ -213,40 +213,41 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                     <label>Для поиска можно использовать национальные знаки, например, ӑ, ӱ, ү</label>
                 </div>
 
-                <div className='resource-content-container'>
-                    <div className='resource-nav-panel'>
-                        <div className='resource-nav-panel-collapse-list'>
-                            <button onClick={_ => flipPanel(1)}>Тип ресурса <i className={openedPanels.includes(1) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i></button>
-                            {openedPanels.includes(1) && <>
-                                <div className='resource-nav-panel-collapse-list-content'>
-                                    <button onClick={_ => flipRT('texts')}><i className={selectedResourceTypes.includes('texts') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Тексты ({filterCount.texts}) </button>
-                                    <button onClick={_ => flipRT('audio')}><i className={selectedResourceTypes.includes('audio') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Аудио ({filterCount.audio}) </button>
-                                    <button onClick={_ => flipRT('video')}><i className={selectedResourceTypes.includes('video') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Видео ({filterCount.video}) </button>
-                                    <button onClick={_ => flipRT('images')}><i className={selectedResourceTypes.includes('images') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Фото ({filterCount.images}) </button>
-                                    <button onClick={_ => flipRT('notes')}><i className={selectedResourceTypes.includes('notes') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Нотировки ({0}) </button>
-                                    <button onClick={_ => flipRT('glossary')}><i className={selectedResourceTypes.includes('glossary') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Глоссы ({0}) </button>
-                                    <button onClick={_ => flipRT('publications')}><i className={selectedResourceTypes.includes('publications') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Публикации ({0}) </button>
-                                </div>
-                            </>}
-                        </div>
+                {!resourceState.is_loading && filterCount && <>
+                    <div className='resource-content-container'>
+                        <div className='resource-nav-panel'>
+                            <div className='resource-nav-panel-collapse-list'>
+                                <button onClick={_ => flipPanel(1)}>Тип ресурса <i className={openedPanels.includes(1) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i></button>
+                                {openedPanels.includes(1) && <>
+                                    <div className='resource-nav-panel-collapse-list-content'>
+                                        <button onClick={_ => flipRT('texts')}><i className={selectedResourceTypes.includes('texts') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Тексты ({filterCount.texts}) </button>
+                                        <button onClick={_ => flipRT('audio')}><i className={selectedResourceTypes.includes('audio') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Аудио ({filterCount.audio}) </button>
+                                        <button onClick={_ => flipRT('video')}><i className={selectedResourceTypes.includes('video') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Видео ({filterCount.video}) </button>
+                                        <button onClick={_ => flipRT('images')}><i className={selectedResourceTypes.includes('images') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Фото ({filterCount.images}) </button>
+                                        <button onClick={_ => flipRT('notes')}><i className={selectedResourceTypes.includes('notes') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Нотировки ({0}) </button>
+                                        <button onClick={_ => flipRT('glossary')}><i className={selectedResourceTypes.includes('glossary') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Глоссы ({0}) </button>
+                                        <button onClick={_ => flipRT('publications')}><i className={selectedResourceTypes.includes('publications') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Публикации ({0}) </button>
+                                    </div>
+                                </>}
+                            </div>
 
 
-                        <div className='resource-nav-panel-collapse-list'>
-                            <button onClick={_ => flipPanel(2)}>Языки <i className={openedPanels.includes(2) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i>
+                            <div className='resource-nav-panel-collapse-list'>
+                                <button onClick={_ => flipPanel(2)}>Языки <i className={openedPanels.includes(2) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i>
 
-                                {authState.user.is_editor && <button onClick={_ => setSelectedItemUriAdd(LANGUAGE_URI)} className='add-object-to-resource-button'><i className='fas fa-plus'></i></button>}
-                            </button>
-                            {openedPanels.includes(2) && <>
+                                    {authState.user.is_editor && <button onClick={_ => setSelectedItemUriAdd(LANGUAGE_URI)} className='add-object-to-resource-button'><i className='fas fa-plus'></i></button>}
+                                </button>
+                                {openedPanels.includes(2) && <>
 
-                                <div className='resource-nav-panel-collapse-list-content'>
-                                    {filterCount.langs.map(l => {
-                                        return <button onClick={_ => toggleResourceTypes(l)}><i className={selectedExtraResourceTypes.includes(l) ? 'far fa-dot-circle' : 'far fa-circle'}></i> {l} </button>
-                                    })}
+                                    <div className='resource-nav-panel-collapse-list-content'>
+                                        {filterCount.langs.map(l => {
+                                            return <button onClick={_ => toggleResourceTypes(l)}><i className={selectedExtraResourceTypes.includes(l) ? 'far fa-dot-circle' : 'far fa-circle'}></i> {l} </button>
+                                        })}
 
 
-                                </div>
+                                    </div>
 
-                                {/* <div className='resource-nav-panel-collapse-list-second'>
+                                    {/* <div className='resource-nav-panel-collapse-list-second'>
                                     <button onClick={_ => flipPanel(21)}>Диалекты ({0}) <i className={openedPanels.includes(21) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i></button>
                                     {openedPanels.includes(21) && <>
                                         <div className='resource-nav-panel-collapse-list-content'>
@@ -266,24 +267,24 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                                     </>}
                                 </div> */}
 
-                            </>}
-                        </div>
+                                </>}
+                            </div>
 
-                        <div className='resource-nav-panel-collapse-list'>
-                            <button onClick={_ => flipPanel(3)}>Жанры <i className={openedPanels.includes(3) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i>
-                                {authState.user.is_editor && <button onClick={_ => setSelectedItemUriAdd(GENRE_URI)} className='add-object-to-resource-button'><i className='fas fa-plus'></i></button>}
-
-
-                            </button>
-                            {openedPanels.includes(3) && <>
-                                <div className='resource-nav-panel-collapse-list-content'>
-                                    {filterCount.genres.map(g => {
-                                        return <button onClick={_ => toggleResourceTypes(g)}><i className={selectedExtraResourceTypes.includes(g) ? 'far fa-dot-circle' : 'far fa-circle'}></i> {g} </button>
-                                    })}
+                            <div className='resource-nav-panel-collapse-list'>
+                                <button onClick={_ => flipPanel(3)}>Жанры <i className={openedPanels.includes(3) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i>
+                                    {authState.user.is_editor && <button onClick={_ => setSelectedItemUriAdd(GENRE_URI)} className='add-object-to-resource-button'><i className='fas fa-plus'></i></button>}
 
 
-                                </div>
-                                {/* <div className='resource-nav-panel-collapse-list-second'>
+                                </button>
+                                {openedPanels.includes(3) && <>
+                                    <div className='resource-nav-panel-collapse-list-content'>
+                                        {filterCount.genres.map(g => {
+                                            return <button onClick={_ => toggleResourceTypes(g)}><i className={selectedExtraResourceTypes.includes(g) ? 'far fa-dot-circle' : 'far fa-circle'}></i> {g} </button>
+                                        })}
+
+
+                                    </div>
+                                    {/* <div className='resource-nav-panel-collapse-list-second'>
                                     <button onClick={_ => flipPanel(31)}>Национальные ({0}) <i className={openedPanels.includes(31) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i></button>
                                     {openedPanels.includes(31) && <>
                                         <div className='resource-nav-panel-collapse-list-content'>
@@ -313,20 +314,20 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                                     </>}
                                 </div> */}
 
-                            </>}
-                        </div>
+                                </>}
+                            </div>
 
-                        <div className='resource-nav-panel-collapse-list'>
-                            <button onClick={_ => flipPanel(4)}>Персоны <i className={openedPanels.includes(4) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i></button>
-                            {openedPanels.includes(4) && <>
-                                <div className='resource-nav-panel-collapse-list-content'>
-                                    {filterCount.actors.map(a => {
-                                        return <button onClick={_ => toggleResourceTypes(a)}><i className={selectedExtraResourceTypes.includes(a) ? 'far fa-dot-circle' : 'far fa-circle'}></i> {a} </button>
-                                    })}
+                            <div className='resource-nav-panel-collapse-list'>
+                                <button onClick={_ => flipPanel(4)}>Персоны <i className={openedPanels.includes(4) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i></button>
+                                {openedPanels.includes(4) && <>
+                                    <div className='resource-nav-panel-collapse-list-content'>
+                                        {filterCount.actors.map(a => {
+                                            return <button onClick={_ => toggleResourceTypes(a)}><i className={selectedExtraResourceTypes.includes(a) ? 'far fa-dot-circle' : 'far fa-circle'}></i> {a} </button>
+                                        })}
 
 
-                                </div>
-                                {/* <div className='resource-nav-panel-collapse-list-second'>
+                                    </div>
+                                    {/* <div className='resource-nav-panel-collapse-list-second'>
                                     <button onClick={_ => flipPanel(41)}>Исполнители ({0}) <i className={openedPanels.includes(41) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i></button>
                                     {openedPanels.includes(41) && <>
                                         <div className='resource-nav-panel-collapse-list-content'>
@@ -346,52 +347,54 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                                     </>}
                                 </div> */}
 
-                            </>}
-                        </div>
-
-                        <div className='resource-nav-panel-collapse-list'>
-                            <button onClick={_ => flipPanel(5)}>Место записи <i className={openedPanels.includes(5) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i>
-                                {authState.user.is_editor && <button onClick={_ => setSelectedItemUriAdd(PLACE_URI)} className='add-object-to-resource-button'><i className='fas fa-plus'></i></button>}
-                            </button>
-                            {openedPanels.includes(5) && <>
-                                <input value={placesInput} onChange={e => setPlacesInput(e.target.value)}></input>
-                            </>}
-                        </div>
-
-                        <div className='resource-nav-panel-collapse-list'>
-                            <button onClick={_ => flipPanel(6)}>Время записи <i className={openedPanels.includes(6) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i></button>
-                            {openedPanels.includes(6) && <>
-                                <input></input>
-                            </>}
-                        </div>
-
-                        <div className='resource-nav-panel-collapse-list'>
-                            <button onClick={_ => flipPanel(7)}>Поиск по контексту <i className={openedPanels.includes(7) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i></button>
-                            {openedPanels.includes(7) && <>
-                                <input></input>
-                            </>}
-                        </div>
-
-
-                        <button className='resource-nav-panel-reset' onClick={resetFilter}>
-                            СБРОСИТЬ ФИЛЬТР
-                        </button>
-
-                        {authState.user.is_editor && selectedCorpus && <>
-                            <div className='admin-resource-filter-add-button-container'>
-                                <button onClick={_ => setUploadMediaWindow(true)}>ЗАГРУЗИТЬ МЕДИА</button>
-                                <button onClick={_ => setUploadTextWindow(true)}>ЗАГРУЗИТЬ ТЕКСТ</button>
-                                <button onClick={_ => setEventFormWindow(true)}>СОЗДАТЬ СОБЫТИЕ</button>
-
+                                </>}
                             </div>
-                        </>}
 
-                    </div>
+                            <div className='resource-nav-panel-collapse-list'>
+                                <button onClick={_ => flipPanel(5)}>Место записи <i className={openedPanels.includes(5) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i>
+                                    {authState.user.is_editor && <button onClick={_ => setSelectedItemUriAdd(PLACE_URI)} className='add-object-to-resource-button'><i className='fas fa-plus'></i></button>}
+                                </button>
+                                {openedPanels.includes(5) && <>
+                                    <input value={placesInput} onChange={e => setPlacesInput(e.target.value)}></input>
+                                </>}
+                            </div>
 
-                    <div className='resource-list'>
-                        {renderResources()}
+                            <div className='resource-nav-panel-collapse-list'>
+                                <button onClick={_ => flipPanel(6)}>Время записи <i className={openedPanels.includes(6) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i></button>
+                                {openedPanels.includes(6) && <>
+                                    <input></input>
+                                </>}
+                            </div>
+
+                            <div className='resource-nav-panel-collapse-list'>
+                                <button onClick={_ => flipPanel(7)}>Поиск по контексту <i className={openedPanels.includes(7) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i></button>
+                                {openedPanels.includes(7) && <>
+                                    <input></input>
+                                </>}
+                            </div>
+
+
+                            <button className='resource-nav-panel-reset' onClick={resetFilter}>
+                                СБРОСИТЬ ФИЛЬТР
+                            </button>
+
+                            {authState.user.is_editor && selectedCorpus && <>
+                                <div className='admin-resource-filter-add-button-container'>
+                                    <button onClick={_ => setUploadMediaWindow(true)}>ЗАГРУЗИТЬ МЕДИА</button>
+                                    <button onClick={_ => setUploadTextWindow(true)}>ЗАГРУЗИТЬ ТЕКСТ</button>
+                                    <button onClick={_ => setEventFormWindow(true)}>СОЗДАТЬ СОБЫТИЕ</button>
+
+                                </div>
+                            </>}
+
+                        </div>
+
+                        <div className='resource-list'>
+                            {renderResources()}
+                        </div>
                     </div>
-                </div>
+                </>}
+
             </div>
         </>}
 

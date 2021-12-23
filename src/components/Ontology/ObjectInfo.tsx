@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getClassObject, updateClass, updateEntity } from '../../actions/ontology/classes/classes';
+import { deleteEntity, getClassObject, updateClass, updateEntity } from '../../actions/ontology/classes/classes';
 import { TClass, TObjectExtended } from '../../actions/ontology/classes/types';
 import { RootStore } from '../../store';
 import { DATA_TYPES, getName, getRandomInt, LABEL, LING_OBJECT_URI, SERVER_DOMAIN, useKeyPress } from '../../utils';
@@ -329,6 +329,7 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
 
 
     const onDelete = () => {
+        dispatch(deleteEntity(currentObject.id))
         props.onClose()
     }
 
