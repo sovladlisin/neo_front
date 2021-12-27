@@ -41,4 +41,5 @@
 }
 .header-auth > p {
   color: red;
+  margin: 0;
 }

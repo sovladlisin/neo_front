@@ -26,7 +26,6 @@ import './src/static/newcss/image-card.css'
 import './src/static/newcss/news.css'
 import './src/static/newcss/cabinet.css'
 import './src/static/newcss/text-upload-form.css'
-import './src/static/font/font.css'
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
