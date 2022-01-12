@@ -19,7 +19,7 @@ export const VisualItem: React.FunctionComponent<IVisualItemProps> = (props) => 
     return <>
         <div className='resource-item-container'>
             <div>
-                {['mp4, wav, avi, mp3, mkv'].includes(props.file.file.type) ?
+                {['mp4', 'wav', 'avi', 'mp3', 'mkv'].includes(props.file.file.type) ?
                     <p className='resource-item-title'> < i style={{ color: '#a9a958' }} className="fas fa-file-video" ></i>{getName(props.node)}</p>
                     :
                     <p className='resource-item-title'><i style={{ color: '#34ab68' }} className="fas fa-file-image"></i>{getName(props.node)}</p>
@@ -27,7 +27,7 @@ export const VisualItem: React.FunctionComponent<IVisualItemProps> = (props) => 
                 <p className='resource-item-note'>{getNote(props.node)}</p>
             </div>
             <div>
-                {['mp4, wav, avi, mp3, mkv'].includes(props.file.file.type) ? <>
+                {['mp4', 'wav', 'avi', 'mp3', 'mkv'].includes(props.file.file.type) ? <>
                     <Link className='resource-item-open' onClick={_ => setVideoCardWindow(true)}>ОТКРЫТЬ</Link>
                 </> : <>
                     <Link className='resource-item-open' onClick={_ => setImageCardWindow(true)}>ОТКРЫТЬ</Link>
