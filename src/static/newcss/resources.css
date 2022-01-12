@@ -277,3 +277,12 @@ top: 20px;
   grid-template-columns: 1fr 2fr;
   gap: 5px;
 }
+
+.resource-item-title > i {
+  font-size: 13pt;
+  margin-right: 9px;
+  display: block;
+  float: left;
+  height: 32px;
+  line-height: 32px;
+}

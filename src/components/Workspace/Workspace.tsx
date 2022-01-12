@@ -20,6 +20,7 @@ import Loading from '../Loading';
 import TextResourceList from './TextResourceList';
 import TextInfo from './TextInfo';
 import TextOntology from './TextOntology';
+import { Link } from 'react-router-dom'
 
 interface IWorkspaceProps {
     id: string
@@ -364,7 +365,7 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
             </> :
 
                 <>
-                    <button className='workspace-return'><i className='fas fa-long-arrow-alt-left'></i>Обратно к списку</button>
+                    <Link to='/resources'><button className='workspace-return'><i className='fas fa-long-arrow-alt-left'></i>Обратно к списку</button></Link>
                     <p className='workspace-title'>{getName(workInfo.origin_node)}</p>
 
                     <div className='workspace-menu-outer'>

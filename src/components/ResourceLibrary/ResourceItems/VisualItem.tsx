@@ -19,16 +19,18 @@ export const VisualItem: React.FunctionComponent<IVisualItemProps> = (props) => 
     return <>
         <div className='resource-item-container'>
             <div>
-                <p className='resource-item-title'>{getName(props.node)}</p>
+                {['mp4, wav, avi, mp3, mkv'].includes(props.file.file.type) ?
+                    <p className='resource-item-title'> < i style={{ color: '#a9a958' }} className="fas fa-file-video" ></i>{getName(props.node)}</p>
+                    :
+                    <p className='resource-item-title'><i style={{ color: '#34ab68' }} className="fas fa-file-image"></i>{getName(props.node)}</p>
+                }
                 <p className='resource-item-note'>{getNote(props.node)}</p>
             </div>
             <div>
-                {props.file.file.type.includes('mp4, wav, avi, mp3, mkv') ? <>
-                    <Link className='resource-item-open' onClick={_ => setImageCardWindow(true)}>ОТКРЫТЬ</Link>
-
-                </> : <>
+                {['mp4, wav, avi, mp3, mkv'].includes(props.file.file.type) ? <>
                     <Link className='resource-item-open' onClick={_ => setVideoCardWindow(true)}>ОТКРЫТЬ</Link>
-
+                </> : <>
+                    <Link className='resource-item-open' onClick={_ => setImageCardWindow(true)}>ОТКРЫТЬ</Link>
                 </>}
                 <button className='resource-item-more'>Подробнее <i className='fas fa-chevron-down'></i></button>
             </div>

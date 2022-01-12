@@ -17,6 +17,8 @@ const VideoCard: React.FunctionComponent<IVideoCardProps> = (props) => {
 
     const [selectedItem, setSelectedItem] = React.useState(-1)
 
+
+
     return <>
         {props.file && <>
             <div className='m-background' onClick={props.onClose}></div>

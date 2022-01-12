@@ -22,7 +22,7 @@ export const TextItem: React.FunctionComponent<ITextItemProps> = (props) => {
     return <>
         <div className='resource-item-container'>
             <div>
-                <p className='resource-item-title'>{getName(props.node)}</p>
+                <p className='resource-item-title'> <i style={{ color: '#61a4eb' }} className="fas fa-file-alt"></i> {getName(props.node)}</p>
                 <p style={!show ? { maxHeight: '20px' } : { maxHeight: 'max-content' }} className='resource-item-note'>{getNote(props.node)}</p>
                 <div className='resource-item-counter'>
                     <label>{props.images} Изобр.</label>

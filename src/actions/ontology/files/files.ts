@@ -57,6 +57,10 @@ export const uploadDocx = (node, file: File, corpus_id) => (dispatch: Dispatch<T
 
     axios.post(SERVER_URL + `uploadDocx`, formData, params).then(res => {
 
+        dispatch({
+            type: CREATE_ALERT,
+            payload: { message: 'Текст загружен', type: 200 }
+        })
     }).catch(err => {
         dispatch({
             type: CREATE_ALERT,
