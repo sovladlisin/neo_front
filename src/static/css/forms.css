@@ -131,7 +131,7 @@
 .og-form>button {
   width: 100%;
   font-size: 9pt;
-  margin: 25px auto 0 auto;
+  margin: 25px auto 25px auto;
   color: red;
   display: block;
   border: 1px solid red;

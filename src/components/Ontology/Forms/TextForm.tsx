@@ -226,13 +226,13 @@ const TextForm: React.FunctionComponent<ITextFormProps> = (props) => {
                 </> :
                 <>
                     <p className='og-form-title'>{fullSignature && fullSignature.uri === LING_OBJECT_URI ? getName(fullSignature.class_node) : 'Сигнатура отсутствует'}</p>
+                    <button onClick={onSave}>СОХРАНИТЬ</button>
 
                     <div className='og-text-upload-form-body'>
                         {selectedClass.length === 0 ? <div id='placeholder'></div> : <>
                             {renderForm()}
                         </>}
                     </div>
-                    <button onClick={onSave}>СОХРАНИТЬ</button>
 
                 </>}
 
