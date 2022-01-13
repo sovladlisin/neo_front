@@ -32,8 +32,8 @@ export const getCorpusResources = (corpus_uri) => (dispatch: Dispatch<TResourceD
     }).catch(err => console.log(err))
 }
 
-export const connectFileToResource = (name: string, file_type: string, object_id: number, file: File, note: string) => (dispatch: Dispatch<TResourceDispatchTypes>) => {
-    var params = withToken({ name, file_type, object_id, note })
+export const connectFileToResource = (name: string, file_type: string, object_id: number, file: File, note: string, res_type = null) => (dispatch: Dispatch<TResourceDispatchTypes>) => {
+    var params = withToken({ name, file_type, object_id, note, res_type })
     params['headers'] = { ...params['headers'], ['Content-Type']: 'multipart/form-data' }
     var formData = new FormData();
     formData.append("file", file);

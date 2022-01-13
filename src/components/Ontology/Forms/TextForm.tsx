@@ -6,7 +6,7 @@ import { TClass, TClassFullSignature } from '../../../actions/ontology/classes/t
 import { uploadDocx } from '../../../actions/ontology/files/files';
 import { TTextParams } from '../../../actions/ontology/files/types';
 import { RootStore } from '../../../store';
-import { DATA_TYPES, getName, getRandomInt, LABEL, LING_OBJECT_URI, NAMED_IND, NOTE_URI, ORIGINAL_TITLE_URI, RDF_TYPE, TEXT_COLLECTED_URI, TEXT_COMMENTED_URI, TEXT_COPRUS_URI, TEXT_DECRYPTED_URI, TEXT_DIALECT_URI, TEXT_D_URI, TEXT_IDK_URI, TEXT_I_URI, TEXT_LANGUAGE_URI, TEXT_NOTATED_URI, TEXT_PERFORMED_URI, TEXT_REDACTED_URI, TEXT_SPEECH_URI, TEXT_TYPE_URI, TITLE_URI } from '../../../utils';
+import { DATA_TYPES, getName, getRandomInt, LABEL, LING_OBJECT_URI, NAMED_IND, NOTE_URI, ORIGINAL_TITLE_URI, RDF_TYPE, TEXT_ARCHIVED_URI, TEXT_COLLECTED_URI, TEXT_COMMENTED_URI, TEXT_COPRUS_URI, TEXT_DECRYPTED_URI, TEXT_DIALECT_URI, TEXT_D_URI, TEXT_IDK_URI, TEXT_I_URI, TEXT_LANGUAGE_URI, TEXT_NOTATED_URI, TEXT_PERFORMED_URI, TEXT_REDACTED_URI, TEXT_SPEECH_URI, TEXT_TYPE_URI, TEXT_UMPRINT_URI, TITLE_URI } from '../../../utils';
 import { useOnClickOutside } from '../../HandleClickOutside';
 import Loading from '../../Loading';
 import LangStringInput from './LangStringInput';
@@ -68,6 +68,10 @@ const TextForm: React.FunctionComponent<ITextFormProps> = (props) => {
                 return props.in_params.commantator
             case TEXT_DIALECT_URI:
                 return props.in_params.dialect
+            case TEXT_UMPRINT_URI:
+                return props.in_params.published
+            case TEXT_ARCHIVED_URI:
+                return props.in_params.place_storage
             default:
                 return ''
         }

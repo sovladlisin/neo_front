@@ -90,7 +90,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                 var r: TConnectedVisualItem = item.media_carrier[0]
                 f.images = ['png', 'jpg', 'jpeg', 'pdf'].includes(r.file.type) ? f.images + 1 : f.images
                 f.video = ['mp4', 'avi', 'mkv'].includes(r.file.type) ? f.video + 1 : f.video
-                f.audio = ['wav', 'mp4'].includes(r.file.type) ? f.audio + 1 : f.audio
+                f.audio = ['wav', 'mp4', 'mp3'].includes(r.file.type) ? f.audio + 1 : f.audio
             }
             if (item.resource.labels.includes(LING_OBJECT_URI)) {
                 f.texts += 1
@@ -137,7 +137,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                     var r: TConnectedVisualItem = i.media_carrier[0]
                     if (['png', 'jpg', 'jpeg', 'pdf'].includes(r.file.type) && selectedResourceTypes.includes('images')) return true
                     if (['mp4', 'avi', 'mkv'].includes(r.file.type) && selectedResourceTypes.includes('video')) return true
-                    if (['wav', 'mp4'].includes(r.file.type) && selectedResourceTypes.includes('audio')) return true
+                    if (['wav', 'mp4', 'mp3'].includes(r.file.type) && selectedResourceTypes.includes('audio')) return true
                 }
                 if (i.resource.labels.includes(LING_OBJECT_URI) && selectedResourceTypes.includes('texts')) return true
 
@@ -165,7 +165,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                         m.resources.map(r => {
                             images = ['png', 'jpg', 'jpeg', 'pdf'].includes(r.file.type) ? images + 1 : images
                             video = ['mp4', 'avi', 'mkv'].includes(r.file.type) ? video + 1 : video
-                            audio = ['wav', 'mp4'].includes(r.file.type) ? audio + 1 : audio
+                            audio = ['wav', 'mp4', 'mp3'].includes(r.file.type) ? audio + 1 : audio
                         })
 
                     })

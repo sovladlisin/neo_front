@@ -61,6 +61,8 @@ export const TEXT_TYPE_URI = 'http://erlangen-crm.org/current/P2_has_type'
 export const TEXT_I_URI = 'http://erlangen-crm.org/current/P73_has_translation'
 export const TEXT_D_URI = 'http://erlangen-crm.org/current/R_131_has_extra_materials'
 export const TEXT_COPRUS_URI = 'http://erlangen-crm.org/current/P165_incorporates'
+export const TEXT_UMPRINT_URI = 'http://erlangen-crm.org/current/imprint'
+export const TEXT_ARCHIVED_URI = 'http://erlangen-crm.org/current/archived_in'
 
 
 export const EVENT_URI = 'http://erlangen-crm.org/current/F8_Preparing_to_publish'

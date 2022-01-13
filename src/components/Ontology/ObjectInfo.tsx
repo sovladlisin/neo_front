@@ -40,7 +40,6 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
         var new_obj = classState.selectedObject
         if (new_obj && props.object_id === new_obj.id) {
             setCurrentObject(new_obj)
-            console.log('HEHEHEHEHEHEH', new_obj.relations.map(r => r.labels[0]))
         }
     }, [classState.selectedObject])
 
@@ -70,16 +69,19 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
         var local_params = {}
 
         properties.map(p => {
+            console.log(p)
             var i_type = DATA_TYPES.find(t => t.uri === p.type)
             var langString = i_type && i_type.type.includes('lang')
-            if (!currentObject.object[p.key])
+            if (!currentObject.object[p.key]) {
                 newNewCurrentObject.object[p.key] = langString ? [] : ''
+                !newNewCurrentObject.object.params.includes(p.key) && newNewCurrentObject.object.params.push(p.key)
+            }
+
         })
 
         // file
         if (currentObject.fileLink && currentObject.fileLink.length > 0) setFileLink(currentObject.fileLink)
 
-        var local_relations = {}
 
         object_props.map(p => {
             const d = currentObject.relations.find(r =>
@@ -102,7 +104,6 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
             }
         })
         setNewCurrentObject(newNewCurrentObject)
-        // console.log(newCurrentObject)
     }, [, currentObject])
 
     const ref = React.useRef()
@@ -160,16 +161,17 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
     const renderParams = () => {
         if (newCurrentObject === null) return <></>
         const signature = newCurrentObject.class_signature
-        const check_prop = (x) => Object.keys(signature).includes(x)
+        // const check_prop = (x) => Object.keys(signature).includes(x)
 
         const l_props = newCurrentObject.object.params.map(p => {
-
+            console.log(p)
             const attr = newCurrentObject.class_attributes.find(a => p === a['uri'])
             var name = attr ? getName(attr) : p
             name = name.includes('#') ? name.split('#').pop() : name
             name = name.includes('/') ? name.split('/').pop() : name
 
             const value = updatedObject[p] ? updatedObject[p] : newCurrentObject.object[p]
+            if (p === 'uri') return <></>
             if (p === LABEL) {
                 return <>
                     <label>Короткое название</label>
@@ -389,11 +391,11 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
                     {renderControlPanel()}
                 </div>
                 <p className='og-object-container-title'>{getName(currentObject.object)}</p>
-                {fileLink.length > 0 && <>
+                {/* {fileLink.length > 0 && <>
                     <div className='og-object-file'>
                         <img src={SERVER_DOMAIN.slice(0, -1) + fileLink}></img>
                     </div>
-                </>}
+                </>} */}
                 {renderParams()}
                 {renderEntities()}
             </div>
