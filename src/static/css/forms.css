@@ -137,6 +137,10 @@
   border: 1px solid red;
   height: 50px;
   line-height: 50px;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 9999;
 }
 
 .og-attribute-form {
@@ -277,4 +281,9 @@
   height: 50px;
   /*! white-space: nowrap; */
   /*! overflow-y: hidden; */
+}
+
+.drag {
+  height: 100px;
+  background: gainsboro;
 }

@@ -74,6 +74,10 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
         genres: string[],
         langs: string[]
     }>(null)
+
+    const scrollRef1 = React.useRef(null)
+    const scroll1 = () => scrollRef1.current.scrollIntoView({ behavior: 'smooth' })
+
     const prepareFilters = () => {
         const data = resourceState.corpus_resources
         var f = {
@@ -204,7 +208,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                     })}
                 </div>
             </div>
-            <div className='sub-page-container'>
+            <div className='sub-page-container' ref={scrollRef1}>
 
                 <div className='resource-search-container'>
                     <span><i className='fas fa-search'></i></span>
@@ -404,6 +408,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
         {uploadMediaWindow && <FileUploadToObject onClose={() => setUploadMediaWindow(false)} object_id={selectedCorpus.id} />}
         {uploadTextWindow && <TextUpload onClose={() => setUploadTextWindow(false)} object_id={selectedCorpus.id} corpus_id={selectedCorpus.id} />}
         {eventFormWindow && <EventForm onClose={() => setEventFormWindow(false)} />}
+        <button className='resource-list-to-the-top' onClick={scroll1}>Наверх</button>
     </>;
 };
 

@@ -286,3 +286,18 @@ top: 20px;
   height: 32px;
   line-height: 32px;
 }
+
+.resource-list-to-the-top {
+  position: fixed;
+  left: 50px;
+  border: 3px solid #6c6c6c;
+  height: 50px;
+  width: 200px;
+  background: #f8f7f4;
+  bottom: 50px;
+  color: #6c6c6c;
+  opacity: 0.5;
+}
+.resource-list-to-the-top:hover {
+  opacity: 1;
+}

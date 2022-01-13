@@ -6,6 +6,7 @@ import { connectFileToResource } from '../../actions/ontology/resources/resource
 import { RootStore } from '../../store';
 import { makeId } from '../../utils';
 import { useOnClickOutside } from '../HandleClickOutside';
+import DragAndDrop from '../Ontology/Forms/DragAndDrop';
 import TextForm from '../Ontology/Forms/TextForm';
 
 interface ITextUploadProps {
@@ -44,6 +45,7 @@ const TextUpload: React.FunctionComponent<ITextUploadProps> = (props) => {
         {!textParams && <>
             <div className='file-upload-window' ref={ref}>
                 <input id='file' type="file" name="file" onChange={(e) => { setNewFileSource(e.target.files[0]) }} />
+                {/* <DragAndDrop onChange={file => setNewFileSource(file)} /> */}
                 <button onClick={onUpload}>ЗАГРУЗИТЬ</button>
             </div>
         </>}
