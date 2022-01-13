@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Dispatch } from "react";
 import { SERVER_URL } from "../../../utils";
+import { alertDispatchTypes, CREATE_ALERT } from "../../alerts/types";
 import { withToken } from "../../auth/auth";
 import { TFile } from "../classes/types";
 import { GET_ALL_CORPUS_RESOURCES, GET_ALL_RESOURCES, IS_RESOURCES_LOADING, TResourceDispatchTypes } from "./types";
@@ -32,17 +33,17 @@ export const getCorpusResources = (corpus_uri) => (dispatch: Dispatch<TResourceD
     }).catch(err => console.log(err))
 }
 
-export const connectFileToResource = (name: string, file_type: string, object_id: number, file: File, note: string, res_type = null) => (dispatch: Dispatch<TResourceDispatchTypes>) => {
+export const connectFileToResource = (name: string, file_type: string, object_id: number, file: File, note: string, res_type = null) => (dispatch: Dispatch<TResourceDispatchTypes | alertDispatchTypes>) => {
     var params = withToken({ name, file_type, object_id, note, res_type })
     params['headers'] = { ...params['headers'], ['Content-Type']: 'multipart/form-data' }
     var formData = new FormData();
     formData.append("file", file);
 
     axios.post(SERVER_URL + 'uploadFile', formData, params).then(res => {
-        // dispatch({
-        //     type: GET_FILE,
-        //     payload: res.data
-        // })
+        dispatch({
+            type: CREATE_ALERT,
+            payload: { type: 200, message: 'Файл загружен' }
+        })
     }).catch(err => {
         console.log(err)
     })
