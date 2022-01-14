@@ -6,6 +6,7 @@ import { withToken } from "../../auth/auth";
 import { DELETE_FILE, GET_FILE, GET_FILES, GET_FIRST_TEXT_TABLE, TFileDispatchTypes } from "./types";
 import { alertDispatchTypes, CREATE_ALERT } from "../../alerts/types";
 import { TComment } from "../../../components/Workspace/CommentaryInfo";
+import { ADD_RESOURCE_TO_LIST, TMainResource, TResourceDispatchTypes } from "../resources/types";
 
 
 export const uploadFile = (name: string, file: File, carrier_uri: string, type_uri: string, object_id: number) => (dispatch: Dispatch<TFileDispatchTypes | alertDispatchTypes>) => {
@@ -19,6 +20,7 @@ export const uploadFile = (name: string, file: File, carrier_uri: string, type_u
         //     type: GET_FILE,
         //     payload: res.data
         // })
+
     }).catch(err => {
         dispatch({
             type: CREATE_ALERT,
@@ -48,7 +50,7 @@ export const uploadDocxFirstTable = (file: File, request_id: string) => (dispatc
     })
 }
 
-export const uploadDocx = (node, file: File, corpus_id) => (dispatch: Dispatch<TFileDispatchTypes | alertDispatchTypes>) => {
+export const uploadDocx = (node, file: File, corpus_id) => (dispatch: Dispatch<TFileDispatchTypes | alertDispatchTypes | TResourceDispatchTypes>) => {
     var params = withToken({})
     params['headers'] = { ...params['headers'], ['Content-Type']: 'multipart/form-data' }
     var formData = new FormData();
@@ -56,7 +58,12 @@ export const uploadDocx = (node, file: File, corpus_id) => (dispatch: Dispatch<T
     formData.append('data', JSON.stringify({ node, corpus_id }))
 
     axios.post(SERVER_URL + `uploadDocx`, formData, params).then(res => {
-
+        const data: TMainResource = res.data
+        console.log(data)
+        dispatch({
+            type: ADD_RESOURCE_TO_LIST,
+            payload: data
+        })
         dispatch({
             type: CREATE_ALERT,
             payload: { message: 'Текст загружен', type: 200 }

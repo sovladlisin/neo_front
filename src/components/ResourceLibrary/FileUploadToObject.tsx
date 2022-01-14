@@ -7,7 +7,9 @@ interface IFileUploadToObjectProps {
     onClose: () => void,
     object_id: number,
     file_type?: string,
-    res_type?: 'image' | 'audio' | 'video' | 'article' | 'note'
+    res_type?: 'image' | 'audio' | 'video' | 'article' | 'note',
+    connect_type?: string
+
 }
 
 const FileUploadToObject: React.FunctionComponent<IFileUploadToObjectProps> = (props) => {
@@ -21,7 +23,7 @@ const FileUploadToObject: React.FunctionComponent<IFileUploadToObjectProps> = (p
     const [fileType, setFileType] = React.useState(props.file_type || 'mp4')
     useOnClickOutside(ref, props.onClose)
     const onUpload = () => {
-        dispatch(connectFileToResource(name, fileType, props.object_id, newFileSource, note, resType))
+        dispatch(connectFileToResource(name, fileType, props.object_id, newFileSource, note, resType, props.connect_type ? props.connect_type : ''))
     }
     React.useEffect(() => {
         newFileSource && setFileType(newFileSource.name.split('.').pop())

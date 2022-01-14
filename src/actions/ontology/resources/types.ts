@@ -4,6 +4,12 @@ export const GET_ALL_RESOURCES = 'GET_ALL_RESOURCES'
 export const GET_ALL_CORPUS_RESOURCES = 'GET_ALL_CORPUS_RESOURCES'
 export const IS_RESOURCES_LOADING = 'IS_RESOURCES_LOADING'
 
+
+export const DELETE_RESOURCE_FROM_LIST = 'DELETE_RESOURCE_FROM_LIST'
+export const ADD_RESOURCE_TO_LIST = 'ADD_RESOURCE_TO_LIST'
+
+
+
 export type TResourcesMeta = {
     actors: TClass[],
     places: TClass[],
@@ -26,6 +32,7 @@ export type TEvent = {
     place: TClass
 }
 
+
 export type TMainResource = {
     resource: TClass,
     media: TClass[],
@@ -34,6 +41,14 @@ export type TMainResource = {
     events: TEvent[],
     notations: number,
     media_carrier: TConnectedVisualItem[]
+}
+interface IAddResourceToList {
+    type: typeof ADD_RESOURCE_TO_LIST,
+    payload: TMainResource
+}
+interface IRemoveResourceFromList {
+    type: typeof DELETE_RESOURCE_FROM_LIST,
+    payload: number
 }
 
 interface IGetAllResources {
@@ -49,4 +64,4 @@ interface isResLoad {
     payload: boolean
 }
 
-export type TResourceDispatchTypes = IGetAllResources | IGetAllCorpusResources | isResLoad
+export type TResourceDispatchTypes = IGetAllResources | IGetAllCorpusResources | isResLoad | IAddResourceToList | IRemoveResourceFromList

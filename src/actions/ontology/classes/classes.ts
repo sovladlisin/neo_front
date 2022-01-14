@@ -3,6 +3,8 @@ import { Dispatch } from "react";
 import { handleError, SERVER_URL } from "../../../utils";
 import { alertDispatchTypes, CREATE_ALERT } from "../../alerts/types";
 import { withToken } from "../../auth/auth";
+import { DISCONNECT_FILE_FROM_TEXT, TWorkspaceDispatchTypes } from "../../workspace/types";
+import { DELETE_RESOURCE_FROM_LIST, TResourceDispatchTypes } from "../resources/types";
 
 import { GET_CLASSES, GET_CLASS_OBJECTS, GET_SUBCLASSES, TClassDispatchTypes, TClass, UPDATE_CLASS, GET_CLASS_OBJECT, GET_CLASS, GET_CLASSES_WITH_SIGNATURE, GET_OBJECTS_BY_URI, CREATE_ENTITY, GET_ALL_CLASSES, GET_DOMAIN_ONTOLOGIES, CLASS_LOADING, LOADING_OBJECTS_BY_URI, GET_CLASS_FULL_SIGNATURE, CLASS_FULL_SIGNATURE_LOADING, IS_SEARCHING, GET_SEARCH, DELETE_DOMAIN_ONTOLOGY, OBJECT_IS_LOADING } from "./types";
 
@@ -332,11 +334,22 @@ export const updateEntity = (node) => (dispatch: Dispatch<TClassDispatchTypes | 
     })
 }
 
-export const deleteEntity = (id: number) => (dispatch: Dispatch<TClassDispatchTypes | alertDispatchTypes>) => {
+export const deleteEntity = (id: number) => (dispatch: Dispatch<TClassDispatchTypes | alertDispatchTypes | TWorkspaceDispatchTypes | TResourceDispatchTypes>) => {
     const params = withToken({ id })
 
     axios.delete(SERVER_URL + `deleteEntity`, params).then(res => {
-
+        dispatch({
+            type: DISCONNECT_FILE_FROM_TEXT,
+            payload: id
+        })
+        dispatch({
+            type: DELETE_RESOURCE_FROM_LIST,
+            payload: id
+        })
+        dispatch({
+            type: CREATE_ALERT,
+            payload: { message: 'Сущность удалена', type: 200 }
+        })
     }).catch(err => {
         dispatch({
             type: CREATE_ALERT,

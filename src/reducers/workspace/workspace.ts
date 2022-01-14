@@ -1,5 +1,6 @@
 import { DELETE_DOMAIN_ONTOLOGY, TClass } from "../../actions/ontology/classes/types"
-import { CREATE_MARKUP, CREATE_TEXT_ENTITY, CREATE_TEXT_RELATION, DELETE_MARKUP, DELETE_TEXT_ENTITY, DELETE_TEXT_RELATION, EDIT_MARKUP, GET_MARKUPS, GET_NODE_ATTRIBUTES, GET_TEXT_ENTITIES, GET_TEXT_RELATIONS, GET_WORKSPACE, TEntity, TMarkup, TTextRelation, TWorkspaceDispatchTypes, TWorkspaceInfo } from "../../actions/workspace/types"
+import { TMainResource } from "../../actions/ontology/resources/types"
+import { CONNECT_FILE_TO_TEXT, CREATE_MARKUP, CREATE_TEXT_ENTITY, CREATE_TEXT_RELATION, DELETE_MARKUP, DELETE_TEXT_ENTITY, DELETE_TEXT_RELATION, DISCONNECT_FILE_FROM_TEXT, EDIT_MARKUP, GET_MARKUPS, GET_NODE_ATTRIBUTES, GET_TEXT_ENTITIES, GET_TEXT_RELATIONS, GET_WORKSPACE, TEntity, TMarkup, TTextRelation, TWorkspaceDispatchTypes, TWorkspaceInfo } from "../../actions/workspace/types"
 
 interface IDefaultState {
     info: TWorkspaceInfo,
@@ -13,7 +14,10 @@ interface IDefaultState {
     selectedAttributes: { node_uri: string, class_node: TClass, attributes: TClass[], attributes_obj: TClass[] },
 
     textRelations: { markup_id: number, relations: TTextRelation[] },
-    newTextRelation: TTextRelation
+    newTextRelation: TTextRelation,
+
+    newConnectedFile: { id: number, data: TMainResource },
+    disconnectedFile: number
 
 }
 
@@ -28,11 +32,25 @@ const defaultState: IDefaultState = {
 
     selectedAttributes: null,
     textRelations: null,
-    newTextRelation: null
+    newTextRelation: null,
+
+    newConnectedFile: null,
+    disconnectedFile: -1
 }
 
 const workspaceReducer = (state: IDefaultState = defaultState, action: TWorkspaceDispatchTypes) => {
     switch (action.type) {
+
+        case CONNECT_FILE_TO_TEXT:
+            return {
+                ...state,
+                newConnectedFile: action.payload
+            }
+        case DISCONNECT_FILE_FROM_TEXT:
+            return {
+                ...state,
+                disconnectedFile: action.payload
+            }
 
         case GET_TEXT_RELATIONS:
             return {

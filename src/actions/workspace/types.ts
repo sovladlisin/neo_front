@@ -1,4 +1,5 @@
 import { TClass, TConnectedVisualItem, TRelation } from "../ontology/classes/types"
+import { TMainResource } from "../ontology/resources/types"
 
 export const GET_WORKSPACE = 'GET_WORKSPACE'
 
@@ -17,6 +18,9 @@ export const DELETE_TEXT_RELATION = 'DELETE_TEXT_RELATION'
 
 export const GET_NODE_ATTRIBUTES = 'GET_NODE_ATTRIBUTES'
 
+
+export const CONNECT_FILE_TO_TEXT = 'CONNECT_FILE_TO_TEXT'
+export const DISCONNECT_FILE_FROM_TEXT = 'DISCONNECT_FILE_FROM_TEXT'
 
 
 export type TWorkspaceInfo = {
@@ -62,6 +66,14 @@ interface IGetWorkspace {
     payload: TWorkspaceInfo
 }
 
+interface IConnectFileToText {
+    type: typeof CONNECT_FILE_TO_TEXT,
+    payload: { id: number, data: TMainResource }
+}
+interface IDisconnectFileFromText {
+    type: typeof DISCONNECT_FILE_FROM_TEXT,
+    payload: number
+}
 //MARKUPS
 interface IGetMarkups {
     type: typeof GET_MARKUPS,
@@ -116,5 +128,5 @@ interface IDeleteTextRelation {
 export type TWorkspaceDispatchTypes = IGetWorkspace |
     IGetMarkups | ICreateMarkup | IEditMarkup | IDeleteMarkup |
     IGetEntities | ICreateEntity | IDeleteEntity | IGetNodeAttributes |
-    IDeleteTextRelation | ICreateTextRelation | IGetTextRelations
+    IDeleteTextRelation | ICreateTextRelation | IGetTextRelations | IConnectFileToText | IDisconnectFileFromText
 

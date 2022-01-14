@@ -123,6 +123,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
 
     const renderResources = () => {
         const data = resourceState.corpus_resources
+
         return data
             .filter(i => JSON.stringify(i).toLocaleLowerCase().includes(mainSearch.toLocaleLowerCase()))
             .filter(i => {
@@ -154,6 +155,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                 return false
             })
             .map(item => {
+                console.log(item)
                 if (item.resource.labels.includes(VISUAL_ITEM_URI)) {
                     return <div className='resource-item-outer-container'>
                         <VisualItem node={item.resource} file={item.media_carrier && item.media_carrier.length > 0 ? { file: item.media_carrier[0].file, node: item.resource } : null} />

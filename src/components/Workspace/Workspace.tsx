@@ -90,6 +90,21 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
         setWorkInfo(workState.info)
     }, [, workState.info])
 
+    React.useEffect(() => {
+        if (!workInfo || !workState.newConnectedFile || workState.newConnectedFile.id != workInfo.id ||
+            workInfo.resources.find(r => r.file.id === workState.newConnectedFile.data.media_carrier[0].file.id)
+        ) return;
+
+        setWorkInfo({ ...workInfo, resources: [...workInfo.resources, { node: workState.newConnectedFile.data.resource, file: workState.newConnectedFile.data.media_carrier[0].file }] })
+
+    }, [, workState.newConnectedFile])
+
+    React.useEffect(() => {
+        if (!workInfo || workState.disconnectedFile === -1) return;
+        setWorkInfo({ ...workInfo, resources: workInfo.resources.filter(r => r.node.id != workState.disconnectedFile) })
+
+    }, [, workState.disconnectedFile])
+
 
     const classState = useSelector((state: RootStore) => state.classes)
 

@@ -143,9 +143,12 @@ export const getActorName = (node: TClass, short = false) => {
 }
 
 export const getName = (node: TClass, lang = 1) => {
+    // @ts-ignore
+    if (node === []) return 'МАССИВ??'
     if (node === null) return 'Не указано'
     if (node['uri'] === NOTE_URI) return 'Описание'
 
+    if (!node.labels) return 'НЕТ ЛЕЙБЛОВ??'
     if (node.labels.includes(ACTOR_URI)) {
         return node[INITIALS] + ' ' + node[LAST_NAME]
     }

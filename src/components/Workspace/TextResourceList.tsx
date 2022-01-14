@@ -64,7 +64,7 @@ const TextResourceList: React.FunctionComponent<ITextResourceListProps> = (props
             </div>
         </div>
 
-        {fileUploadWindow && <FileUploadToObject onClose={() => setFileUploadWindow(null)} object_id={props.object_id} res_type={fileUploadWindow} />}
+        {fileUploadWindow && <FileUploadToObject connect_type='text' onClose={() => setFileUploadWindow(null)} object_id={props.object_id} res_type={fileUploadWindow} />}
     </>;
 };
 
