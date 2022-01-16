@@ -88,3 +88,8 @@ background: #a49c9c70;
 .resource-video-player {
   width: 100% !important;
 }
+
+.image-card iframe {
+  height: 500px;
+  width: 100%;
+}

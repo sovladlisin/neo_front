@@ -139,7 +139,6 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
     React.useEffect(() => {
         if (workInfo && workState.textMarkups && workState.textMarkups.text_uri === workInfo.origin_node['uri']) {
             setMarkups(workState.textMarkups.markups)
-            console.log('1', markups)
         }
     }, [, workState.textMarkups, workInfo, workState.newMarkup])
 
@@ -464,12 +463,12 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
                                         {renderText()}
                                     </div>
                                 </>}
-                                {selectedView === 2 && <>
+                                {/* {selectedView === 2 && <>
                                     {renderResources()}
                                 </>}
                                 {selectedView === 3 && <>
                                     {renderInfo()}
-                                </>}
+                                </>} */}
                             </div>
                         </div>
                     </div>

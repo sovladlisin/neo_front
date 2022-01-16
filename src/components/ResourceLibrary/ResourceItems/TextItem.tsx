@@ -28,7 +28,7 @@ export const TextItem: React.FunctionComponent<ITextItemProps> = (props) => {
                     <label>{props.images} Изобр.</label>
                     <label>{props.video} Видео</label>
                     <label>{props.audio} Аудио</label>
-                    <label>{props.notations} Нотировки</label>
+                    <label>{props.notations} Ноты</label>
                 </div>
             </div>
             <div>

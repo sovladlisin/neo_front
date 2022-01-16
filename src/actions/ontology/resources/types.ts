@@ -9,6 +9,9 @@ export const DELETE_RESOURCE_FROM_LIST = 'DELETE_RESOURCE_FROM_LIST'
 export const ADD_RESOURCE_TO_LIST = 'ADD_RESOURCE_TO_LIST'
 
 
+export const GET_VISUAL_ITEM_CONNECTIONS = 'GET_VISUAL_ITEM_CONNECTIONS'
+
+
 
 export type TResourcesMeta = {
     actors: TClass[],
@@ -42,6 +45,11 @@ export type TMainResource = {
     notations: number,
     media_carrier: TConnectedVisualItem[]
 }
+interface IGetVisualItemsConnections {
+    type: typeof GET_VISUAL_ITEM_CONNECTIONS,
+    payload: { id: number, data: TClass[] }
+}
+
 interface IAddResourceToList {
     type: typeof ADD_RESOURCE_TO_LIST,
     payload: TMainResource
@@ -64,4 +72,4 @@ interface isResLoad {
     payload: boolean
 }
 
-export type TResourceDispatchTypes = IGetAllResources | IGetAllCorpusResources | isResLoad | IAddResourceToList | IRemoveResourceFromList
+export type TResourceDispatchTypes = IGetAllResources | IGetAllCorpusResources | isResLoad | IAddResourceToList | IRemoveResourceFromList | IGetVisualItemsConnections

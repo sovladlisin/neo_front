@@ -21,7 +21,7 @@ const TextResourceList: React.FunctionComponent<ITextResourceListProps> = (props
     React.useEffect(() => {
         if (!props.resources) return;
 
-        const temp_images = props.resources.filter(r => ['png', 'jpg', 'jpeg'].includes(r.file.type))
+        const temp_images = props.resources.filter(r => ['png', 'jpg', 'jpeg', 'pdf'].includes(r.file.type))
 
         const notes = temp_images.filter(t => t.node['res_type'] === 'note')
         const images = temp_images.filter(t => t.node['res_type'] === 'image')
@@ -44,19 +44,19 @@ const TextResourceList: React.FunctionComponent<ITextResourceListProps> = (props
                     return <VisualTile file={i} />
                 })}
             </div>
-            <p className='sub-page-title'>Видео {videoList.length} <button onClick={_ => setFileUploadWindow('video')}><i className='fas fa-plus'></i></button></p>
+            <p style={audioList.length > 0 ? { marginTop: '100px' } : {}} className='sub-page-title'>Видео {videoList.length} <button onClick={_ => setFileUploadWindow('video')}><i className='fas fa-plus'></i></button></p>
             <div className='text-resource-items-list'>
                 {videoList.map(i => {
                     return <VisualTile file={i} />
                 })}
             </div>
-            <p className='sub-page-title'>Изображения {imageList.length} <button onClick={_ => setFileUploadWindow('image')}><i className='fas fa-plus'></i></button></p>
+            <p style={videoList.length > 0 ? { marginTop: '100px' } : {}} className='sub-page-title'>Изображения {imageList.length} <button onClick={_ => setFileUploadWindow('image')}><i className='fas fa-plus'></i></button></p>
             <div className='text-resource-items-list'>
                 {imageList.map(i => {
                     return <ImageTile file={i} />
                 })}
             </div>
-            <p className='sub-page-title'>Ноты {notesList.length} <button onClick={_ => setFileUploadWindow('note')}><i className='fas fa-plus'></i></button></p>
+            <p style={imageList.length > 0 ? { marginTop: '100px' } : {}} className='sub-page-title'>Ноты {notesList.length} <button onClick={_ => setFileUploadWindow('note')}><i className='fas fa-plus'></i></button></p>
             <div className='text-resource-items-list'>
                 {notesList.map(i => {
                     return <ImageTile file={i} />

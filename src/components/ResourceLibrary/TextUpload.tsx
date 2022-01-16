@@ -35,7 +35,6 @@ const TextUpload: React.FunctionComponent<ITextUploadProps> = (props) => {
     const [textParams, setTextParams] = React.useState<TTextParams>(null)
 
     React.useEffect(() => {
-        fileState.textFirstTable && console.log(fileState.textFirstTable.request_id, requestId)
         fileState.textFirstTable && fileState.textFirstTable.request_id === requestId && setTextParams(fileState.textFirstTable.params)
     }, [fileState.textFirstTable])
     return <>

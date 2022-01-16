@@ -38,7 +38,6 @@ const CorpusView: React.FunctionComponent<ICorpusViewProps> = ({ match }: RouteC
         var new_obj = classState.selectedObject
         if (new_obj && current_id === new_obj.id) {
             setCurrentCorpus(new_obj)
-            console.log(new_obj.object['uri'])
             dispatch(getCorpusResources(new_obj.object['uri']))
         }
     }, [classState.selectedObject])

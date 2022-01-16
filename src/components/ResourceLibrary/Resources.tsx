@@ -68,6 +68,8 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
     const [filterCount, setFilterCount] = React.useState<{
         images: number,
         video: number,
+        notes: number,
+        articles: number,
         audio: number,
         texts: number,
         actors: string[],
@@ -85,6 +87,8 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
             video: 0,
             audio: 0,
             texts: 0,
+            notes: 0,
+            articles: 0,
             actors: [],
             genres: [],
             langs: []
@@ -92,9 +96,13 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
         data.map(item => {
             if (item.media_carrier && item.media_carrier.length === 1) {
                 var r: TConnectedVisualItem = item.media_carrier[0]
-                f.images = ['png', 'jpg', 'jpeg', 'pdf'].includes(r.file.type) ? f.images + 1 : f.images
-                f.video = ['mp4', 'avi', 'mkv'].includes(r.file.type) ? f.video + 1 : f.video
-                f.audio = ['wav', 'mp4', 'mp3'].includes(r.file.type) ? f.audio + 1 : f.audio
+
+                f.articles = item.resource['res_type'] && item.resource['res_type'] === 'article' ? f.articles + 1 : f.articles
+                f.images = item.resource['res_type'] && item.resource['res_type'] === 'image' ? f.images + 1 : f.images
+                f.video = item.resource['res_type'] && item.resource['res_type'] === 'video' ? f.video + 1 : f.video
+                f.audio = item.resource['res_type'] && item.resource['res_type'] === 'audio' ? f.audio + 1 : f.audio
+                f.notes = item.resource['res_type'] && item.resource['res_type'] === 'note' ? f.notes + 1 : f.notes
+
             }
             if (item.resource.labels.includes(LING_OBJECT_URI)) {
                 f.texts += 1
@@ -140,9 +148,14 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                 if (selectedResourceTypes.length === 0) return true
                 if (i.media_carrier && i.media_carrier.length === 1) {
                     var r: TConnectedVisualItem = i.media_carrier[0]
-                    if (['png', 'jpg', 'jpeg', 'pdf'].includes(r.file.type) && selectedResourceTypes.includes('images')) return true
-                    if (['mp4', 'avi', 'mkv'].includes(r.file.type) && selectedResourceTypes.includes('video')) return true
-                    if (['wav', 'mp4', 'mp3'].includes(r.file.type) && selectedResourceTypes.includes('audio')) return true
+                    if (i.resource['res_type'] && i.resource['res_type'] === 'article' && selectedResourceTypes.includes('articles')) return true
+                    if (i.resource['res_type'] && i.resource['res_type'] === 'image' && selectedResourceTypes.includes('images')) return true
+                    if (i.resource['res_type'] && i.resource['res_type'] === 'video' && selectedResourceTypes.includes('video')) return true
+                    if (i.resource['res_type'] && i.resource['res_type'] === 'audio' && selectedResourceTypes.includes('audio')) return true
+                    if (i.resource['res_type'] && i.resource['res_type'] === 'note' && selectedResourceTypes.includes('notes')) return true
+                    // if (['png', 'jpg', 'jpeg', 'pdf'].includes(r.file.type) && selectedResourceTypes.includes('images')) return true
+                    // if (['mp4', 'avi', 'mkv'].includes(r.file.type) && selectedResourceTypes.includes('video')) return true
+                    // if (['wav', 'mp4', 'mp3'].includes(r.file.type) && selectedResourceTypes.includes('audio')) return true
                 }
                 if (i.resource.labels.includes(LING_OBJECT_URI) && selectedResourceTypes.includes('texts')) return true
 
@@ -155,7 +168,6 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                 return false
             })
             .map(item => {
-                console.log(item)
                 if (item.resource.labels.includes(VISUAL_ITEM_URI)) {
                     return <div className='resource-item-outer-container'>
                         <VisualItem node={item.resource} file={item.media_carrier && item.media_carrier.length > 0 ? { file: item.media_carrier[0].file, node: item.resource } : null} />
@@ -166,17 +178,25 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                     var images = 0
                     var audio = 0
                     var video = 0
+                    var notes = 0
 
                     item.media.map(m => {
-                        m.resources.map(r => {
-                            images = ['png', 'jpg', 'jpeg', 'pdf'].includes(r.file.type) ? images + 1 : images
-                            video = ['mp4', 'avi', 'mkv'].includes(r.file.type) ? video + 1 : video
-                            audio = ['wav', 'mp4', 'mp3'].includes(r.file.type) ? audio + 1 : audio
-                        })
+
+                        images = m['res_type'] && m['res_type'] === 'image' ? images + 1 : images
+                        video = m['res_type'] && m['res_type'] === 'video' ? video + 1 : video
+                        audio = m['res_type'] && m['res_type'] === 'audio' ? audio + 1 : audio
+                        notes = m['res_type'] && m['res_type'] === 'note' ? notes + 1 : notes
+                        // m.resources.map(r => {
+
+
+                        //     // images = ['png', 'jpg', 'jpeg', 'pdf'].includes(r.file.type) ? images + 1 : images
+                        //     // video = ['mp4', 'avi', 'mkv'].includes(r.file.type) ? video + 1 : video
+                        //     // audio = ['wav', 'mp4', 'mp3'].includes(r.file.type) ? audio + 1 : audio
+                        // })
 
                     })
                     return <div className='resource-item-outer-container'>
-                        <TextItem node={item.resource} notations={item.notations} audio={audio} video={video} images={images} />
+                        <TextItem node={item.resource} notations={notes} audio={audio} video={video} images={images} />
                         {authState.user.is_editor && <button onClick={_ => setSelectedResourceEdit(item.resource.id)} id='selected-for-edit-item-resource-list-button'><i className='fas fa-cog'></i></button>}
                     </div>
 
@@ -230,9 +250,9 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                                         <button onClick={_ => flipRT('audio')}><i className={selectedResourceTypes.includes('audio') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Аудио ({filterCount.audio}) </button>
                                         <button onClick={_ => flipRT('video')}><i className={selectedResourceTypes.includes('video') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Видео ({filterCount.video}) </button>
                                         <button onClick={_ => flipRT('images')}><i className={selectedResourceTypes.includes('images') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Фото ({filterCount.images}) </button>
-                                        <button onClick={_ => flipRT('notes')}><i className={selectedResourceTypes.includes('notes') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Нотировки ({0}) </button>
+                                        <button onClick={_ => flipRT('notes')}><i className={selectedResourceTypes.includes('notes') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Ноты ({filterCount.notes}) </button>
                                         <button onClick={_ => flipRT('glossary')}><i className={selectedResourceTypes.includes('glossary') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Глоссы ({0}) </button>
-                                        <button onClick={_ => flipRT('publications')}><i className={selectedResourceTypes.includes('publications') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Публикации ({0}) </button>
+                                        <button onClick={_ => flipRT('articles')}><i className={selectedResourceTypes.includes('articles') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Публикации ({filterCount.articles}) </button>
                                     </div>
                                 </>}
                             </div>

@@ -69,7 +69,7 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
         var local_params = {}
 
         properties.map(p => {
-            console.log(p)
+            // console.log(p)
             var i_type = DATA_TYPES.find(t => t.uri === p.type)
             var langString = i_type && i_type.type.includes('lang')
             if (!currentObject.object[p.key]) {
@@ -164,7 +164,7 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
         // const check_prop = (x) => Object.keys(signature).includes(x)
 
         const l_props = newCurrentObject.object.params.map(p => {
-            console.log(p)
+            // console.log(p)
             const attr = newCurrentObject.class_attributes.find(a => p === a['uri'])
             var name = attr ? getName(attr) : p
             name = name.includes('#') ? name.split('#').pop() : name

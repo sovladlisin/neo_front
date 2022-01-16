@@ -26,7 +26,6 @@ const Actor: React.FunctionComponent<IActorProps> = ({ match }: RouteComponentPr
         var new_obj = classState.selectedObject
         if (new_obj && current_id === new_obj.id) {
             setCurrentObject(new_obj)
-            console.log(new_obj)
         }
     }, [classState.selectedObject])
 

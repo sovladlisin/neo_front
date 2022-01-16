@@ -574,3 +574,7 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+.ws-content {
+  margin-bottom: 200px;
+}
