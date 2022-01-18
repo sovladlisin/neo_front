@@ -62,6 +62,9 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
         setSearchActor(-1)
         setSearchTime('')
         setChunkNumber(1)
+        setMainSearch('')
+        setChunkNumber(1)
+        requestResources(1, 50, true)
     }
 
     const [searchLang, setSearchLang] = React.useState(-1)
@@ -74,12 +77,12 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
 
     React.useEffect(() => {
         setChunkNumber(1)
-        // requestResources(1, 50)
+        !resourceState.is_loading && requestResources(1, 50)
     }, [searchLang, searchPlace, searchTime, searchGenre, searchActor, selectedResourceTypes])
 
-    const requestResources = (chunkNumberLocal, chunkSizeLocal) => {
+    const requestResources = (chunkNumberLocal, chunkSizeLocal, clean = false) => {
         const c_uri = selectedCorpus ? selectedCorpus['uri'] : ''
-        dispatch(getCorpusResources(c_uri, selectedResourceTypes, mainSearch, searchLang, searchActor, searchPlace, searchGenre, searchTime, chunkNumberLocal, chunkSizeLocal))
+        dispatch(getCorpusResources(c_uri, selectedResourceTypes, clean ? '' : mainSearch, searchLang, searchActor, searchPlace, searchGenre, searchTime, chunkNumberLocal, chunkSizeLocal))
     }
 
     React.useEffect(() => {
@@ -306,6 +309,9 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                         onKeyUp={e => {
                             if (e.key === 'Enter' || e.keyCode === 13) {
                                 setChunkNumber(1)
+                                !resourceState.is_loading && requestResources(1, 50)
+
+
                             }
                         }}
                         onChange={e => {
