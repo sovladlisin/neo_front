@@ -20,7 +20,7 @@
   height: 60px;
   line-height: 60px;
   padding: 0 0 0 60px;
-  width: calc(100% - 60px);
+  width: calc(100% - 180px);
   border: 1px solid #b2b2b2;
 }
 .resource-search-container > button {
@@ -373,4 +373,22 @@ top: 20px;
   margin: auto 10px;
   display: block;
   float: left;
+}
+
+.main-search-button {
+  height: 60px;
+  background: #f1eee8;
+  color: #636261;
+  width: 100px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+.main-search-button > p {
+  line-height: 60px;
+  margin: auto;
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
 }

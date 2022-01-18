@@ -56,6 +56,12 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
     }
     const resetFilter = () => {
         setSelectedResourceTypes([])
+        setSearchPlace(-1)
+        setSearchLang(-1)
+        setSearchGenre(-1)
+        setSearchActor(-1)
+        setSearchTime('')
+        setChunkNumber(1)
     }
 
     const [searchLang, setSearchLang] = React.useState(-1)
@@ -65,6 +71,11 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
     const [searchTime, setSearchTime] = React.useState('')
     const [chunkNumber, setChunkNumber] = React.useState(1)
     const [chunkSize, setChunkSize] = React.useState(50)
+
+    React.useEffect(() => {
+        setChunkNumber(1)
+        // requestResources(1, 50)
+    }, [searchLang, searchPlace, searchTime, searchGenre, searchActor, selectedResourceTypes])
 
     const requestResources = (chunkNumberLocal, chunkSizeLocal) => {
         const c_uri = selectedCorpus ? selectedCorpus['uri'] : ''
@@ -253,10 +264,12 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
 
         return <div className='resource-nav-panel-pages'>
             <div className='resource-nav-panel-pages-left'>
-                <label>Ресурсов на стр. 50</label>
+                <label>Ресурсов на странице: 50</label>
             </div>
             <div className='resource-nav-panel-pages-page-numbers'>
-                <button className='resource-nav-panel-pages-page-numbers-left'>{'<'}</button>
+                {chunkNumber - 1 > 0 && <button onClick={_ => {
+                    chunkNumber - 1 > 0 && setChunkNumber(chunkNumber - 1)
+                }} className='resource-nav-panel-pages-page-numbers-left'>{'<'}</button>}
                 <div className='resource-nav-panel-pages-page-numbers-numbers'>
                     {numbers.map(number => {
                         if (Math.abs(number - chunkNumber) < 5) return <button className={number === chunkNumber ? 'resource-nav-panel-pages-page-numbers-numbers-selected' : ''} onClick={_ => setChunkNumber(number)}>{number}</button>
@@ -264,7 +277,9 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                     })}
                 </div>
 
-                <button className='resource-nav-panel-pages-page-numbers-right'>{'>'}</button>
+                {chunkNumber + 1 <= number_of_pages && <button onClick={_ => {
+                    chunkNumber + 1 <= number_of_pages && setChunkNumber(chunkNumber + 1)
+                }} className='resource-nav-panel-pages-page-numbers-right'>{'>'}</button>}
             </div>
 
         </div>
@@ -285,7 +300,23 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
 
                 <div className='resource-search-container'>
                     <span><i className='fas fa-search'></i></span>
-                    <input placeholder={'Поиск по ресурсам'} value={mainSearch} onChange={e => setMainSearch(e.target.value)}></input>
+                    <input
+                        placeholder={'Поиск по ресурсам'}
+                        value={mainSearch}
+                        onKeyUp={e => {
+                            if (e.key === 'Enter' || e.keyCode === 13) {
+                                setChunkNumber(1)
+                            }
+                        }}
+                        onChange={e => {
+                            setMainSearch(e.target.value)
+                        }}>
+
+
+                    </input>
+                    <div className='main-search-button' onClick={_ => requestResources(1, 50)}>
+                        <p>Поиск</p>
+                    </div>
                     <button onClick={_ => setKeyboard(!keyboard)}>Клавиатура спецсимволов</button>
                     <label>Для поиска можно использовать национальные знаки, например, ӑ, ӱ, ү</label>
                 </div>
@@ -299,13 +330,13 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                                 <button onClick={_ => flipPanel(1)}>Тип ресурса <i className={openedPanels.includes(1) ? 'fas fa-chevron-down' : 'fas fa-chevron-up'}></i></button>
                                 {openedPanels.includes(1) && <>
                                     <div className='resource-nav-panel-collapse-list-content'>
-                                        <button onClick={_ => flipRT('texts')}><i className={selectedResourceTypes.includes('texts') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Тексты ({filterCount.texts}) </button>
+                                        <button onClick={_ => flipRT('text')}><i className={selectedResourceTypes.includes('text') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Тексты ({filterCount.texts}) </button>
                                         <button onClick={_ => flipRT('audio')}><i className={selectedResourceTypes.includes('audio') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Аудио ({filterCount.audio}) </button>
                                         <button onClick={_ => flipRT('video')}><i className={selectedResourceTypes.includes('video') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Видео ({filterCount.video}) </button>
-                                        <button onClick={_ => flipRT('images')}><i className={selectedResourceTypes.includes('images') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Фото ({filterCount.images}) </button>
-                                        <button onClick={_ => flipRT('notes')}><i className={selectedResourceTypes.includes('notes') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Ноты ({filterCount.notes}) </button>
+                                        <button onClick={_ => flipRT('image')}><i className={selectedResourceTypes.includes('image') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Фото ({filterCount.images}) </button>
+                                        <button onClick={_ => flipRT('note')}><i className={selectedResourceTypes.includes('note') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Ноты ({filterCount.notes}) </button>
                                         <button onClick={_ => flipRT('glossary')}><i className={selectedResourceTypes.includes('glossary') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Глоссы ({0}) </button>
-                                        <button onClick={_ => flipRT('articles')}><i className={selectedResourceTypes.includes('articles') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Публикации ({filterCount.articles}) </button>
+                                        <button onClick={_ => flipRT('article')}><i className={selectedResourceTypes.includes('article') ? 'far fa-dot-circle' : 'far fa-circle'}></i> Публикации ({filterCount.articles}) </button>
                                     </div>
                                 </>}
                             </div>
@@ -320,7 +351,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
 
                                     <div className='resource-nav-panel-collapse-list-content'>
                                         {filterCount.langs.map(l => {
-                                            return <button onClick={_ => setSearchLang(l.id)}><i className={searchLang === l.id ? 'far fa-dot-circle' : 'far fa-circle'}></i> {l} </button>
+                                            return <button onClick={_ => setSearchLang(l.id)}><i className={searchLang === l.id ? 'far fa-dot-circle' : 'far fa-circle'}></i> {getName(l)} </button>
                                         })}
 
 
