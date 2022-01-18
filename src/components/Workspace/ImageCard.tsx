@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TClass, TConnectedVisualItem } from '../../actions/ontology/classes/types';
+import { TClass, TConnectedVisualItem, TFile } from '../../actions/ontology/classes/types';
 import { SERVER_DOMAIN, getName, getNote, CORPUS_URI, PERSON_URI, LING_OBJECT_URI } from '../../utils';
 import { useOnClickOutside } from '../HandleClickOutside';
 import { Link } from 'react-router-dom'
@@ -9,6 +9,8 @@ import { getVisualConnections } from '../../actions/ontology/resources/resources
 import { RootStore } from '../../store';
 
 import { Document, Page } from 'react-pdf';
+import axios from 'axios';
+import Loading from '../Loading';
 
 interface IImageCardProps {
     onClose: () => void
@@ -38,21 +40,41 @@ const ImageCard: React.FunctionComponent<IImageCardProps> = (props) => {
 
     // console.log('IDDDDDD:', props.file.file.id)
 
+    const [file, setFile] = React.useState<string>('')
+    const [localLoading, setLocalLoading] = React.useState(true)
+    React.useEffect(() => {
+        props.file.file.type === 'pdf' && fetch(SERVER_DOMAIN.slice(0, -1) + props.file.file.source,).then((r) => r.blob()).then(text => {
+            const newBlob = new Blob([text], { type: 'application/pdf' });
+            var fileURL = window.URL.createObjectURL(newBlob);
+            setFile(fileURL)
+            setLocalLoading(false)
+        })
+        // axios.get(SERVER_DOMAIN.slice(0, -1) + props.file.file.source).then(res => {
+        //     console.log(res)
+        //     var file = new Blob([res.data], { type: 'application/pdf' });
+        //     var fileURL = window.URL.createObjectURL(file);
+        //     setFile(fileURL)
+        //     console.log(file)
+        // })
+
+
+    }, [])
+
     return <>
         {props.file && <>
             <div className='m-background' onClick={props.onClose}></div>
             <div className='image-card' ref={ref}>
                 {props.file.file.type === 'pdf' ? <>
-                    <object data={SERVER_DOMAIN.slice(0, -1) + props.file.file.source} type="application/pdf">
-                        <iframe src={"https://docs.google.com/viewer?url=" + SERVER_DOMAIN.slice(0, -1) + props.file.file.source + "&embedded=true"}></iframe>
-                    </object>
-
-                    {/* <Document file={SERVER_DOMAIN.slice(0, -1) + props.file.file.source}>
+                    {/* <object data={SERVER_DOMAIN.slice(0, -1) + props.file.file.source} type="application/pdf">
+                        <iframe src={"https://docs.google.com/viewer?url=" + file + "&embedded=true"}></iframe>
+                    </object> */}
+                    {/* 
+                    <Document file={file}>
                         <Page pageNumber={1} />
                     </Document> */}
+                    {localLoading && <Loading height={300} />}
+                    {!localLoading && <iframe src={file}></iframe>}
 
-
-                    {/* <iframe src={SERVER_DOMAIN.slice(0, -1) + props.file.file.source}></iframe> */}
 
 
                 </> : <><img src={SERVER_DOMAIN.slice(0, -1) + props.file.file.source}></img></>}
