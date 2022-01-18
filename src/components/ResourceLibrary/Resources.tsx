@@ -157,6 +157,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
     // }
 
     const renderResources = () => {
+        if (!resourceState.corpus_resources) return <></>
         const data = resourceState.corpus_resources.data
 
         // return data
@@ -329,7 +330,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
 
                 {renderNav()}
 
-                {<>
+                {filterCount && <>
                     <div className='resource-content-container'>
                         <div className='resource-nav-panel'>
                             <div className='resource-nav-panel-collapse-list'>
