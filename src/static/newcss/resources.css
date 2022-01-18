@@ -301,3 +301,76 @@ top: 20px;
 .resource-list-to-the-top:hover {
   opacity: 1;
 }
+
+.resource-nav-panel-pages-left label {
+  color: #636261;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  display: block;
+  margin: auto;
+}
+.resource-nav-panel-pages-left input {
+  height: 50px;
+  border: 1px solid gainsboro;
+  width: 70px;
+}
+.resource-nav-panel-pages-left {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 20px;
+  width: max-content;
+  height: 50px;
+}
+.resource-nav-panel-pages {
+  display: grid;
+  grid-template-columns: auto auto;
+  height: 50px;
+  margin: 0 0 20px 0;
+}
+.resource-nav-panel-pages-page-numbers-numbers button {
+  height: 30px;
+  background: #f8f7f4;
+  width: 30px;
+  border-radius: 30px;
+  color: #636261;
+  font-size: 9pt;
+  margin: auto 10px;
+  display: block;
+  float: left;
+}
+.resource-nav-panel-pages-page-numbers-numbers {
+  height: 50px;
+  display: inline-flex;
+}
+.resource-nav-panel-pages-page-numbers {
+  height: 50px;
+  display: inline-flex;
+}
+
+.resource-nav-panel-pages-page-numbers-numbers-selected {
+  background: #ee5858 !important;
+  color: white !important;
+}
+.resource-nav-panel-pages-page-numbers-left {
+  height: 40px;
+  background: #f8f7f4;
+  width: 40px;
+  border-radius: 30px;
+  color: #636261;
+  font-size: 14pt;
+  margin: auto 10px;
+  display: block;
+  float: left;
+}
+.resource-nav-panel-pages-page-numbers-right {
+  height: 40px;
+  background: #f8f7f4;
+  width: 40px;
+  border-radius: 30px;
+  color: #636261;
+  font-size: 14pt;
+  margin: auto 10px;
+  display: block;
+  float: left;
+}

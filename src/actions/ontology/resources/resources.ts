@@ -16,16 +16,20 @@ export const getAllResources = () => (dispatch: Dispatch<TResourceDispatchTypes>
     }).catch(err => console.log(err))
 }
 
-export const getCorpusResources = (corpus_uri) => (dispatch: Dispatch<TResourceDispatchTypes>) => {
-    const params = withToken({ corpus_uri })
+export const getCorpusResources = (corpus_uri: string, res_types: string[], text_search: string, lang_id: number, actor_id: number, place_id: number, genre_id: number, time_search: string, chunk_number: number, chunk_size: number) => (dispatch: Dispatch<TResourceDispatchTypes>) => {
+    const params = withToken()
+
+    const r_data = JSON.stringify({
+        corpus_uri, res_types, text_search, lang_id, actor_id, place_id, genre_id, time_search, chunk_number, chunk_size
+    })
     dispatch({
         type: IS_RESOURCES_LOADING,
         payload: true
     })
-    axios.get(SERVER_URL + 'getCorpusResources', params).then(res => {
+    axios.post(SERVER_URL + 'getCorpusResources', r_data, params).then(res => {
         dispatch({
             type: GET_ALL_CORPUS_RESOURCES,
-            payload: res.data
+            payload: { data: res.data.data, data_size: res.data.data_size, counters: res.data.counters }
         })
         dispatch({
             type: IS_RESOURCES_LOADING,

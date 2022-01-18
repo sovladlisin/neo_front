@@ -38,7 +38,7 @@ const CorpusView: React.FunctionComponent<ICorpusViewProps> = ({ match }: RouteC
         var new_obj = classState.selectedObject
         if (new_obj && current_id === new_obj.id) {
             setCurrentCorpus(new_obj)
-            dispatch(getCorpusResources(new_obj.object['uri']))
+            // dispatch(getCorpusResources(new_obj.object['uri']))
         }
     }, [classState.selectedObject])
 
@@ -61,39 +61,39 @@ const CorpusView: React.FunctionComponent<ICorpusViewProps> = ({ match }: RouteC
             langs: [],
             places: []
         }
-        data.map(item => {
-            if (item.media_carrier && item.media_carrier.length === 1) {
-                var r: TConnectedVisualItem = item.media_carrier[0]
-                f.images = ['png', 'jpg', 'jpeg', 'pdf'].includes(r.file.type) ? f.images + 1 : f.images
-                f.video = ['mp4', 'avi', 'mkv'].includes(r.file.type) ? f.video + 1 : f.video
-                f.audio = ['wav', 'mp4'].includes(r.file.type) ? f.audio + 1 : f.audio
-            }
-            if (item.resource.labels.includes(LING_OBJECT_URI)) {
-                f.texts += 1
-            }
-            if (item.lang) {
-                f.langs.push(getName(item.lang))
-            }
-            if (item.events && item.events.length > 0) {
-                item.events.map(e => {
-                    f.actors.push(e.actor)
-                })
-            }
-            if (item.events && item.events.length > 0) {
-                item.events.map(e => {
-                    f.places.push(e.place)
-                })
-            }
-            if (item.genres && item.genres.length > 0) {
-                item.genres.map(g => {
-                    f.genres.push(getName(g))
-                })
-            }
-            f.langs = removeDuplFromStringList(f.langs)
-            f.genres = removeDuplFromStringList(f.genres)
-            f.actors = removeDuplFromNodeList(f.actors)
-            f.places = removeDuplFromNodeList(f.places)
-        })
+        // data.map(item => {
+        //     if (item.media_carrier && item.media_carrier.length === 1) {
+        //         var r: TConnectedVisualItem = item.media_carrier[0]
+        //         f.images = ['png', 'jpg', 'jpeg', 'pdf'].includes(r.file.type) ? f.images + 1 : f.images
+        //         f.video = ['mp4', 'avi', 'mkv'].includes(r.file.type) ? f.video + 1 : f.video
+        //         f.audio = ['wav', 'mp4'].includes(r.file.type) ? f.audio + 1 : f.audio
+        //     }
+        //     if (item.resource.labels.includes(LING_OBJECT_URI)) {
+        //         f.texts += 1
+        //     }
+        //     if (item.lang) {
+        //         f.langs.push(getName(item.lang))
+        //     }
+        //     if (item.events && item.events.length > 0) {
+        //         item.events.map(e => {
+        //             f.actors.push(e.actor)
+        //         })
+        //     }
+        //     if (item.events && item.events.length > 0) {
+        //         item.events.map(e => {
+        //             f.places.push(e.place)
+        //         })
+        //     }
+        //     if (item.genres && item.genres.length > 0) {
+        //         item.genres.map(g => {
+        //             f.genres.push(getName(g))
+        //         })
+        //     }
+        //     f.langs = removeDuplFromStringList(f.langs)
+        //     f.genres = removeDuplFromStringList(f.genres)
+        //     f.actors = removeDuplFromNodeList(f.actors)
+        //     f.places = removeDuplFromNodeList(f.places)
+        // })
         // types
         setFilterCount(f)
 

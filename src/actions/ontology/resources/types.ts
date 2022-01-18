@@ -35,6 +35,18 @@ export type TEvent = {
     place: TClass
 }
 
+export type TMainCounter = {
+    images: number,
+    notes: number,
+    audio: number,
+    articles: number,
+    video: number,
+    texts: number,
+    places: TClass[],
+    actors: TClass[],
+    genres: TClass[],
+    langs: TClass[],
+}
 
 export type TMainResource = {
     resource: TClass,
@@ -65,7 +77,7 @@ interface IGetAllResources {
 }
 interface IGetAllCorpusResources {
     type: typeof GET_ALL_CORPUS_RESOURCES,
-    payload: TMainResource[]
+    payload: { data: TMainResource[], data_size: number, counters: TMainCounter }
 }
 interface isResLoad {
     type: typeof IS_RESOURCES_LOADING,
