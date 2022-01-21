@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "react";
+import store from "../../../store";
 import { SERVER_URL } from "../../../utils";
 import { alertDispatchTypes, CREATE_ALERT } from "../../alerts/types";
 import { withToken } from "../../auth/auth";
@@ -17,6 +18,11 @@ export const getAllResources = () => (dispatch: Dispatch<TResourceDispatchTypes>
 }
 
 export const getCorpusResources = (corpus_uri: string, res_types: string[], text_search: string, lang_id: number, actor_id: number, place_id: number, genre_id: number, time_search: string, chunk_number: number, chunk_size: number) => (dispatch: Dispatch<TResourceDispatchTypes>) => {
+    // const state = store.getState()
+
+    // const is_loading = state['resources']['is_loading']
+    // if (is_loading) return;
+
     const params = withToken()
 
     const r_data = JSON.stringify({

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TClass, TObjectExtended, TRelation } from '../../actions/ontology/classes/types';
-import { getName, NOTE_URI, ORIGINAL_TITLE_URI, TEXT_COLLECTED_URI, TEXT_DECRYPTED_URI, TEXT_DIALECT_URI, TEXT_LANGUAGE_URI, TEXT_TRANSATED_URI, TEXT_TYPE, TEXT_TYPE_URI, TITLE_URI } from '../../utils';
+import { getName, NOTE_URI, ORIGINAL_TITLE_URI, TEXT_ARCHIVED_URI, TEXT_COLLECTED_URI, TEXT_DECRYPTED_URI, TEXT_DIALECT_URI, TEXT_LANGUAGE_URI, TEXT_TRANSATED_URI, TEXT_TYPE, TEXT_TYPE_URI, TEXT_UMPRINT_URI, TITLE_URI } from '../../utils';
 import ObjectInfo from '../Ontology/ObjectInfo';
 
 interface ITextInfoProps {
@@ -26,10 +26,11 @@ const TextInfo: React.FunctionComponent<ITextInfoProps> = (props) => {
         collector: TTextInfoSubType,
         decryptor: TTextInfoSubType,
         translator: TTextInfoSubType,
-        published: TTextInfoSubType,
+        published: string,
         variants: string,
         areal: string,
-        note: string
+        note: string,
+        archived_in: string
 
     }
 
@@ -78,7 +79,11 @@ const TextInfo: React.FunctionComponent<ITextInfoProps> = (props) => {
             translator: rel_nodes.find(r => r.uri === TEXT_TRANSATED_URI),
 
             // опубликовано
-            published: null,
+            published: node[TEXT_UMPRINT_URI],
+
+            // место хранения
+            archived_in: node[TEXT_ARCHIVED_URI],
+
 
             // варианты
             variants: '-',
@@ -115,6 +120,8 @@ const TextInfo: React.FunctionComponent<ITextInfoProps> = (props) => {
                     <p className='text-info-container-event-item' onClick={_ => data.place && setSelectedEvent(data.place.id)}>{data.place ? data.place.name : '-'}</p>
                     <label>Время записи</label>
                     <p>{data.time}</p>
+                    <label>Место хранения</label>
+                    <p>{data.archived_in}</p>
                 </div>
                 <div>
                     <label>Собиратель</label>
@@ -124,7 +131,7 @@ const TextInfo: React.FunctionComponent<ITextInfoProps> = (props) => {
                     <label>Перевод на русский язык</label>
                     <p className='text-info-container-event-item' onClick={_ => data.translator && setSelectedEvent(data.translator.id)}>{data.translator ? data.translator.name : '-'}</p>
                     <label>Опубликовано (Выходные данные)</label>
-                    <p className='text-info-container-event-item' onClick={_ => data.published && setSelectedEvent(data.published.id)}>{data.published ? data.published.name : '-'}</p>
+                    <p>{data.published}</p>
                     <label>Варианты	</label>
                     <p>{data.variants}</p>
                     <label>Ареал распространения</label>

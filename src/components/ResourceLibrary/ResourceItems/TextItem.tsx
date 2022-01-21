@@ -11,12 +11,16 @@ interface ITextItemProps {
     video: number,
     audio: number,
     notations: number,
+    corpus_uri: string
 }
 export const TextItem: React.FunctionComponent<ITextItemProps> = (props) => {
     const getLink = () => {
-        if (props.node.labels.includes('http://erlangen-crm.org/current/E33_Linguistic_Object')) {
-            return "/workspace/" + props.node.id
+
+        return {
+            pathname: "/workspace/" + props.node.id,
+            corpusUri: props.corpus_uri
         }
+
     }
     const [show, setShow] = React.useState(false)
     return <>

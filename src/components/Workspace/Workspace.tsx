@@ -20,7 +20,7 @@ import Loading from '../Loading';
 import TextResourceList from './TextResourceList';
 import TextInfo from './TextInfo';
 import TextOntology from './TextOntology';
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 interface IWorkspaceProps {
     id: string
@@ -369,6 +369,10 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
 
     const [textMode, setTextMode] = React.useState(2)
     const [commentMode, setCommentMode] = React.useState(true)
+
+    const location = useLocation();
+
+    const corpus_uri_props: string = location.corpusUri
     return <>
         <div className='sub-page-container'>
 
@@ -379,7 +383,11 @@ const Workspace: React.FunctionComponent<IWorkspaceProps> = ({ match }: RouteCom
             </> :
 
                 <>
-                    <Link to='/resources'><button className='workspace-return'><i className='fas fa-long-arrow-alt-left'></i>Обратно к списку</button></Link>
+                    <Link to={{
+                        pathname: "/resources",
+                        resType: "text",
+                        corpusUri: corpus_uri_props
+                    }}><button className='workspace-return'><i className='fas fa-long-arrow-alt-left'></i>Обратно к списку</button></Link>
                     <p className='workspace-title'>{getName(workInfo.origin_node)}</p>
 
                     <div className='workspace-menu-outer'>

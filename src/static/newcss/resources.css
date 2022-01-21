@@ -392,3 +392,25 @@ top: 20px;
   text-align: center;
   cursor: pointer;
 }
+
+.resource-list {
+  min-height: 635px;
+}
+
+.resource-list-empty {
+  width: 100%;
+  display: inline-grid;
+  gap: 13px;
+  height: 460px;
+}
+.resource-list-empty span {
+  display: block;
+  margin: auto auto 0 auto;
+  font-size: 57px;
+  height: max-content;
+  color: #b5b5b5;
+}
+.resource-list-empty > p {
+  margin: 0 auto;
+  color: #b5b5b5;
+}

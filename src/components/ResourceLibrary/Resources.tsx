@@ -17,13 +17,24 @@ import FileUploadToObject from './FileUploadToObject';
 import TextUpload from './TextUpload';
 import ObjectInfo from '../Ontology/ObjectInfo';
 import EventForm from './EventForm';
+import { RouteComponentProps, useLocation } from 'react-router-dom'
 
 
 
 interface IResourcesProps {
+    corpus_uri: string,
+    res_type: string
 }
 
-const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
+const Resources: React.FunctionComponent<IResourcesProps> = ({ match }: RouteComponentProps<IResourcesProps>) => {
+    const location = useLocation();
+
+    const corpus_uri_props: string = location.corpusUri
+    const res_type_props: string = location.resType
+
+    console.log(corpus_uri_props, res_type_props)
+
+
     const dispatch = useDispatch()
     const resourceState = useSelector((state: RootStore) => state.resources)
     const filterCount = useSelector((state: RootStore) => state.resources.corpus_resources.counters)
@@ -45,7 +56,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
     const [keyboard, setKeyboard] = React.useState(false)
 
     const [openedPanels, setOpenedPanels] = React.useState<number[]>([])
-    const [selectedResourceTypes, setSelectedResourceTypes] = React.useState<string[]>([])
+    const [selectedResourceTypes, setSelectedResourceTypes] = React.useState<string[]>(res_type_props ? [res_type_props] : [])
     const [selectedExtraResourceTypes, setSelectedExtraResourceTypes] = React.useState<string[]>([])
 
     const flipPanel = (n: number) => {
@@ -224,7 +235,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
 
                 })
                 return <div className='resource-item-outer-container'>
-                    <TextItem node={item.resource} notations={notes} audio={audio} video={video} images={images} />
+                    <TextItem corpus_uri={selectedCorpus ? selectedCorpus['uri'] : ''} node={item.resource} notations={notes} audio={audio} video={video} images={images} />
                     {authState.user.is_editor && <button onClick={_ => setSelectedResourceEdit(item.resource.id)} id='selected-for-edit-item-resource-list-button'><i className='fas fa-cog'></i></button>}
                 </div>
 
@@ -296,6 +307,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                 <div>
                     <button className={!selectedCorpus ? 'resource-corpus-list-selected' : ''} onClick={_ => setSelectedCorpus(null)}>Все корпусы</button>
                     {corpuses.map(c => {
+                        corpus_uri_props && corpus_uri_props === c['uri'] && !selectedCorpus && setSelectedCorpus(c)
                         return <button className={selectedCorpus && selectedCorpus['uri'] === c['uri'] ? 'resource-corpus-list-selected' : ''} onClick={_ => setSelectedCorpus(c)}>{getName(c)}</button>
                     })}
                 </div>
@@ -515,7 +527,13 @@ const Resources: React.FunctionComponent<IResourcesProps> = (props) => {
                         <div className='resource-list'>
                             {resourceState.is_loading && <Loading height={460} />}
                             {!resourceState.is_loading && renderResources()}
-                            { }
+                            {!resourceState.is_loading && resourceState.corpus_resources && resourceState.corpus_resources.data_size === 0 && <>
+                                <div className='resource-list-empty'>
+                                    <span><i className='fas fa-times'></i></span>
+                                    <p>Запрос не дал результата</p>
+                                </div>
+
+                            </>}
                         </div>
                     </div>
                 </>}

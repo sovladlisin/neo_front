@@ -55,11 +55,11 @@ export const CorpusTree: React.FunctionComponent<ICorpusTreeProps> = (props) => 
                                 <span></span>
                                 <p>{getName(c)}</p>
                             </div>
-                            <div className='corpus-container-meta'>
+                            {/* <div className='corpus-container-meta'>
                                 <p>{c.texts.length + ' текстов'}</p>
                                 <p>{c.texts.length + ' видео'}</p>
                                 <button className='corpus-detailed-info-button' onClick={_ => setSelectedCorpus(c.id)}><i className='fas fa-info'></i></button>
-                            </div>
+                            </div> */}
                         </div>
                         {/* <CorpusItem onSelect={id => setSelectedCorpus(id)} corpus={c} /> */}
                     </>
