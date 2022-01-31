@@ -23,11 +23,13 @@ export const getCorpusResources = (corpus_uri: string, res_types: string[], text
     // const is_loading = state['resources']['is_loading']
     // if (is_loading) return;
 
+
     const params = withToken()
 
     const r_data = JSON.stringify({
         corpus_uri, res_types, text_search, lang_id, actor_id, place_id, genre_id, time_search, chunk_number, chunk_size
     })
+    console.log(r_data)
     dispatch({
         type: IS_RESOURCES_LOADING,
         payload: true

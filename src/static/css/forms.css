@@ -287,3 +287,11 @@
   height: 100px;
   background: gainsboro;
 }
+
+.og-object-container-params textarea {
+  background: #f1eee8;
+  padding: 10px;
+  font-size: 9pt;
+  width: calc(100% - 20px);
+  resize: vertical;
+}

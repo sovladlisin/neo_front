@@ -75,7 +75,7 @@ const CorpusView: React.FunctionComponent<ICorpusViewProps> = ({ match }: RouteC
                         <p className='corpus-view-title-card-meta-title'>
                             {getName(currentCorpus.object)}
                         </p>
-                        <p>{getNote(currentCorpus.object)}</p>
+                        <p className='corpus-view-title-card-meta-note'>{getNote(currentCorpus.object)}</p>
                     </div>
                 </div>
 

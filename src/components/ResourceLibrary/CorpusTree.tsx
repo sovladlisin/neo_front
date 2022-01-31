@@ -54,6 +54,7 @@ export const CorpusTree: React.FunctionComponent<ICorpusTreeProps> = (props) => 
                                 <Link target={'_blank'} to={'/corpus/' + c.id}><img src={CORPUS_1}></img></Link>
                                 <span></span>
                                 <p>{getName(c)}</p>
+                                {authState.user.is_editor && <button className='corpus-container-image-container-edit-corpus' onClick={_ => setSelectedCorpus(c.id)}><i className='fas fa-cog'></i></button>}
                             </div>
                             {/* <div className='corpus-container-meta'>
                                 <p>{c.texts.length + ' текстов'}</p>

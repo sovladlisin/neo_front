@@ -370,7 +370,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = ({ match }: RouteCom
 
                                     <div className='resource-nav-panel-collapse-list-content'>
                                         {filterCount.langs.map(l => {
-                                            return <button onClick={_ => setSearchLang(l.id)}><i className={searchLang === l.id ? 'far fa-dot-circle' : 'far fa-circle'}></i> {getName(l)} </button>
+                                            return <button onClick={_ => setSearchLang(searchLang === l.id ? -1 : l.id)}><i className={searchLang === l.id ? 'far fa-dot-circle' : 'far fa-circle'}></i> {getName(l)} </button>
                                         })}
 
 
@@ -408,7 +408,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = ({ match }: RouteCom
                                 {openedPanels.includes(3) && <>
                                     <div className='resource-nav-panel-collapse-list-content'>
                                         {filterCount.genres.map(g => {
-                                            return <button onClick={_ => setSearchGenre(g.id)}><i className={searchGenre === g.id ? 'far fa-dot-circle' : 'far fa-circle'}></i> {getName(g)} </button>
+                                            return <button onClick={_ => setSearchGenre(searchGenre === g.id ? -1 : g.id)}><i className={searchGenre === g.id ? 'far fa-dot-circle' : 'far fa-circle'}></i> {getName(g)} </button>
                                         })}
 
 
@@ -451,7 +451,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = ({ match }: RouteCom
                                 {openedPanels.includes(4) && <>
                                     <div className='resource-nav-panel-collapse-list-content'>
                                         {filterCount.actors.map(a => {
-                                            return <button onClick={_ => setSearchActor(a.id)}><i className={searchActor === a.id ? 'far fa-dot-circle' : 'far fa-circle'}></i> {getName(a)} </button>
+                                            return <button onClick={_ => setSearchActor(searchActor === a.id ? -1 : a.id)}><i className={searchActor === a.id ? 'far fa-dot-circle' : 'far fa-circle'}></i> {getName(a)} </button>
                                         })}
 
 
@@ -486,7 +486,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = ({ match }: RouteCom
                                 {openedPanels.includes(5) && <>
                                     <div className='resource-nav-panel-collapse-list-content'>
                                         {filterCount.places.map(p => {
-                                            return <button onClick={_ => setSearchPlace(p.id)}><i className={searchPlace === p.id ? 'far fa-dot-circle' : 'far fa-circle'}></i> {getName(p)} </button>
+                                            return <button onClick={_ => setSearchPlace(searchPlace === p.id ? -1 : p.id)}><i className={searchPlace === p.id ? 'far fa-dot-circle' : 'far fa-circle'}></i> {getName(p)} </button>
                                         })}
 
 
