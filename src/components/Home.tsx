@@ -47,7 +47,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                                         <Link target={'_blank'} to={'/corpus/' + c.id}><img src={CORPUS_1}></img></Link>
                                         <p>{getName(c)}</p>
                                         <div className='home-coprus-meta'>
-                                            <p>{c.texts.length + ' текстов'}</p>
+                                            {/* <p>{c.texts.length + ' текстов'}</p> */}
                                         </div>
                                         <div className='home-corpus-image-backdrop'></div>
                                     </div>
