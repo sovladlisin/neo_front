@@ -1,4 +1,4 @@
-import { CLASS_FULL_SIGNATURE_LOADING, CLASS_LOADING, CREATE_ENTITY, DELETE_DOMAIN_ONTOLOGY, GET_ALL_CLASSES, GET_CLASS, GET_CLASSES, GET_CLASSES_WITH_SIGNATURE, GET_CLASS_FULL_SIGNATURE, GET_CLASS_OBJECT, GET_CLASS_OBJECTS, GET_DOMAIN_ONTOLOGIES, GET_OBJECTS_BY_URI, GET_SEARCH, GET_SUBCLASSES, IS_SEARCHING, LOADING_OBJECTS_BY_URI, OBJECT_IS_LOADING, TAttributeType, TClass, TClassDispatchTypes, TClassExtended, TClassFullSignature, TObjectExtended, UPDATE_CLASS } from "../../../actions/ontology/classes/types"
+import { CLASS_FULL_SIGNATURE_LOADING, CLASS_LOADING, CREATE_ENTITY, DELETE_DOMAIN_ONTOLOGY, EVENT_CREATED_TO, EVENT_DELETED_FROM, GET_ALL_CLASSES, GET_CLASS, GET_CLASSES, GET_CLASSES_WITH_SIGNATURE, GET_CLASS_FULL_SIGNATURE, GET_CLASS_OBJECT, GET_CLASS_OBJECTS, GET_DOMAIN_ONTOLOGIES, GET_OBJECTS_BY_URI, GET_SEARCH, GET_SUBCLASSES, IS_SEARCHING, LOADING_OBJECTS_BY_URI, OBJECT_IS_LOADING, TAttributeType, TClass, TClassDispatchTypes, TClassExtended, TClassFullSignature, TObjectExtended, UPDATE_CLASS } from "../../../actions/ontology/classes/types"
 
 
 interface IDefaultState {
@@ -24,7 +24,11 @@ interface IDefaultState {
 
     searchResult: { domain: string, result: TClass[] },
     isSearching: boolean,
-    isObjectLoading: boolean
+    isObjectLoading: boolean,
+
+
+    deletedEventFrom: { id: number, resource_id: number },
+    createdEventTo: { id: number, resource_id: number },
 
 }
 
@@ -51,11 +55,27 @@ const defaultState: IDefaultState = {
 
     searchResult: null,
     isSearching: false,
-    isObjectLoading: false
+    isObjectLoading: false,
+
+    deletedEventFrom: null,
+    createdEventTo: null,
 }
 
 const classReducer = (state: IDefaultState = defaultState, action: TClassDispatchTypes) => {
     switch (action.type) {
+        case EVENT_CREATED_TO: {
+            return {
+                ...state,
+                createdEventTo: action.payload
+            }
+        }
+        case EVENT_DELETED_FROM: {
+            return {
+                ...state,
+                deletedEventFrom: action.payload
+            }
+        }
+
         case OBJECT_IS_LOADING:
             return {
                 ...state,

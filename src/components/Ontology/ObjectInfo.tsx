@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteEntity, getClassObject, updateClass, updateEntity } from '../../actions/ontology/classes/classes';
+import { deleteEntity, deleteEvent, getClassObject, updateClass, updateEntity } from '../../actions/ontology/classes/classes';
 import { TClass, TObjectExtended } from '../../actions/ontology/classes/types';
 import { RootStore } from '../../store';
 import { DATA_TYPES, getName, getRandomInt, LABEL, LING_OBJECT_URI, NOTE_URI, SERVER_DOMAIN, useKeyPress } from '../../utils';
@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import Loading from '../Loading';
 import { useEffect } from 'react';
 import LangStringInput from './Forms/LangStringInput';
+import AddEventForm from './Forms/AddEventForm';
 
 interface IObjectInfoProps {
     object_id: number,
@@ -35,7 +36,28 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
 
     const ctrlPress = useKeyPress('Control')
 
+    const text_relations_dict = [
+        'http://erlangen-crm.org/current/R17_collected',
+        'http://erlangen-crm.org/current/R19_decrypted ',
+        'http://erlangen-crm.org/current/R18_performed ',
+        'http://erlangen-crm.org/current/R20_translated ',
+        'http://erlangen-crm.org/current/R22_translation_redacted',
+        'http://erlangen-crm.org/current/R23_redacted',
+        'http://erlangen-crm.org/current/R24_notated',
+        'http://erlangen-crm.org/current/R21_commented',
+    ]
     React.useEffect(() => { dispatch(getClassObject(props.object_id)) }, [, props.object_id])
+
+    // event update
+    useEffect(() => {
+        if ((classState.deletedEventFrom && classState.deletedEventFrom.resource_id === props.object_id)
+            ||
+            (classState.createdEventTo && classState.createdEventTo.resource_id === props.object_id))
+            dispatch(getClassObject(props.object_id))
+    }, [
+        classState.createdEventTo, classState.deletedEventFrom
+    ])
+
     React.useEffect(() => {
         var new_obj = classState.selectedObject
         if (new_obj && props.object_id === new_obj.id) {
@@ -157,6 +179,9 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
         })
         setNewCurrentObject(new_obj)
     }
+
+    const [addingEvent, setAddingEvent] = React.useState<{ connection_type: string, event_name: string }>(null)
+
 
     const renderParams = () => {
         if (newCurrentObject === null) return <></>
@@ -289,6 +314,38 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
             end_name = end_name.includes('/') ? end_name.split('/').pop() : end_name
             const object_uri = signature[rel_key] ? signature[rel_key][2] : ''
 
+
+            if (object_uri === 'http://erlangen-crm.org/current/F8_Preparing_to_publish') {
+                return <>
+                    <p className='object-info-relation-name'>
+                        {end_name}
+                        <button className='obj-add-rel' onClick={_ => setAddingEvent({ connection_type: rel_key, event_name: end_name + '_' + getName(currentObject.object) })}><i className='fas fa-plus'></i></button>
+                    </p>
+                    <div className='object-info-relation-text-events'>
+                        {local_relations.map(rel => {
+                            const selectedObjectField: TClass = rel.start_node
+                            var name = getName(selectedObjectField)
+                            if (name.includes('_')) {
+                                name = name.split('_')[0]
+                            }
+
+                            if (selectedObjectField) {
+                                return <div className='object-info-relation-text-events-item'>
+                                    <p>{name}</p>
+                                    <button onClick={_ => {
+                                        dispatch(deleteEvent(selectedObjectField.id, currentObject.id))
+                                    }}
+                                    ><i className='fas fa-times'></i></button>
+                                </div>
+                            }
+
+                        })}
+
+                    </div>
+                </>
+
+
+            }
             return <>
                 <p className='object-info-relation-name'>
                     {end_name}
@@ -411,8 +468,11 @@ const ObjectInfo: React.FunctionComponent<IObjectInfoProps> = (props) => {
                 </>} */}
                 {renderParams()}
                 {renderEntities()}
+
             </div>
         </>}
+        {addingEvent && <div ref={ref}><AddEventForm resource_id={currentObject.id} onClose={() => setAddingEvent(null)} connection_type={addingEvent.connection_type} event_name={addingEvent.event_name} /></div>}
+
     </>;
 };
 

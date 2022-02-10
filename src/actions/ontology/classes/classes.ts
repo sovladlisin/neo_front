@@ -1,12 +1,12 @@
 import axios from "axios";
 import { Dispatch } from "react";
-import { handleError, SERVER_URL } from "../../../utils";
+import { getRandomInt, handleError, SERVER_URL } from "../../../utils";
 import { alertDispatchTypes, CREATE_ALERT } from "../../alerts/types";
 import { withToken } from "../../auth/auth";
 import { DISCONNECT_FILE_FROM_TEXT, TWorkspaceDispatchTypes } from "../../workspace/types";
 import { DELETE_RESOURCE_FROM_LIST, TResourceDispatchTypes } from "../resources/types";
 
-import { GET_CLASSES, GET_CLASS_OBJECTS, GET_SUBCLASSES, TClassDispatchTypes, TClass, UPDATE_CLASS, GET_CLASS_OBJECT, GET_CLASS, GET_CLASSES_WITH_SIGNATURE, GET_OBJECTS_BY_URI, CREATE_ENTITY, GET_ALL_CLASSES, GET_DOMAIN_ONTOLOGIES, CLASS_LOADING, LOADING_OBJECTS_BY_URI, GET_CLASS_FULL_SIGNATURE, CLASS_FULL_SIGNATURE_LOADING, IS_SEARCHING, GET_SEARCH, DELETE_DOMAIN_ONTOLOGY, OBJECT_IS_LOADING } from "./types";
+import { GET_CLASSES, GET_CLASS_OBJECTS, GET_SUBCLASSES, TClassDispatchTypes, TClass, UPDATE_CLASS, GET_CLASS_OBJECT, GET_CLASS, GET_CLASSES_WITH_SIGNATURE, GET_OBJECTS_BY_URI, CREATE_ENTITY, GET_ALL_CLASSES, GET_DOMAIN_ONTOLOGIES, CLASS_LOADING, LOADING_OBJECTS_BY_URI, GET_CLASS_FULL_SIGNATURE, CLASS_FULL_SIGNATURE_LOADING, IS_SEARCHING, GET_SEARCH, DELETE_DOMAIN_ONTOLOGY, OBJECT_IS_LOADING, EVENT_CREATED_TO, EVENT_DELETED_FROM } from "./types";
 
 export const deleteOntology = (domain: string) => (dispatch: Dispatch<TClassDispatchTypes | alertDispatchTypes>) => {
     const params = withToken({ domain })
@@ -305,17 +305,37 @@ export const createEntity = (labels: string[], node) => (dispatch: Dispatch<TCla
     })
 }
 
-export const createEvent = (actor_id: number, place_id: number, time_string: string, label: string[]) => (dispatch: Dispatch<TClassDispatchTypes | alertDispatchTypes>) => {
+export const createEvent = (actors_id: { actor_id: number, title: string[] }[], place_id: number, time_string: string, resource_id: number, connection_type: string) => (dispatch: Dispatch<TClassDispatchTypes | alertDispatchTypes>) => {
     const params = withToken()
-    const body = JSON.stringify({ actor_id, place_id, time_string, label })
+    const body = JSON.stringify({ actor_id: actors_id, place_id, time_string, resource_id, connection_type })
     axios.post(SERVER_URL + `createEvent`, body, params).then(res => {
-
+        dispatch({
+            type: CREATE_ALERT,
+            payload: { message: 'Событие создано', type: 200 }
+        })
+        const id = getRandomInt(0, 1000)
+        dispatch({
+            type: EVENT_CREATED_TO,
+            payload: { id, resource_id }
+        })
     }).catch(err => {
+        console.log(err)
         dispatch({
             type: CREATE_ALERT,
             payload: handleError(err)
         })
     })
+}
+
+export const deleteEvent = (id: number, resource_id: number) => (dispatch: Dispatch<TClassDispatchTypes | alertDispatchTypes | TWorkspaceDispatchTypes | TResourceDispatchTypes>) => {
+    const params = withToken({ id })
+
+    axios.delete(SERVER_URL + `deleteEntity`, params).then(res => {
+        dispatch({
+            type: EVENT_DELETED_FROM,
+            payload: { id, resource_id }
+        })
+    }).catch(err => console.log(err))
 }
 
 export const updateEntity = (node) => (dispatch: Dispatch<TClassDispatchTypes | alertDispatchTypes>) => {

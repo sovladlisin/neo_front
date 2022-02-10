@@ -89,16 +89,17 @@
 }
 .og-object-container {
   position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 700px;
+  top: 50%;
+  left: 50%;
+  height: 600px;
+  width: 885px;
   background: white;
   z-index: 15;
   overflow-y: auto;
-  margin: 0 !important;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  transform: translate(-50%,-50%);
+  box-shadow: 0 0 21px #00000061;
 }
 .og-object-container-title {
   background: #F1EEE8;

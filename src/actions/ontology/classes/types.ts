@@ -29,8 +29,17 @@ export const GET_SEARCH = "GET_SEARCH"
 export const IS_SEARCHING = "IS_SEARCHING"
 
 
+export const EVENT_CREATED_TO = 'EVENT_CREATED_TO'
+export const EVENT_DELETED_FROM = 'EVENT_DELETED_FROM'
 
-
+interface ICreatedEvent {
+    type: typeof EVENT_CREATED_TO,
+    payload: { id: number, resource_id: number }
+}
+interface IDeletedEvent {
+    type: typeof EVENT_DELETED_FROM,
+    payload: { id: number, resource_id: number }
+}
 export type TClass = {
     id?: number
     labels: string[]
@@ -185,7 +194,7 @@ interface IGetObjectsByUri {
     payload: { uri: string, objects: TClass[] }
 }
 
-export type TClassDispatchTypes = IGetClasses | IGetSubClasses | IGetClassObjects | IUpdateClass | IGetClassObject |
+export type TClassDispatchTypes = IGetClasses | IGetSubClasses | IGetClassObjects | IUpdateClass | IGetClassObject | ICreatedEvent | IDeletedEvent |
     IGetClass | IGetClassesWithSignature | IGetObjectsByUri | ICreateEntity | IGetAllClasses | IGetDomainOntologies |
     ISetClassLoading | ISetLoadingObjectByUri | IGetClassFullSignature | IClassFullSignatureLoading | IGetSearch | IIsSearching | IDeleteDomainOntology |
     ISetObjectIsLoading

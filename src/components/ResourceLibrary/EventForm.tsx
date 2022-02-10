@@ -24,7 +24,7 @@ const EventForm: React.FunctionComponent<IEventFormProps> = (props) => {
 
 
     const onSave = () => {
-        dispatch(createEvent(selectedActor.id, selectedPlace.id, selectedTime, label))
+        // dispatch(createEvent(selectedActor.id, selectedPlace.id, selectedTime, label))
     }
     return <>
         <div className='m-background'></div>

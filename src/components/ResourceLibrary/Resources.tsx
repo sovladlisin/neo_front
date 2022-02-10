@@ -517,7 +517,7 @@ const Resources: React.FunctionComponent<IResourcesProps> = ({ match }: RouteCom
                                 <div className='admin-resource-filter-add-button-container'>
                                     <button onClick={_ => setUploadMediaWindow(true)}>ЗАГРУЗИТЬ МЕДИА</button>
                                     <button onClick={_ => setUploadTextWindow(true)}>ЗАГРУЗИТЬ ТЕКСТ</button>
-                                    <button onClick={_ => setEventFormWindow(true)}>СОЗДАТЬ СОБЫТИЕ</button>
+                                    {/* <button onClick={_ => setEventFormWindow(true)}>СОЗДАТЬ СОБЫТИЕ</button> */}
 
                                 </div>
                             </>}
