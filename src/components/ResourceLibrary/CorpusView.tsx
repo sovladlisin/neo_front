@@ -39,20 +39,21 @@ const CorpusView: React.FunctionComponent<ICorpusViewProps> = ({ match }: RouteC
         var new_obj = classState.selectedObject
         if (new_obj && current_id === new_obj.id) {
             setCurrentCorpus(new_obj)
-            // dispatch(getCorpusResources(new_obj.object['uri']))
+            dispatch(getCorpusResources(new_obj.object['uri'], [], '', -1, -1, -1, -1, '', 1, 1))
         }
     }, [classState.selectedObject])
 
 
-    React.useEffect(() => {
-        requestResources()
-    }, [currentCorpus])
+    // React.useEffect(() => {
+    //     requestResources()
+    // }, [currentCorpus])
 
 
 
-    const requestResources = () => {
-        currentCorpus && dispatch(getCorpusResources(currentCorpus['uri'], [], '', -1, -1, -1, -1, '', 1, 1))
-    }
+    // const requestResources = () => {
+    //     currentCorpus && console.log(currentCorpus['uri'])
+    //     currentCorpus && dispatch(getCorpusResources(currentCorpus['uri'], [], '', -1, -1, -1, -1, '', 1, 1))
+    // }
 
     const [counter, setCounter] = React.useState<TMainCounter>(null)
     React.useEffect(() => {

@@ -170,7 +170,6 @@ export const getName = (node: TClass, lang = 1) => {
         return 'Ошибка имени'
     }
     const label: String[] = node[LABEL]
-    console.log(label)
     var result = ''
     label.map(s => {
         if (s.includes(language))
