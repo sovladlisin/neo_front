@@ -5,6 +5,12 @@
     grid-template-columns: 300px auto 50px;
     gap: 20px;
   }
+  
+.news-item-page-paragraph a {
+  color: #6090ed;
+  font-weight: bold;
+  text-decoration: underline;
+}
   .news-item > img {
     width: 288px;
     height: 190px;

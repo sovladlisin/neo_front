@@ -125,12 +125,12 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
                         <div className='news-item'>
                             <img src={NEWS_1}></img>
                             <div className='news-item-meta'>
-                                <label>{'28.07.2021'}</label>
+                                <label>{'05.02.2022'}</label>
                                 <p className='news-item-meta-title'>
-                                    Кто такие теленгиты и зачем им топшур? Исчезающие народы России
+                                    Заработала новая версия портала «Фольклор народов Сибири»
                                 </p>
                                 <p className='news-temp-meta-summary'>
-                                    На земле осталось всего около четырех тысяч теленгитов — древнего тюркского народа. Долгое время теленгиты считались субэтнической группой алтайцев и лишь во время ...
+                                    В рамках работы по гранту Правительства РФ для государственной поддержки научных исследований, проводимых ...
                                 </p>
                             </div>
                             <Link to='/news/1'><i className="fas fa-external-link-alt"></i></Link>
